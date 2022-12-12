@@ -15,9 +15,8 @@ Im unteren Vergleich sieht man, dass das Spielfenster auf größeren Bildschirme
 viel kleiner wirkt. Auch die Positionen der Figuren sind etwas verrückt, aufgrund der
 unterschiedlichen Webbrowser (Oben: Chrome; Unten: Firefox).
 
-<img src="./images/chrome.png" alt="chrome">
-
-<img src="./images/fireFox.png" alt="picture of the game in the firefox browser">
+<img src="./images/chrome.png" alt="chrome" width="443" height="212"><br>
+<img src="./images/fireFox.png" alt="picture of the game in the firefox browser" width="443" height="212">
 
 Wir hatten mit der Zeit auch oft Probleme mit dem Server, da dieser oft nicht
 funktioniert hat. Deswegen hat die Website, wenn der Server nicht funktionierte, die
@@ -58,12 +57,12 @@ Man kann sich einen Account mit einem Usernamen, Passwort und E-Mail anlegen.
     - Speicherung des Spielstandes: 
 Auf dem Account werden die Spielstände des Spielers gespeichert.
 
-<img src="./images/mindMap.png" alt="mindMap">
+<img src="./images/mindMap.png" alt="mindMap" height="134" width="579">
 
 ## 2. Funktionale Anforderungen
 ### 2.1. Use Case Überblick
 
-<img src="./images/uml1.png" alt="uml1">
+<img src="./images/uml1.png" alt="uml1" width="520" height="371">
 
 Auf unserer Web-Site sind die 3 main use-cases:
 - Ein Spiel erstellen
@@ -71,7 +70,7 @@ Auf unserer Web-Site sind die 3 main use-cases:
     - Nach dem Spielen kann man den Spielstand speichern, jedoch wird dafür ein Account benötigt.
 - Einen Account erstellen
 
-<img src="./images/uml2.png" alt="uml2">
+<img src="./images/uml2.png" alt="uml2" width="552" height="252">
 
 
 Ein Spiel zu erstellen beinhaltet das Erstellen von Szenen. Am Ende einer Szene kann man eine Entscheidung einbauen, wenn das Spiel fertig erstellt wurde, gibt es die Möglichkeit es auf der Web-Site zu speichern.
