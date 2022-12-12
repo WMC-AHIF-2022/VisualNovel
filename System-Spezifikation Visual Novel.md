@@ -72,5 +72,10 @@ Auf unserer Web-Site sind die 3 main use-cases:
 
 <img src="./images/uml2.png" alt="uml2" width="552" height="252">
 
-
 Ein Spiel zu erstellen beinhaltet das Erstellen von Szenen. Am Ende einer Szene kann man eine Entscheidung einbauen, wenn das Spiel fertig erstellt wurde, gibt es die Möglichkeit es auf der Web-Site zu speichern.
+
+### 2.2 MockUp
+
+<img src="./images/mockUpV1.png" alt="mockUpV1">
+Grobes Layout für den Maker, wird noch angepasst mit einem etwas anderen Colour-theme und weiteren Buttons,
+welche die Navigierung bei der Erstellung eines Spiels vereinfachen sollen.
