@@ -76,6 +76,24 @@ Ein Spiel zu erstellen beinhaltet das Erstellen von Szenen. Am Ende einer Szene 
 
 ### 2.2 MockUp
 
-<img src="./images/mockUpV1.png" alt="mockUpV1">
-Grobes Layout für den Maker, wird noch angepasst mit einem etwas anderen Colour-theme und weiteren Buttons,
-welche die Navigierung bei der Erstellung eines Spiels vereinfachen sollen.
+<img src="./images/maker1.png" height="360" width="550">
+
+An den Stellen, an welchen sich die '+' Symbole befinden, können Bilder der gerade interagierenden
+Charaktere hinzugefügt werden. In der Box mit dem Schriftsatz 'Name' wird der Name der Person eingetragen,
+welche gerade spricht oder denkt. 'Enter Text here' ist der Platzhalter für den gerade gesprochenen / gedachten Text.
+
+Am Rand werden zur Übersicht die Szenen angezeigt, auf welche man klicken kann umm sie zu verändern oder neue hinzuzufügen.
+
+<img src="./images/maker2.png" height="360" width="550">
+
+Option 1 und 2 sind die Desicions, welche für das Spiel erstellt werden können.
+
+<img src="./images/games.png" height="360" width="550">
+
+In diesem Bild sieht man die Übersicht der bereits erstellten Spiele, welche man spielen kann.
+Neben jedem Spiel steht eine kleine Beschreibung über das Spiel, der Name des Erstellers und das Erstelldatum.
+
+<img src="./images/account.png" height="360" width="550">
+
+Hier ist die Account übersicht, mit User-Name, E-mail Adresse und den Spielen, bei welchen man weiter
+spielen kann.
