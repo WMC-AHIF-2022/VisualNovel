@@ -86,7 +86,7 @@ Am Rand werden zur Übersicht die Szenen angezeigt, auf welche man klicken kann 
 
 <img src="./images/maker2.png" height="360" width="550">
 
-Option 1 und 2 sind die Desicions, welche für das Spiel erstellt werden können.
+Option 1 und 2 sind die Decisions, welche für das Spiel erstellt werden können.
 
 <img src="./images/games.png" height="360" width="550">
 
@@ -95,5 +95,5 @@ Neben jedem Spiel steht eine kleine Beschreibung über das Spiel, der Name des E
 
 <img src="./images/account.png" height="360" width="550">
 
-Hier ist die Account übersicht, mit User-Name, E-mail Adresse und den Spielen, bei welchen man weiter
+Hier ist die Account übersicht, mit User-Name, E-Mail-Adresse und den Spielen, bei welchen man weiter
 spielen kann.
