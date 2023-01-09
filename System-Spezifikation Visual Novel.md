@@ -97,3 +97,13 @@ Neben jedem Spiel steht eine kleine Beschreibung über das Spiel, der Name des E
 
 Hier ist die Account übersicht, mit User-Name, E-Mail-Adresse und den Spielen, bei welchen man weiter
 spielen kann.
+
+## 3. Nicht-funktionale Anforderungen
+
+### `Usability`: Benutzbarkeitsanforderung
+
+Der Maker soll durch verschiedenste Buttons leicht bedienbar werden und durch die
+'+' Symbol sollen Bilder auf einfachste Weise eingefügt werden können.
+
+Durch eine klare Strukturierung der schon erstellten Szenen, soll dem benutzer eine 
+gute Übersicht gegeben werden.
