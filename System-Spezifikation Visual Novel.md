@@ -62,7 +62,7 @@ Auf dem Account werden die Spielstände des Spielers gespeichert.
 ## 2. Funktionale Anforderungen
 ### 2.1. Use Case Überblick
 
-<img src="./images/uml1.png" alt="uml1" width="520" height="371">
+<img src="./images/uml1_1.png" alt="uml1" width="520" height="371">
 
 Auf unserer Web-Site sind die 3 main use-cases:
 - Ein Spiel erstellen
