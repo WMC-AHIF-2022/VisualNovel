@@ -72,7 +72,10 @@ Auf unserer Web-Site sind die 3 main use-cases:
 
 <img src="./images/uml2.png" alt="uml2" width="552" height="252">
 
-Ein Spiel zu erstellen beinhaltet das Erstellen von Szenen. Am Ende einer Szene kann man eine Entscheidung einbauen, wenn das Spiel fertig erstellt wurde, gibt es die Möglichkeit es auf der Web-Site zu speichern.
+Ein Spiel zu erstellen beinhaltet das Erstellen von Szenen. Am Ende einer Szene kann man eine Entscheidung einbauen, 
+wenn das Spiel fertig erstellt wurde, gibt es die Möglichkeit es auf der Web-Site zu speichern. Nicht bei jeder Szene muss 
+eine Entscheidung eingebaut werden, es kann auch einfach eine Szene ohne Entscheidung eingebaut werden. Nach entscheidungslosen Szenen 
+wird einfach die darauf folgende Szene abgespielt.
 
 ### 2.2 MockUp
 
