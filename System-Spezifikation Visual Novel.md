@@ -80,19 +80,23 @@ wird einfach die darauf folgende Szene abgespielt.
 <br>
 Ebenso können erstellte Szenen mit rechtsklick auf die Szene wieder gelöscht werden.
 
-### 2.2 MockUp
+### 2.2 Mock Up
 
-<img src="./images/maker1.png" height="360" width="550">
+#### 2.2.1 Mock Up Spiel erstellen
+<img src="./images/maker.png" height="360" width="550">
 
 An den Stellen, an welchen sich die '+' Symbole befinden, können Bilder der gerade interagierenden
 Charaktere hinzugefügt werden. In der Box mit dem Schriftsatz 'Name' wird der Name der Person eingetragen,
 welche gerade spricht oder denkt. 'Enter Text here' ist der Platzhalter für den gerade gesprochenen / gedachten Text.
 
 Am Rand werden zur Übersicht die Szenen angezeigt, auf welche man klicken kann umm sie zu verändern oder neue hinzuzufügen.
+Wenn die Szenen-Übersicht zu groß wird um auf der Seite vollständig angezeigt zu werden, kann man auf dem Rand der seite hinunter
+Scrollen, um die nächsten Szenen bearbeiten zu können.
 
-<img src="./images/maker2.png" height="360" width="550">
+<img src="./images/makerDecision.png" height="360" width="550">
 
-Option 1 und 2 sind die Decisions, welche für das Spiel erstellt werden können.
+Bei einer Szene können genau zwei Entscheidungen eingefügt werden
+(Option 1 und 2 sind die Decisions, welche für das Spiel erstellt werden können.)
 
 <img src="./images/games.png" height="360" width="550">
 
