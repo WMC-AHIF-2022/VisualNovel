@@ -91,18 +91,25 @@ welche gerade spricht oder denkt. 'Enter Text here' ist der Platzhalter für den
 
 Am Rand werden zur Übersicht die Szenen angezeigt, auf welche man klicken kann umm sie zu verändern oder neue hinzuzufügen.
 Wenn die Szenen-Übersicht zu groß wird um auf der Seite vollständig angezeigt zu werden, kann man auf dem Rand der seite hinunter
-Scrollen, um die nächsten Szenen bearbeiten zu können.
+Scrollen, um die nächsten Szenen bearbeiten zu können. Bei dem Button "next Scene" wird eine neue Szene erstellt und bei der Szenen-Übersicht wird diese hinzugefügt.
 
+#### 2.2.1 Mock Up Entscheidung einbauen
 <img src="./images/makerDecision.png" height="360" width="550">
 
 Bei einer Szene können genau zwei Entscheidungen eingefügt werden
 (Option 1 und 2 sind die Decisions, welche für das Spiel erstellt werden können.)
+Die zwei Scene - option 1 und Scene - option 2 sind die jeweiligen Szenen, bei dennen der Spieler weiter spielt, je nachdem welche Option er nimmt.
+option 1 => es geht bei Scene - option 1 weiter.
+option 2 => es geht bei Scene -option 2 weiter.
+Die Namen Scene - option auf der Übersicht kann man jeweils noch mit einem Doppelklick ändern, um sie für einen selbst im editing-prozess verständlicher zu machen.
 
+#### 2.2.3 Mock Up Spiel spielen/ Übersicht der vorhandenen Spiele
 <img src="./images/games.png" height="360" width="550">
 
 In diesem Bild sieht man die Übersicht der bereits erstellten Spiele, welche man spielen kann.
 Neben jedem Spiel steht eine kleine Beschreibung über das Spiel, der Name des Erstellers und das Erstelldatum.
 
+#### 2.2.4 Mock Up Spielstände betrachten/fortsetzten
 <img src="./images/account.png" height="360" width="550">
 
 Hier ist die Account übersicht, mit User-Name, E-Mail-Adresse und den Spielen, bei welchen man weiter
