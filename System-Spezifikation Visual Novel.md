@@ -97,11 +97,12 @@ Scrollen, um die nächsten Szenen bearbeiten zu können. Bei dem Button "next Sc
 <img src="./images/makerDecision.png" height="360" width="550">
 
 Bei einer Szene können genau zwei Entscheidungen eingefügt werden
-(Option 1 und 2 sind die Decisions, welche für das Spiel erstellt werden können.)
-Die zwei Scene - option 1 und Scene - option 2 sind die jeweiligen Szenen, bei dennen der Spieler weiter spielt, je nachdem welche Option er nimmt.
-option 1 => es geht bei Scene - option 1 weiter.
-option 2 => es geht bei Scene -option 2 weiter.
-Die Namen Scene - option auf der Übersicht kann man jeweils noch mit einem Doppelklick ändern, um sie für einen selbst im editing-prozess verständlicher zu machen.
+(Option 1 und 2 sind die Entscheidungen, welche für das Spiel erstellt werden können).
+<br>Die zwei Szenen (Scene - option 1 & Scene - option 2) sind die jeweiligen Szenen, bei denen der Spieler weiter spielt, je nachdem welche Option er nimmt.
+<br>option 1 => es geht bei "Scene - option 1" weiter.
+<br>option 2 => es geht bei "Scene - option 2" weiter.
+<br>Die Namen "Scene - option" auf der Übersicht kann man jeweils noch mit einem Doppelklick ändern, 
+um sie für einen selbst im editing-prozess verständlicher zu machen.
 
 #### 2.2.3 Mock Up Spiel spielen/ Übersicht der vorhandenen Spiele
 <img src="./images/games.png" height="360" width="550">
