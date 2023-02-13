@@ -48,7 +48,7 @@ mehr zu sehen ist.
 
 - Visual Novel Maker
     - Erstellen von Spielen: 
-Mit dem Visual Novel Maker wird Einem ermöglicht, Spiele zu erstellen.
+Mit dem Visual Novel Maker wird einem ermöglicht, Spiele zu erstellen.
     - Speichern von Spielen: 
 Die erstellten Spiele werden auf der Website gespeichert und sind für jeden zugänglich.
 - Accounts
@@ -117,6 +117,18 @@ Neben jedem Spiel steht eine kleine Beschreibung des Spiels, der Name des Erstel
 <img src="./images/account.png" height="360" width="550">
 
 Hier ist die Account übersicht, mit User-Name, E-Mail-Adresse und den Spielen, bei welchen man weiterspielen kann.
+
+### 2.6 Create Account
+#### 2.6.1 Mock Up
+<img src="./images/createAccount.png" height="360" width="550">
+
+Mit diesem Mock Up möchten wir veranschaulichen, wie die das Accounterstellen auf unserer Website aussieht.
+
+### 2.7 Login
+#### 2.7.1 Mock Up
+<img src="./images/login.png" height="360" width="550">
+
+In diesem Mock Up lässt sich erkennen, wie die login page auf unserer Website aussieht.
 
 ## 3. Nicht-funktionale Anforderungen
 
