@@ -27,7 +27,7 @@ Szenen aus der json-Datei, welche auf GitHub gespeichert ist, ausgelesen.
 ### 1.2 Verbesserungspotenziale
 
 Wir wollen einen Visual Novel Maker hinzufügen, in welchen man seine eigenen VNs
-erstellen, speichern kann. Auch die Funktionen unserer schon vorhanden VN wollen wir
+erstellen und speichern kann. Auch die Funktionen unserer schon vorhanden VN wollen wir
 in diesem Projekt verbessern.
 
 ### 1.3 Zielsetzung
@@ -44,16 +44,16 @@ mehr zu sehen ist.
     - Audio
         - Im Spiel gibt es ein Audio, in welchem der Text vorgelesen wird. Vorerst ist geplant den Text nur mit den Pronomen they/them vorzulesen, um geschlechtsneutral zu bleiben. Wenn genügend Zeit bleibt, werden die anderen zwei auch noch eingesprochen.
     - Pfadübersicht
-        - Eine Übersicht, in der alle schon gespielten Szenen aufgelistet werden. Sie soll dem Spieler einen Überblick verschaffen
+        - Eine Übersicht, in der alle schon gespielten Szenen aufgelistet werden. Sie soll dem Spieler einen Überblick verschaffen.
 
 - Visual Novel Maker
     - Erstellen von Spielen: 
-Mit dem Visual Novel Maker wird es einem ermöglicht, spiele zu erstellen.
+Mit dem Visual Novel Maker wird Einem ermöglicht, Spiele zu erstellen.
     - Speichern von Spielen: 
 Die erstellten Spiele werden auf der Website gespeichert und sind für jeden zugänglich.
 - Accounts
     - Erstellen von einem Account: 
-Man kann sich einen Account mit einem Usernamen, Passwort und E-Mail anlegen.
+Man kann sich einen Account mit Usernamen, Passwort und E-Mail anlegen.
     - Speicherung des Spielstandes: 
 Auf dem Account werden die Spielstände des Spielers gespeichert.
 
@@ -64,7 +64,7 @@ Auf dem Account werden die Spielstände des Spielers gespeichert.
 
 <img src="./images/uml1.png">
 
-Auf unserer Web-Site sind die 3 main use-cases:
+Auf unserer Website sind die 3 main Use-Cases:
 - Ein Spiel erstellen
 - Ein Spiel spielen
     - Nach dem Spielen kann man den Spielstand speichern, jedoch wird für das Speichern ein Account benötigt, weshalb nur
@@ -74,11 +74,11 @@ Auf unserer Web-Site sind die 3 main use-cases:
 <img src="./images/spielErstellen.png" alt="spiel erstellen" width="552" height="252">
 
 Ein Spiel zu erstellen beinhaltet das Erstellen von Szenen. Am Ende einer Szene kann man eine Entscheidung einbauen. 
-Wenn das Spiel fertig erstellt wurde, gibt es die Möglichkeit es auf der Web-Site zu speichern. Nicht bei jeder Szene muss 
-eine Entscheidung eingebaut werden, es kann auch einfach eine Szene ohne Entscheidung eingebaut werden. Nach entscheidungslosen Szenen 
+Wenn das Spiel fertig erstellt wurde, gibt es die Möglichkeit, es auf der Website zu speichern. Nicht bei jeder Szene muss 
+eine Entscheidung eingebaut werden, man kann auch eine Szene ohne Entscheidung einbauen. Nach entscheidungslosen Szenen 
 wird einfach die darauf folgende Szene abgespielt.
 <br>
-Ebenso können erstellte Szenen mit rechtsklick auf die Szene wieder gelöscht werden.
+Ebenso können erstellte Szenen mit Rechtsklick auf die Szene wieder gelöscht werden.
 
 ### 2.2 Spiel erstellen
 #### 2.2.1 Mock Up
@@ -87,11 +87,11 @@ Ebenso können erstellte Szenen mit rechtsklick auf die Szene wieder gelöscht w
 
 An den Stellen, an welchen sich die '+' Symbole befinden, können Bilder der gerade interagierenden
 Charaktere hinzugefügt werden. In der Box mit dem Schriftsatz 'Name' wird der Name der Person eingetragen,
-welche gerade spricht oder denkt. 'Enter Text here' ist der Platzhalter für den gerade gesprochenen / gedachten Text.
+welche gerade spricht oder denkt. 'Enter Text here' ist der Platzhalter für den momentan gesprochenen / gedachten Text.
 
-Am Rand werden zur Übersicht die Szenen angezeigt, auf welche man klicken kann umm sie zu verändern oder neue hinzuzufügen.
-Wenn die Szenen-Übersicht zu groß wird um auf der Seite vollständig angezeigt zu werden, kann man auf dem Rand der seite hinunter
-Scrollen, um die nächsten Szenen bearbeiten zu können. Bei dem Button "next Scene" wird eine neue Szene erstellt und bei der Szenen-Übersicht wird diese hinzugefügt.
+Am Rand werden zur Übersicht die Szenen angezeigt, auf welche man zum Ändern oder neu Hinzufügen klicken kann.
+Wenn die Szenen-Übersicht zu groß wird um auf der Seite vollständig angezeigt zu werden, kann man auf dem Rand der Seite hinunter-
+scrollen, um die nächsten Szenen bearbeiten zu können. Bei dem Button "next Scene" wird eine neue Szene erstellt und bei der Szenen-Übersicht wird diese hinzugefügt.
 
 ### 2.3 Entscheidung einbauen
 #### 2.3.1 Mock Up
@@ -103,28 +103,27 @@ Bei einer Szene können genau zwei Entscheidungen eingefügt werden
 <br>option 1 => es geht bei "Scene - option 1" weiter.
 <br>option 2 => es geht bei "Scene - option 2" weiter.
 <br>Die Namen "Scene - option" auf der Übersicht kann man jeweils noch mit einem Doppelklick ändern, 
-um sie für einen selbst im editing-prozess verständlicher zu machen.
+um sie für einen selbst im Editing-Prozess verständlicher zu machen.
 
-### 2.4 Spiel spielen/ Übersicht der vorhandenen Spiele
+### 2.4 Spiel spielen / Übersicht der vorhandenen Spiele
 #### 2.4.1 Mock Up
 <img src="./images/games.png" height="360" width="550">
 
 In diesem Bild sieht man die Übersicht der bereits erstellten Spiele, welche man spielen kann.
-Neben jedem Spiel steht eine kleine Beschreibung über das Spiel, der Name des Erstellers und das Erstelldatum.
+Neben jedem Spiel steht eine kleine Beschreibung des Spiels, der Name des Erstellers und das Erstelldatum.
 
-### 2.5 Spielstände betrachten/fortsetzen
+### 2.5 Spielstände betrachten / fortsetzen
 #### 2.5.1 Mock Up
 <img src="./images/account.png" height="360" width="550">
 
-Hier ist die Account übersicht, mit User-Name, E-Mail-Adresse und den Spielen, bei welchen man weiter
-spielen kann.
+Hier ist die Account übersicht, mit User-Name, E-Mail-Adresse und den Spielen, bei welchen man weiterspielen kann.
 
 ## 3. Nicht-funktionale Anforderungen
 
 ### `Usability`: Benutzbarkeitsanforderung
 
-Der Maker soll durch verschiedenste Buttons leicht bedienbar werden und durch die
+Der Maker soll durch verschiedenste Buttons leicht bedienbar werden und durch das
 '+' Symbol sollen Bilder auf einfachste Weise eingefügt werden können.
 
-Durch eine klare Strukturierung der schon erstellten Szenen, soll dem benutzer eine 
+Durch eine klare Strukturierung der bereits erstellten Szenen, soll dem Benutzer eine 
 gute Übersicht gegeben werden.
