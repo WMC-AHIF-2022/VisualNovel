@@ -80,6 +80,18 @@ wird einfach die darauf folgende Szene abgespielt.
 <br>
 Ebenso können erstellte Szenen mit Rechtsklick auf die Szene wieder gelöscht werden.
 
+<img src="./images/spielSpielen.png" width="552" height="290">
+
+Das Spiel spielen beinhaltet Änderungen an der Originalseite, welche sich in folgenden Bereichen zeigen:
+- Overview 
+  - Übersicht über den Pfad welchen man gerade spielt (bereits durch gespielte Pfade)
+- back
+  -  Zurück button um zu der vorherigen Szene zurückzukehren
+- next
+  -  Weiter button um zu der nächsten Szene vorzuspringen
+- Fullscreen
+  - Button um in den Vollbildschirmmodus zu wechseln 
+
 ### 2.2 Spiel erstellen
 #### 2.2.1 Mock Up
 
@@ -135,7 +147,8 @@ In diesem Mock Up lässt sich erkennen, wie die login page auf unserer Website a
 <img src="./images/changesFromTheOldGameLayout.png" height="360" width="550">
 
 Dieses Mock Up beschreibt, wie sich das Game Layout mit dem Hinzufügen neuer Optionen (Vor/ Zurück button, Pfadübersicht, Vollbildschirmmodus)
-verändert.
+verändert. 
+<br>Natürlich bleibt die Weiterfunktion, welche durch das Klicken des Spielfelds aktiviert wird, weiter bestehen.
 
 ## 3. Nicht-funktionale Anforderungen
 
