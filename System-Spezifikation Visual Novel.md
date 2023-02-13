@@ -80,9 +80,9 @@ wird einfach die darauf folgende Szene abgespielt.
 <br>
 Ebenso können erstellte Szenen mit rechtsklick auf die Szene wieder gelöscht werden.
 
-### 2.2 Mock Up
+### 2.2 Spiel erstellen
+#### 2.2.1 Mock Up
 
-#### 2.2.1 Mock Up Spiel erstellen
 <img src="./images/maker.png" height="360" width="550">
 
 An den Stellen, an welchen sich die '+' Symbole befinden, können Bilder der gerade interagierenden
@@ -93,7 +93,8 @@ Am Rand werden zur Übersicht die Szenen angezeigt, auf welche man klicken kann 
 Wenn die Szenen-Übersicht zu groß wird um auf der Seite vollständig angezeigt zu werden, kann man auf dem Rand der seite hinunter
 Scrollen, um die nächsten Szenen bearbeiten zu können. Bei dem Button "next Scene" wird eine neue Szene erstellt und bei der Szenen-Übersicht wird diese hinzugefügt.
 
-#### 2.2.1 Mock Up Entscheidung einbauen
+### 2.3 Entscheidung einbauen
+#### 2.3.1 Mock Up
 <img src="./images/makerDecision.png" height="360" width="550">
 
 Bei einer Szene können genau zwei Entscheidungen eingefügt werden
@@ -104,13 +105,15 @@ Bei einer Szene können genau zwei Entscheidungen eingefügt werden
 <br>Die Namen "Scene - option" auf der Übersicht kann man jeweils noch mit einem Doppelklick ändern, 
 um sie für einen selbst im editing-prozess verständlicher zu machen.
 
-#### 2.2.3 Mock Up Spiel spielen/ Übersicht der vorhandenen Spiele
+### 2.4 Spiel spielen/ Übersicht der vorhandenen Spiele
+#### 2.4.1 Mock Up
 <img src="./images/games.png" height="360" width="550">
 
 In diesem Bild sieht man die Übersicht der bereits erstellten Spiele, welche man spielen kann.
 Neben jedem Spiel steht eine kleine Beschreibung über das Spiel, der Name des Erstellers und das Erstelldatum.
 
-#### 2.2.4 Mock Up Spielstände betrachten/fortsetzten
+### 2.5 Spielstände betrachten/fortsetzen
+#### 2.5.1 Mock Up
 <img src="./images/account.png" height="360" width="550">
 
 Hier ist die Account übersicht, mit User-Name, E-Mail-Adresse und den Spielen, bei welchen man weiter
