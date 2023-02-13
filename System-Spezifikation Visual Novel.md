@@ -130,6 +130,13 @@ Mit diesem Mock Up möchten wir veranschaulichen, wie die das Accounterstellen a
 
 In diesem Mock Up lässt sich erkennen, wie die login page auf unserer Website aussieht.
 
+### 2.8 Fullscreenmodus und Pfadübersicht (in Game)
+#### 2.8.1 Mock Up
+<img src="./images/changesFromTheOldGameLayout.png" height="360" width="550">
+
+Dieses Mock Up beschreibt, wie sich das Game Layout mit dem Hinzufügen neuer Optionen (Vor/ Zurück button, Pfadübersicht, Vollbildschirmmodus)
+verändert.
+
 ## 3. Nicht-funktionale Anforderungen
 
 ### `Usability`: Benutzbarkeitsanforderung
