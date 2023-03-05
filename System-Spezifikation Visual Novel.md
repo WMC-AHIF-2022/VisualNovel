@@ -124,3 +124,7 @@ Der Maker soll durch verschiedenste Buttons leicht bedienbar werden und durch di
 
 Durch eine klare Strukturierung der schon erstellten Szenen, soll dem benutzer eine 
 gute Übersicht gegeben werden.
+
+## 5. Datenmodell
+
+<img src="./images/datamodel.png">

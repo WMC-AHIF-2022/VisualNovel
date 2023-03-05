@@ -1,0 +1,86 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+class ScenePictures{
+string leftCharacter
+string rightCharacter
+string background
+
+formatPictures() void
+}
+
+class Scene{
+number id
+number nextID
+number nextID2
+number beforeID
+
+string talkingCharacter
+string text
+
+ScenePictures pictures
+playScene() number
+}
+
+'class SceneWithDecision extends Scene{
+'    number nextIDIfDecisionFalse
+'    playScene() number
+'}
+'playScene returns a number
+'number is the id for the next scene
+' Scene returns -1 due to not having a decision
+' SceneWithDecision 0 for decision answered with true
+' SceneWithDecision 1 for decision answered with false
+' if Value != -1 value gets saved in choices Array for later use
+
+class Game {
+Scene[] scenes
+string name
+string[] pronomen
+boolean loggedIn
+GameInfo infos
+
+playGame() boolean
+saveGame() boolean
+}
+' playGame returns true if finished false if unfinished
+' saveGame return: true --> saved false --> not able to save
+
+class Account {
+string userName
+string gameName
+
+Game[] playedGames
+}
+
+class Maker{
+Game gameToBeCreated
+
+createScene() Scene
+private insertPictures() ScenePictures
+
+}
+
+class GameInfo{
+string creator
+string gameDescription
+date releaseDate
+}
+
+class GamesOnPage{
+Game[] Games
+
+getGame() Game
+addGame() void
+}
+
+
+Maker -- Game: creates
+Game -- GameInfo: uses
+Game -- Scene: consist of
+Scene -- ScenePictures: displays
+Account -- Game: saves
+GamesOnPage -- Game : manages
+
+' createScene adds id of scene
+@enduml
