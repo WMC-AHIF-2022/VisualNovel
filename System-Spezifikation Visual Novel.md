@@ -155,6 +155,13 @@ verändert.
 
 Ansicht im Fullscreenmodus.
 
+### 2.9 Overview
+
+<img src="./images/Overview.png" height="360" width="550">
+
+In der Overview sieht man welche Abschnitte man schon gespielt hat.
+Ungespielte Abschnitte sind grau gekennzeichnet und deren Endpunkte dunkelgrün.
+Gespielte Abschitte sind türkis mit blaulichen Endpunkten.
 ## 3. Nicht-funktionale Anforderungen
 
 ### `Usability`: Benutzbarkeitsanforderung
