@@ -159,10 +159,39 @@ Ansicht im Fullscreenmodus.
 
 ### `Usability`: Benutzbarkeitsanforderung
 
-Der Maker soll durch verschiedenste Buttons leicht bedienbar werden und durch das
+- Der Maker soll durch verschiedenste Buttons leicht bedienbar werden und durch das
 '+' Symbol sollen Bilder auf einfachste Weise eingefügt werden können.
 Durch eine klare Strukturierung der schon erstellten Szenen, soll dem benutzer eine 
 gute Übersicht gegeben werden.
+- Damit der Ersteller nicht vergisst sein Spiel zu speichern, wird es automatisch auf der Website gespeichert.
+
+### `Efficiency`: Effizienzanforderung
+
+- Das Laden der Website sollte unter 2 Sekunden liegen
+
+### `Maintenance`: Wartbarkeits- und Portierbarkeitsanforderung
+
+- Audio einfügen
+- Mehr als zwei Entscheidungen auf einmal hinzufügen
+- Überarbeitung des Spieles durch den Account
+  - Spiele offen/geschlossen für die Bearbeitung anderer stellen
+  -  privates Speichern der selber erstellten Spiele
+- Einfluss einer Entscheidung bei späteren Szenen
+- Searchbar für Spiele/Accounts
+  - Kategorisierung/Sortieren der Spiele
+  - Bewerten/Kommentieren von Spielen
+
+
+### `Security`: Sicherheitsanforderung
+
+- Spiele sind auch ohne Account spielbar, jedoch kann man den Spielstand dann nicht speichern
+- Daten der Spiele und Accounts werden konsistent in einer Datenbank gespeichert
+
+## 4. Mengengerüst
+
+- Zu Beginn werden 9-20 User erwartet. Wenn nach der Zeit schon mehrere Spiele erstellt wurden, werden mehr erwartet.
+- Pro User werden ca 2-3 gespielte Spiele und ein erstelltes Spiel erwartet. Für einen Account wird ein Username, Password und eine E-Mail gespeichert.
+- Wir rechnen mit einer sehr geringen Anfrage, da wir nicht aktiv dafür werben.
 
 ## 5. Datenmodell
 
