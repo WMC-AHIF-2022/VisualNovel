@@ -6,7 +6,19 @@ class Game{
     //infos: GameInfo; TODO! create Game info class
     //loggedIn: boolean; TODO! check if needed when accounts exist
 
+    /**
+     *  playGame: function for starting the game
+     *  return: false = if game not finished true = if game is finished
+     */
     public playGame():boolean{
+        return false;
+    }
+
+    /**
+     * saveGame: function for saving the game (if Account exists & isLoggedIn)
+     * return: false = if saving failed true = if saving successful
+     */
+    public saveGame():boolean{
         return false;
     }
 
