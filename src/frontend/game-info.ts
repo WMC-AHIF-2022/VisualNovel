@@ -1,19 +1,22 @@
+import {Game} from "./game";
+
 export class GameInfo {
-    private readonly creator: string;
-    private gameDescription:string;
-    private readonly releaseDate: Date;
+    private readonly creator: string; // creator doesn't change
+    private gameDescription:string; // description might change in a later point of time
+    private readonly creationDate: Date; // creation date won't change
 
     constructor(creator: string, releaseDate:Date) {
-        this.releaseDate = releaseDate;
+        this.creationDate = releaseDate;
         this.creator = creator;
     }
+    // getters + setters
     public getCreator():string{
         return this.creator;
     }
-    public getGameDescription():string{
+    public getDescription():string{
         return this.gameDescription;
     }    public getReleaseData():Date{
-        return this.releaseDate;
+        return this.creationDate;
     }
     public setDescription(newDescription: string){
         this.gameDescription = newDescription;
