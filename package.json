@@ -1,0 +1,41 @@
+{
+  "name": "visualnovel",
+  "version": "1.0.0",
+  "description": "This Website is all about Visual Novels.",
+  "main": "index.js",
+  "scripts": {
+    "server-dev": "npx nodemon ./src/backend/app.ts",
+    "client-dev": "npx tsc --watch --project ./src/frontend",
+    "prestart": "npx tsc --project public",
+    "start": "npx ts-node app.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/WMC-AHIF-2022/VisualNovel.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/WMC-AHIF-2022/VisualNovel/issues"
+  },
+  "homepage": "https://github.com/WMC-AHIF-2022/VisualNovel#readme",
+  "dependencies": {
+    "express": "^4.17.2",
+    "http-status-codes": "^2.2.0",
+    "sqlite": "^4.1.2",
+    "sqlite3": "^5.1.6"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.13",
+    "@types/node": "^17.0.15",
+    "nodemon": "^2.0.15",
+    "ts-node": "^10.5.0",
+    "typescript": "^4.6.2"
+  },
+  "nodemonConfig": {
+    "ignore": [
+      "public",
+      "**/*.json"
+    ]
+  }
+}

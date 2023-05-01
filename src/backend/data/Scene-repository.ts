@@ -1,12 +1,13 @@
+import {DB} from "../database";
 
 export interface IScene {
     id: number,
     nextId : number,
     choiceId: number,
-    beforeId : number,
+    prevId : number
     talkingChar: string,
     text: string,
-    scenePics: IScenePictures
+    scenePicsId: number
 }
 
 export interface IScenePictures{
@@ -39,10 +40,21 @@ export function getSceneById(id: number): IScene|undefined {
     return scenes[index];
 }
 
-export function addScene(nextId: number,choiceId: number,beforeId: number,talkingChar:string,text:string,pics:IScenePictures): IScene {
-    const scene: IScene = { id: nextId++, nextId: nextId, choiceId: choiceId,beforeId: beforeId,talkingChar: talkingChar,text:text,scenePics: pics};
-    scenes.push(scene);
-    return scene;
+export async function addScene(scene : IScene): Promise<void> {
+    const db = await DB.createDBConnection();
+    const stmt = await db.prepare('insert into Scenes (nextId,choiceId,prevId,talkingChar,text)values(?1,?2,?3,?4,?5)');
+    await stmt.bind({1:scene.nextId,2:scene.choiceId,3:scene.prevId,4:scene.talkingChar,5:scene.text});
+    const operationResult =await stmt.run();
+    await stmt.finalize();
+    await db.close();
+
+    if (typeof operationResult.changes !== "number" || operationResult.changes !== 1) {
+        throw new Error("DB Error");
+    }
+    else {
+        scene.id = operationResult.lastID!;
+    }
+
 }
 
 export function removeAllScenes(): void {
