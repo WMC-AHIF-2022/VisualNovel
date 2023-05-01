@@ -4,7 +4,7 @@ import {SceneRouter} from "./router/Scene-router";
 
 const app = express();
 
-const path = join(__dirname, "../frontend");
+const path = join(__dirname, "../client");
 const options = { extensions: ["html"] };
 app.use(express.json())
 app.use(express.static(path, options));

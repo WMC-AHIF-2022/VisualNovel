@@ -4,8 +4,8 @@
   "description": "This Website is all about Visual Novels.",
   "main": "index.js",
   "scripts": {
-    "server-dev": "npx nodemon ./src/backend/app.ts",
-    "client-dev": "npx tsc --watch --project ./src/frontend",
+    "server-dev": "npx nodemon ./src/server/app.ts",
+    "client-dev": "npx tsc --watch --project ./src/client",
     "prestart": "npx tsc --project public",
     "start": "npx ts-node app.ts"
   },
