@@ -1,6 +1,7 @@
 import express from "express";
 import { join } from "path"
-import {SceneRouter} from "./router/Scene-router";
+import {SceneRouter} from "./router/scene-router";
+import {GameRouter} from "./router/game-router";
 
 const app = express();
 
@@ -9,6 +10,7 @@ const options = { extensions: ["html"] };
 app.use(express.json())
 app.use(express.static(path, options));
 app.use("/api/scenes",SceneRouter);
+app.use("/api/games",GameRouter);
 
 const port = 3000;
 
