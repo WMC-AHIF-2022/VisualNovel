@@ -97,6 +97,7 @@ input{
     grid-area: SceneList;
     display: flex;
     overflow: hidden;
+    overflow-y: scroll;
 }
 
 .item4{
@@ -134,6 +135,24 @@ li{
 
 .plus{
     font-size: 5em;
+}
+
+input[type="file"] {
+    display: none;
+}
+
+
+.custom-file-upload {
+    display: inline-block;
+    cursor: pointer;
+    width: 10em;
+   background-color: gainsboro;
+    text-align: center;
+    margin: 0 2.5em 0 2.5em;
+    padding: 7em 0 7em 0;
+    height: 7em;
+
+
 }
 
 

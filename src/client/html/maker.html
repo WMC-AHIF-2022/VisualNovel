@@ -6,6 +6,8 @@
     <link href="./../styles.css" rel="stylesheet" type="text/css" />
     <link href="./../makerStyles.css" rel="stylesheet" type="text/css"/>
     <link rel="icon" href="../img/additional/logo.png" type="image/icon type"/>
+    <script src="../scripts/maker.js" type="module"></script>
+
 </head>
 <body>
     <div id="main-content">
@@ -25,32 +27,34 @@
             <div class="item2"></div>
             <div class="item3">
                 <ul id="sceneOverview">
-                    <li><p>Scene 1</p></li>
                 </ul>
 
             </div>
             <div class="item4">
-                <button class="makerButton">next scene</button>
-                <button class="makerButton">make decision</button>
+                <button id="makeScene" class="makerButton">next scene</button>
+                <button id="makeDecision" class="makerButton">make decision</button>
             </div>
         </div>
         <div class="playground-con">
-            <div class="playgroundItem1">
-                <div class="characterSpaces">
+            <div id="imageBG" class="playgroundItem1">
+                <label id="file-label" for="file-upload" class="custom-file-upload">
                     <p class="plus">+</p>
-                </div>
+                </label>
+                <input id="file-upload" type="file"/>
             </div>
 
             <div class="playgroundItem2">
-                <input value="Name"/>
+                <input id="povName" value="Name"/>
             </div>
             <div class="playgroundItem3">
-                <div class="characterSpaces">
+                <label for="file-upload2" class="custom-file-upload">
                     <p class="plus">+</p>
-                </div>
+                </label>
+                <input id="file-upload2" type="file" accept="images/*"/>
             </div>
             <div class="playgroundItem4">
-                <textarea id="playgroundTextbox">Enter Text here</textarea>
+                <label id="label-textbox" for="playgroundTextbox"></label>
+                <textarea id="playgroundTextbox" >Enter text here</textarea>
             </div>
 
         </div>

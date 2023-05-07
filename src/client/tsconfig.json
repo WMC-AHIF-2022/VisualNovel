@@ -1,15 +1,17 @@
 {
-  "extends": "../../tsconfig.json",
   "compilerOptions": {
-    "module": "commonjs",
-    "target": "es2021",
-    "sourceMap": true,
+    "target": "es6", // Set the JavaScript language version for emitted JavaScript and include compatible library declarations.
+    "module": "es6",
+    "strict": true, // Enable all strict type-checking options.
+    "sourceMap": true, // Create source map files for emitted JavaScript files.
+    "strictNullChecks": false, // When type checking, dont't take into account null and undefined,
+    "skipDefaultLibCheck": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
     "lib": [
       "DOM",
       "ES6"
     ]
   },
-  "exclude": [
-    "node_modules"
-  ]
+
 }

@@ -1,5 +1,5 @@
 import express, {response} from "express";
-import {addScene, IScene, IScenePictures} from "../data/scene-repository";
+import {addScene, IScene} from "../data/scene-repository";
 import {StatusCodes} from "http-status-codes";
 
 export const SceneRouter = express.Router();
