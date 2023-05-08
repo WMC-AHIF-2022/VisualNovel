@@ -48,6 +48,7 @@ export class Maker{
             let char = <HTMLImageElement>document.getElementById("char");
             // @ts-ignore
             char.src = base64;
+            char.style.display = 'block';
             //"url(\"../img/backgrounds/wald2_5.png\")"
 
 
