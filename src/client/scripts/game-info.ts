@@ -6,10 +6,8 @@ export class GameInfo {
     private readonly creationDate: Date; // creation date won't change
     private name: string; // game name might get changed later on, so it's not read only
 
-    constructor(creator: string, releaseDate:Date, name : string) {
+    constructor() {
         this.name = "Visual Novel";
-        this.creationDate = releaseDate;
-        this.creator = creator;
     }
     // getters + setters
     public getCreator():string{

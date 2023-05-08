@@ -1,15 +1,16 @@
-import {GameInfo} from "./game-info";
-import {Scene} from "./scene";
+import {GameInfo} from "./game-info.js";
+import {Scene} from "./scene.js";
 import {ScenePictures} from "./scene-pics";
 export class Game{
     private readonly id: number; // must stay readonly, due to saving in database and identification
     private pronouns: string[]; // TODO!! create setter
-    private scenes: Scene[];
+    public scenes: Scene[];
     private infos: GameInfo; // description might get changed
     //private loggedIn: boolean; TODO! check if needed when accounts exist
 
     constructor() {
         this.scenes = [];
+        this.infos = new GameInfo();
     }
 
 
@@ -43,10 +44,7 @@ export class Game{
      * @param text displayed text
      * @param pictures pictures being used in the scene
      */
-    public addScene( id: number, nextId: number, nextId2: number, prevId: number, talkingCharacter: string, text: string, pictures: ScenePictures):void{
-        let newScene: Scene = new Scene(id,nextId,nextId2,prevId,talkingCharacter,text,pictures);
-        this.scenes.push(newScene);
-    }
+
     /**
      * changeDescription: function to change game description
      * @param newDescription: the new description which is going to be saved
