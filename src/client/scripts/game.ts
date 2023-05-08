@@ -1,24 +1,29 @@
-import {GameInfo} from "./game-info";
-import {Scene} from "./scene";
+import {GameInfo} from "./game-info.js";
+import {Scene} from "./scene.js";
+import {ScenePictures} from "./scene-pics";
 export class Game{
     private readonly id: number; // must stay readonly, due to saving in database and identification
-    private name: string; // game name might get changed later on, so it's not read only
-    private pronouns: string[]; // TODO!! ask liss when this is gonna get set
-    scenes: Scene[];
+    private pronouns: string[]; // TODO!! create setter
+    public scenes: Scene[];
     private infos: GameInfo; // description might get changed
     //private loggedIn: boolean; TODO! check if needed when accounts exist
 
     constructor() {
-        this.name = "Visual Novel"
         this.scenes = [];
+        this.infos = new GameInfo();
     }
+
 
     /**
      *  playGame: function for starting the game
      *  return: false = if game not finished true = if game is finished
      */
     public playGame():boolean{
-        return false;
+        let nextID:number = 0;
+        while (nextID != -1){ // TODO!! check if the last nextID is gonna be -1
+            nextID = this.scenes[nextID].playScene(this.pronouns);
+        }
+        return true;
     }
 
     /**
@@ -30,22 +35,32 @@ export class Game{
     }
 
     /**
+     * addScene: function for adding a scene to the scene Array
+     * @param id scene id
+     * @param nextId id of the following scene
+     * @param nextId2 id of the following scene if a certain decision was made
+     * @param prevId id of the previous scene
+     * @param talkingCharacter the name of the talking character
+     * @param text displayed text
+     * @param pictures pictures being used in the scene
+     */
+
+    /**
      * changeDescription: function to change game description
      * @param newDescription: the new description which is going to be saved
      */
     public changeDescription( newDescription:string):void{
         this.infos.setDescription(newDescription);
     }
-
+    public setPronouns(newPronouns : string[]){
+        this.pronouns = newPronouns;
+    }
     //getters
     public getGameID():number{
         return this.id;
     }
     public getGameInfo():GameInfo{
         return this.infos;
-    }
-    public getGameName():string{
-        return this.name;
     }
     public getPronouns():string[]{
         return this.pronouns;

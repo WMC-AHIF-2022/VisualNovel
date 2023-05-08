@@ -96,7 +96,9 @@ async function init() {
         maker.createScene();
         maker.setPlaygroundBack()
         maker.createScene();
+        maker.switchScene();
         maker.createOptions();
+
     })
 
 }

@@ -4,7 +4,7 @@ import {IScene} from "./scene-repository";
 
 export interface IGame {
     id: number,
-    gameName: string,
+    gameName: string,//TODO!!weg damit :O
     scenes: IScene[],
     infoId: number
 }
