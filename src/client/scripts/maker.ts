@@ -11,14 +11,14 @@ export class Maker{
     }
 
     createScene() {
-        this.curScene = new Scene(this.game.scenes.length);
+        this.curScene = new Scene(this.game.getScenes().length);
         let list = document.getElementById("sceneOverview");
-        let html = '<li><p id="' + `${this.game.scenes.length}`+'" class="clickable">Scene ';
-        this.game.scenes.push(this.curScene);
-        html += this.game.scenes.length;
+        let html = '<li><p id="' + `${this.game.getScenes().length}`+'" class="clickable">Scene ';
+        this.game.addScene(this.curScene)
+        html += this.game.getScenes().length;
         html += '</p></li>';
         list.innerHTML += html;
-        document.getElementById(`${this.game.scenes.length-1}`).style.color= "pink";
+        document.getElementById(`${this.game.getScenes().length-1}`).style.color= "pink";
 
         const leftChar = <HTMLInputElement>document.getElementById("file-upload");
 
@@ -57,16 +57,16 @@ export class Maker{
     }
 
     setPlaygroundBack() {
-            document.getElementById(`${this.curScene.id}`).style.color= "#CCE8E1";
-            this.curScene.talkingCharacter = (<HTMLInputElement>document.getElementById("povName")).value;
-            this.curScene.text = (<HTMLInputElement>document.getElementById("playgroundTextbox")).value;
+            document.getElementById(`${this.curScene.getId()}`).style.color= "#CCE8E1";
+            this.curScene.setTalkingCharacter((<HTMLInputElement>document.getElementById("povName")).value);
+            this.curScene.setText((<HTMLInputElement>document.getElementById("playgroundTextbox")).value);
         (<HTMLInputElement>document.getElementById("playgroundTextbox")).value = 'Enter text here';
         (<HTMLInputElement>document.getElementById("povName")).value = 'Name';
         console.log("weg");
-        for(let i = 0;i < this.game.scenes.length;i++){
+        for(let i = 0;i < this.game.getScenes().length;i++){
             console.log(i);
-            console.log(this.game.scenes[i].talkingCharacter);
-            console.log(this.game.scenes[i].text);
+            console.log(this.game.getScenes()[i].getTalkingCharacter());
+            console.log(this.game.getScenes()[i].getText());
         }
         
     }
@@ -76,13 +76,13 @@ export class Maker{
         for(let i = 0;i < scenes.length;i++){
             scenes[i].addEventListener("click",()=>{
                 console.log("test");
-                document.getElementById(`${this.curScene.id}`).style.color= "#CCE8E1";
-                this.curScene.talkingCharacter = (<HTMLInputElement>document.getElementById("povName")).value;
-                this.curScene.text = (<HTMLInputElement>document.getElementById("playgroundTextbox")).value;
-                this.curScene = this.game.scenes[i];
-                console.log(this.game.scenes[i]);
-                (<HTMLInputElement>document.getElementById("playgroundTextbox")).value = this.curScene.text;
-                (<HTMLInputElement>document.getElementById("povName")).value = this.curScene.talkingCharacter;
+                document.getElementById(`${this.curScene.getId()}`).style.color= "#CCE8E1";
+                this.curScene.setTalkingCharacter((<HTMLInputElement>document.getElementById("povName")).value) ;
+                this.curScene.setText((<HTMLInputElement>document.getElementById("playgroundTextbox")).value) ;
+                this.curScene = this.game.getScenes()[i];
+                console.log(this.game.getScenes()[i]);
+                (<HTMLInputElement>document.getElementById("playgroundTextbox")).value = this.curScene.getText();
+                (<HTMLInputElement>document.getElementById("povName")).value = this.curScene.getTalkingCharacter();
                 document.getElementById(`${i}`).style.color= "pink";
             })
         }
