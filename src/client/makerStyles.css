@@ -152,8 +152,15 @@ input[type="file"] {
     padding: 7em 0 7em 0;
     height: 7em;
 
-
 }
+
+#char{
+    width: 10em;
+    height: 15em;
+    display: none;
+}
+
+
 
 
 
