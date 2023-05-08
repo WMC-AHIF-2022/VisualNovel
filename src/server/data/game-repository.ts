@@ -1,16 +1,20 @@
-import {IScene, IScenePictures} from "./Scene-repository";
+
+import {DB} from "../database";
+import {IScene} from "./scene-repository";
 
 export interface IGame {
     id: number,
+    gameName: string,//TODO!!weg damit :O
     scenes: IScene[],
-    //TODO!! player
-    infos: IGameinfo
+    infoId: number
 }
 
 export interface IGameinfo{
+    infoId: number,
     creator: string,
     description: string,
-    releaseDate: Date
+    releaseDate: Date,
+    name:string
 }
 
 let nextId = 0;
@@ -38,10 +42,21 @@ export function getGameById(id: number): IGame|undefined {
     return games[index];
 }
 
-export function addGame(nextId: number, scenes: IScene[],infos: IGameinfo): IGame {
-    const game: IGame = { id: nextId++, scenes: scenes, infos: infos};
-    games.push(game);
-    return game;
+export async function addGame(game:IGame): Promise<void> {
+    const db = await DB.createDBConnection();
+    const stmt = await db.prepare('insert into Games (gameName,infoId)values(?1,?2)');
+    await stmt.bind({1:game.gameName,2:game.infoId});
+    const operationResult =await stmt.run();
+    await stmt.finalize();
+    await db.close();
+
+    if (typeof operationResult.changes !== "number" || operationResult.changes !== 1) {
+        throw new Error("DB Error");
+    }
+    else {
+        game.id = operationResult.lastID!;
+    }
+
 }
 
 export function removeAllGames(): void {

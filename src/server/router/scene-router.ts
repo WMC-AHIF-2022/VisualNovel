@@ -1,5 +1,5 @@
 import express, {response} from "express";
-import {addScene, IScene, IScenePictures} from "../data/Scene-repository";
+import {addScene, IScene} from "../data/scene-repository";
 import {StatusCodes} from "http-status-codes";
 
 export const SceneRouter = express.Router();
@@ -11,6 +11,7 @@ SceneRouter.post("/",async (request,response)=>{
     let talkingChar : string | undefined = request.body.talkingChar;
     let text : string | undefined = request.body.text;
     let scenePicsId : number | undefined = request.body.scenePicsId;
+    let gameId : number | undefined = request.body.gameId;
 
     if (typeof choiceId !== "number") {
         response.status(StatusCodes.BAD_REQUEST).send("action missing or not ok");
@@ -36,6 +37,10 @@ SceneRouter.post("/",async (request,response)=>{
         response.status(StatusCodes.BAD_REQUEST).send("action missing or not ok");
         return;
     }
+    if (typeof gameId !== "number") {
+        response.status(StatusCodes.BAD_REQUEST).send("action missing or not ok");
+        return;
+    }
     const scene: IScene= {
         id: -1,
         nextId: nextId,
@@ -43,7 +48,8 @@ SceneRouter.post("/",async (request,response)=>{
         prevId: prevId,
         talkingChar: talkingChar,
         text: text,
-        scenePicsId: scenePicsId
+        scenePicsId: scenePicsId,
+        gameId: gameId
     }
 
     try {

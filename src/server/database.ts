@@ -26,5 +26,12 @@ export class DB{
                 ScenePicsId Integer
             )strict;`
         );
+        await connection.run(`
+           create table if not exists Games (
+                gameId INTEGER NOT NULL PRIMARY KEY,
+                gameName Text not null,
+                infoId Integer not null
+           )strict;`
+        );
     }
 }

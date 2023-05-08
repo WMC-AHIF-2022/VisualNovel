@@ -1,24 +1,18 @@
 import {ScenePictures} from "./scene-pics";
 
 export class Scene{
-
-    private id: number;
-    private nextId: number;
-    private nextId2: number; //if the scene has no decisions => nextId2 = null
-    private prevId: number;
-    private talkingCharacter: string;
-    private text: string;
-    private pictures: ScenePictures;
-
-    constructor(id: number, nextId: number, nextId2: number, prevId: number, talkingCharacter: string, text: string, pictures: ScenePictures) {
+    constructor(id: number) {
         this.id = id;
-        this.nextId = nextId;
-        this.nextId2 = nextId2;
-        this.prevId = prevId;
-        this.talkingCharacter = talkingCharacter;
-        this. text = text;
-        this.pictures = pictures;
+
     }
+
+    id: number;
+    nextId: number;
+    nextId2: number;
+    prevId: number;
+    talkingCharacter: string;
+    text: string;
+    pictures: ScenePictures;
     public playScene(pronouns: string[]): number{
         return;
     }
