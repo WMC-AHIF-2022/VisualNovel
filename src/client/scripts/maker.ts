@@ -20,28 +20,40 @@ export class Maker{
         list.innerHTML += html;
         document.getElementById(`${this.game.scenes.length-1}`).style.color= "pink";
 
-        /*const leftChar = <HTMLInputElement>document.getElementById("file-upload");
-        leftChar.addEventListener("change", () => {
+        const leftChar = <HTMLInputElement>document.getElementById("file-upload");
+
+        const convertBase64 =(file: File)=>{
+            return new Promise((resolve, reject) => {
+                const fileReader = new FileReader();
+                fileReader.readAsDataURL(file);
+
+                fileReader.onload = () => {
+                    resolve(fileReader.result);
+                };
+
+                fileReader.onerror = (error) => {
+                    reject(error);
+                };
+            });
+
+        }
+
+        leftChar.addEventListener("change", async() => {
+
             let file = leftChar.files[0];
             console.log("file:");
             console.log(file);
-            let reader = new FileReader();
-            let imageBG = document.getElementById("imageBG");
-            reader.onloadend = function () {
-                let urlData = reader.result.toString().split(";");
-                urlData[1].split(",");
-                console.log( urlData[1].split(","));
-                let url = urlData[1].split(",");
-                imageBG.style.backgroundImage = "url(" + url[1] + ")";
-                console.log("tried url");
-            };
+            const base64 = await convertBase64(file);
+            console.log(base64);
+            let char = <HTMLImageElement>document.getElementById("char");
+            // @ts-ignore
+            char.src = base64;
+            char.style.display = 'block';
+            //"url(\"../img/backgrounds/wald2_5.png\")"
 
-            if (file)
-            {
-                reader.readAsDataURL(file)
-            }
+
             console.log("should have changed");
-        });*/
+        });
     }
 
     setPlaygroundBack() {
