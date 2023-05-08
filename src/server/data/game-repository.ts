@@ -4,7 +4,6 @@ import {IScene} from "./scene-repository";
 
 export interface IGame {
     id: number,
-    gameName: string,//TODO!!weg damit :O
     scenes: IScene[],
     infoId: number
 }
@@ -41,11 +40,12 @@ export function getGameById(id: number): IGame|undefined {
     }
     return games[index];
 }
-
+//TODO!! change things
 export async function addGame(game:IGame): Promise<void> {
     const db = await DB.createDBConnection();
-    const stmt = await db.prepare('insert into Games (gameName,infoId)values(?1,?2)');
-    await stmt.bind({1:game.gameName,2:game.infoId});
+    await db.get('PRAGMA foreign_keys = ON');
+    const stmt = await db.prepare('insert into Games (infoId)values(?1)');
+    await stmt.bind({1:game.infoId});
     const operationResult =await stmt.run();
     await stmt.finalize();
     await db.close();
