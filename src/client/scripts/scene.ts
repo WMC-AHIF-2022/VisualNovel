@@ -19,7 +19,7 @@ export class Scene{
         this. text = text;
         this.pictures = pictures;
     }
-    public playScene(): number{
+    public playScene(pronouns: string[]): number{
         return;
     }
 

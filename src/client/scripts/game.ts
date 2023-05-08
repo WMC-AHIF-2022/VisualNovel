@@ -22,7 +22,7 @@ export class Game{
     public playGame():boolean{
         let nextID:number = 0;
         while (nextID != -1){ // TODO!! check if the last nextID is gonna be -1
-            //nextID = this.scenes[nextID].playScene(this.pronouns);
+            nextID = this.scenes[nextID].playScene(this.pronouns);
         }
         return true;
     }
@@ -46,8 +46,8 @@ export class Game{
      * @param pictures pictures being used in the scene
      */
     public addScene( id: number, nextId: number, nextId2: number, prevId: number, talkingCharacter: string, text: string, pictures: ScenePictures):void{
-        //let newScene: Scene = new Scene(id,nextId,nextId2,prevId,talkingCharacter,text,pictures);
-        //this.scenes.push(newScene);
+        let newScene: Scene = new Scene(id,nextId,nextId2,prevId,talkingCharacter,text,pictures);
+        this.scenes.push(newScene);
     }
     /**
      * changeDescription: function to change game description
