@@ -3,14 +3,12 @@ import {Scene} from "./scene";
 import {ScenePictures} from "./scene-pics";
 export class Game{
     private readonly id: number; // must stay readonly, due to saving in database and identification
-    private name: string; // game name might get changed later on, so it's not read only
     private pronouns: string[]; // TODO!! create setter
     private scenes: Scene[];
     private infos: GameInfo; // description might get changed
     //private loggedIn: boolean; TODO! check if needed when accounts exist
 
     constructor() {
-        this.name = "Visual Novel";
         this.scenes = [];
     }
 
@@ -56,16 +54,15 @@ export class Game{
     public changeDescription( newDescription:string):void{
         this.infos.setDescription(newDescription);
     }
-
+    public setPronouns(newPronouns : string[]){
+        this.pronouns = newPronouns;
+    }
     //getters
     public getGameID():number{
         return this.id;
     }
     public getGameInfo():GameInfo{
         return this.infos;
-    }
-    public getGameName():string{
-        return this.name;
     }
     public getPronouns():string[]{
         return this.pronouns;
