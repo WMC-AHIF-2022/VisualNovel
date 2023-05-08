@@ -13,7 +13,8 @@ export interface IGameinfo{
     infoId: number,
     creator: string,
     description: string,
-    releaseDate: Date
+    releaseDate: Date,
+    name:string
 }
 
 let nextId = 0;

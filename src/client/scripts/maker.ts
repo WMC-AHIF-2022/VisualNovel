@@ -20,19 +20,6 @@ export class Maker{
         list.innerHTML += html;
         document.getElementById(`${this.game.scenes.length-1}`).style.color= "pink";
 
-       /* document.getElementById("povName").addEventListener("change",()=>{
-            this.curScene.talkingCharacter = (<HTMLInputElement>document.getElementById("povName")).value;
-            console.log(this.curScene.talkingCharacter);
-            for(let i = 0;i < this.game.scenes.length;i++){
-                console.log(i);
-                console.log(this.game.scenes[i].talkingCharacter);
-            }
-
-        })
-        document.getElementById("playgroundTextbox").addEventListener("change",()=>{
-            this.curScene.text = document.getElementById("playgroundTextbox").textContent;
-        })/*
-
         /*const leftChar = <HTMLInputElement>document.getElementById("file-upload");
         leftChar.addEventListener("change", () => {
             let file = leftChar.files[0];
@@ -46,22 +33,19 @@ export class Maker{
                 console.log( urlData[1].split(","));
                 let url = urlData[1].split(",");
                 imageBG.style.backgroundImage = "url(" + url[1] + ")";
-                console.log("at least tried");
+                console.log("tried url");
             };
 
             if (file)
             {
                 reader.readAsDataURL(file)
             }
-            else {
-                imageBG.style.backgroundColor = "green";
-            }
             console.log("should have changed");
         });*/
     }
 
     setPlaygroundBack() {
-            document.getElementById(`${this.game.scenes.length-1}`).style.color= "#CCE8E1";
+            document.getElementById(`${this.curScene.id}`).style.color= "#CCE8E1";
             this.curScene.talkingCharacter = (<HTMLInputElement>document.getElementById("povName")).value;
             this.curScene.text = (<HTMLInputElement>document.getElementById("playgroundTextbox")).value;
         (<HTMLInputElement>document.getElementById("playgroundTextbox")).value = 'Enter text here';
@@ -92,6 +76,11 @@ export class Maker{
         }
 
     }
+
+    createOptions() {
+        let html = '<button id="btn1">Option 1</button><button id="btn2 ">Option 2</button>'
+        let place = document.getElementById("btnsAndName");
+    }
 }
 
 async function init() {
@@ -102,6 +91,13 @@ async function init() {
         await maker.createScene();
         await maker.switchScene();
     });
+    document.getElementById("makeDecision").addEventListener("click",()=>{
+        maker.setPlaygroundBack();
+        maker.createScene();
+        maker.setPlaygroundBack()
+        maker.createScene();
+        maker.createOptions();
+    })
 
 }
 
