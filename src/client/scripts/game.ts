@@ -9,11 +9,11 @@ export class Game{
     private infos: GameInfo; // description might get changed
     //private loggedIn: boolean; TODO! check if needed when accounts exist
 
-    constructor(id:number,name:string,gameInfo: GameInfo) {
-        this.id = id;
-        this.name = name;
-        this.infos = gameInfo;
+    constructor() {
+        this.name = "Visual Novel";
+        this.scenes = [];
     }
+
 
     /**
      *  playGame: function for starting the game
@@ -22,7 +22,7 @@ export class Game{
     public playGame():boolean{
         let nextID:number = 0;
         while (nextID != -1){ // TODO!! check if the last nextID is gonna be -1
-            //nextID = this.scenes[nextID].playScene(); TODO!! ask Mia to put the code for next scene into her scene class
+            //nextID = this.scenes[nextID].playScene(this.pronouns);
         }
         return true;
     }
