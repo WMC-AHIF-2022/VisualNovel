@@ -40,9 +40,10 @@ export function getGameById(id: number): IGame|undefined {
     }
     return games[index];
 }
-
+//TODO!! change things
 export async function addGame(game:IGame): Promise<void> {
     const db = await DB.createDBConnection();
+    await db.get('PRAGMA foreign_keys = ON');
     const stmt = await db.prepare('insert into Games (infoId)values(?1)');
     await stmt.bind({1:game.infoId});
     const operationResult =await stmt.run();

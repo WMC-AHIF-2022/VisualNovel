@@ -4,7 +4,7 @@ import {ScenePictures} from "./scene-pics";
 export class Game{
     private readonly id: number; // must stay readonly, due to saving in database and identification
     private pronouns: string[]; // TODO!! create setter
-    public scenes: Scene[];
+    private scenes: Scene[];
     private infos: GameInfo; // description might get changed
     //private loggedIn: boolean; TODO! check if needed when accounts exist
 
@@ -35,16 +35,12 @@ export class Game{
     }
 
     /**
-     * addScene: function for adding a scene to the scene Array
-     * @param id scene id
-     * @param nextId id of the following scene
-     * @param nextId2 id of the following scene if a certain decision was made
-     * @param prevId id of the previous scene
-     * @param talkingCharacter the name of the talking character
-     * @param text displayed text
-     * @param pictures pictures being used in the scene
+     * function to add a scene to the scene[] liss just deleted it bad liss
+     * @param newScene
      */
-
+    public addScene(newScene: Scene){
+        this.scenes.push(newScene);
+    }
     /**
      * changeDescription: function to change game description
      * @param newDescription: the new description which is going to be saved
