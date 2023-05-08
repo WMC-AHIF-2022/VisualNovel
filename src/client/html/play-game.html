@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Game you play</title>
+    <link rel="stylesheet" href="../styles.css" type="text/css">
+</head>
+<body>
+<div id="game" class="container-md">
+    <h2 id="gendertext">Choose desired gender:</h2>
+    <button type="button" id="btnFemale" class="genderbtn">Female</button>
+    <button type="button" id="btnMale" class="genderbtn">Male</button>
+    <button type="button" id="btnDiv" class="genderbtn">Other</button>
+    <button type="button" id="btnOpt1" >Option1</button>
+    <button type="button" id="btnOpt2" >Option2</button>
+
+    <h2 id="EnterText">Enter name of Choice:</h2>
+    <button type="button" id="btnContinue" class="btn btn-primary">
+        Continue
+    </button>
+    <img id="charLeft" class="clickable" alt="character on the left">
+    <img id="charRight" class="clickable" alt="character on the right">
+    <label for="MCsName"></label>
+    <input type="text" id="MCsName" />
+    <div id="SpeakingPerson" class="clickable">Name</div>
+    <div id="textbox" class="clickable">Textbox</div>
+    <button type="button" id="btnRestart" class="btn btn-primary">
+        Restart Game
+    </button>
+    <img
+        class="Start clickable"
+        id="background"
+        alt=""
+        src="../images/backgrounds/SpawnPoint.png"
+    />
+</div>
+<script type="module">
+    import * as game from "../scripts/game";
+    import * as game from "../scripts/scene";
+</script>
+</body>
+</html>

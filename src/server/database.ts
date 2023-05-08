@@ -1,5 +1,6 @@
 import { Database as Driver } from "sqlite3";
 import { open, Database } from "sqlite";
+import * as sqlite3 from "sqlite3";
 
 export const dbFileName = 'database.db';
 
@@ -28,10 +29,19 @@ export class DB{
         );
         await connection.run(`
            create table if not exists Games (
-                gameId INTEGER NOT NULL PRIMARY KEY,
-                gameName Text not null,
-                infoId Integer not null
+                gameId INTEGER NOT NULL PRIMARY KEY
            )strict;`
         );
+        await connection.run(`
+            create table if not exists GameInfos (
+                gameInfoId INTEGER PRIMARY KEY,
+                gameId INTEGER not null,
+                gameName TEXT  DEFAULT "Visual Novel",
+                FOREIGN KEY(gameName) REFERENCES Game(gameId)
+            )strict;`
+        );
+        await connection.run(`
+            ALTER TABLE Games ADD COLUMN gameInfoId INTEGER REFERENCES GameInfos(gameInfoId);
+        `)
     }
 }
