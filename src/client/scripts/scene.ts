@@ -1,7 +1,7 @@
 import {ScenePictures} from "./scene-pics";
 
 export class Scene{
-    private isDecision:boolean;
+    private readonly isDecision:boolean;
     private buttonName1 : string; //button name for nextId
     private buttonName2:string; // button name for nextId2
 
@@ -24,35 +24,42 @@ export class Scene{
         }
     }
 
-    public playScene(pronouns: string[]): number{
+    public playScene(pronouns: string[], playerName:string): number{
         if(this.isDecision){
-            return this.showDecision();
+            return this.handleDecision();
         }
-        return;
+        this.playNormalScene(pronouns,playerName);
+        return this.nextId;
+    }
+
+    private playNormalScene(pronouns: string[], playerName: string) {
+
     }
 
     /**
-     * shows decision
+     * handle decision
      * return: number for next scene nextId if button 1 was pressed nextId2 if button 2 was pressed
      */
-    private showDecision() :number {
-        let firstButton = document.getElementById('btnOpt1');
-        let secondButton = document.getElementById('btnOpt2');
+    private handleDecision() :number {
+        let firstButton:HTMLElement = document.getElementById('btnOpt1');
+        let secondButton:HTMLElement = document.getElementById('btnOpt2');
         firstButton.innerText = this.buttonName1;
         secondButton.innerText = this.buttonName2;
         //TODO!! check if button is visible
         firstButton.style.display = "block";
         secondButton.style.display = "block";
-        console.log("setted buttons onto visible");
+        console.log("set buttons onto visible");
+
+        let nextSceneToBePlayed:number = -1; // in case something goes wrong, return -1
         firstButton.addEventListener('click',()=>{
             console.log(`clicked button: ${this.buttonName1} next scene is: ${this.nextId}`);
-            return this.nextId;
+            nextSceneToBePlayed = this.nextId;
         });
         secondButton.addEventListener('click',()=>{
             console.log(`clicked button: ${this.buttonName2} next scene is: ${this.nextId2}`);
-            return this.nextId2;
+            nextSceneToBePlayed =  this.nextId2;
         });
-        return -1; // in case something goes wrong, return -1
+        return nextSceneToBePlayed;
     }
 
     //Getters + Setters

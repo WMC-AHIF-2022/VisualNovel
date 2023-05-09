@@ -7,7 +7,7 @@ export class Game{
     private scenes: Scene[];
     private infos: GameInfo; // description might get changed
     //private loggedIn: boolean; TODO! check if needed when accounts exist
-
+    private playerName: string;
     constructor() {
         this.scenes = [];
         this.infos = new GameInfo();
@@ -21,7 +21,7 @@ export class Game{
     public playGame():boolean{
         let nextID:number = 0;
         while (nextID != -1){ // TODO!! check if the last nextID is gonna be -1
-            nextID = this.scenes[nextID].playScene(this.pronouns);
+            nextID = this.scenes[nextID].playScene(this.pronouns,this.playerName);
         }
         return true;
     }
@@ -50,6 +50,9 @@ export class Game{
     }
     public setPronouns(newPronouns : string[]){
         this.pronouns = newPronouns;
+    }
+    public setPlayerName(newPlayerName:string){
+        this.playerName = newPlayerName;
     }
     //getters
     public getGameID():number{
