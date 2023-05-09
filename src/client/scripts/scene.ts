@@ -36,7 +36,23 @@ export class Scene{
      * return: number for next scene nextId if button 1 was pressed nextId2 if button 2 was pressed
      */
     private showDecision() :number {
-        return 0;
+        let firstButton = document.getElementById('btnOpt1');
+        let secondButton = document.getElementById('btnOpt2');
+        firstButton.innerText = this.buttonName1;
+        secondButton.innerText = this.buttonName2;
+        //TODO!! check if button is visible
+        firstButton.style.display = "block";
+        secondButton.style.display = "block";
+        console.log("setted buttons onto visible");
+        firstButton.addEventListener('click',()=>{
+            console.log(`clicked button: ${this.buttonName1} next scene is: ${this.nextId}`);
+            return this.nextId;
+        });
+        secondButton.addEventListener('click',()=>{
+            console.log(`clicked button: ${this.buttonName2} next scene is: ${this.nextId2}`);
+            return this.nextId2;
+        });
+        return -1; // in case something goes wrong, return -1
     }
 
     //Getters + Setters
