@@ -3,7 +3,7 @@ import {Scene} from "./scene.js";
 import {ScenePictures} from "./scene-pics";
 export class Game{
     private readonly id: number; // must stay readonly, due to saving in database and identification
-    private pronouns: string[]; // TODO!! create setter
+    private pronouns: string[]; // index 1 = they|he|she index 2 = Them|him|her index 3 = theirs|his|hers
     private scenes: Scene[];
     private infos: GameInfo; // description might get changed
     //private loggedIn: boolean; TODO! check if needed when accounts exist

@@ -33,18 +33,48 @@ export class Scene{
     }
 
     private playNormalScene(pronouns: string[], playerName: string) {
+        let textField = document.getElementById("pText");
+        let talkingPerson = document.getElementById("pTalkingPerson");
 
+        if(this.talkingCharacter === "::name"){
+            this.talkingCharacter = playerName;
+        }
+
+        talkingPerson.innerText = this.talkingCharacter;
+        textField.innerText = this.replacePronounsAndPlayerName(pronouns, playerName);
+    }
+
+    /**
+     * helper function for replacing the player name and pronouns
+     * @param pronouns the pronouns which are going to be inserted
+     * @param playerName the player name which is going to be inserted
+     * @return the replaced string
+     * ::name -> player name
+     * ::they -> he, she, they
+     * ::them -> him, her, them
+     * ::theirs -> his, hers, theirs
+     */
+    private replacePronounsAndPlayerName(pronouns: string[], playerName: string):string {
+        this.text = this.text.replace("::name", playerName);
+        this.text = this.text.replace("::they",pronouns[1]);
+        this.text = this.text.replace("::them",pronouns[2]);
+        this.text = this.text.replace("::theirs",pronouns[3]);
+
+        return this.text;
     }
 
     /**
      * handle decision
-     * return: number for next scene nextId if button 1 was pressed nextId2 if button 2 was pressed
+     * @return: number for next scene nextId if button 1 was pressed nextId2 if button 2 was pressed
      */
     private handleDecision() :number {
+        this.resetTextFields();
+
         let firstButton:HTMLElement = document.getElementById('btnOpt1');
         let secondButton:HTMLElement = document.getElementById('btnOpt2');
         firstButton.innerText = this.buttonName1;
         secondButton.innerText = this.buttonName2;
+
         //TODO!! check if button is visible
         firstButton.style.display = "block";
         secondButton.style.display = "block";
@@ -60,6 +90,14 @@ export class Scene{
             nextSceneToBePlayed =  this.nextId2;
         });
         return nextSceneToBePlayed;
+    }
+
+    /**
+     * small helper function for resetting the content in the text fields talking person and text
+     */
+    private resetTextFields() {
+        document.getElementById("pTalkingPerson").textContent = " ";
+        document.getElementById("pText").textContent = " ";
     }
 
     //Getters + Setters
