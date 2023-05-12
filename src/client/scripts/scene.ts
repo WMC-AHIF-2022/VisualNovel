@@ -1,6 +1,7 @@
 import {ScenePictures} from "./scene-pics";
 
 export class Scene{
+    //TODO!! delete clickable and add prev and next buttons in html
     private readonly isDecision:boolean;
     private buttonName1 : string; //button name for nextId
     private buttonName2:string; // button name for nextId2

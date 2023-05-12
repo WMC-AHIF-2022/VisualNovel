@@ -2,6 +2,7 @@ import {GameInfo} from "./game-info.js";
 import {Scene} from "./scene.js";
 import {ScenePictures} from "./scene-pics";
 export class Game{
+    //TODO!! get one scene or a limited scene array of xx scenes instead of all
     private readonly id: number; // must stay readonly, due to saving in database and identification
     private pronouns: string[]; // index 1 = they|he|she index 2 = Them|him|her index 3 = theirs|his|hers
     private scenes: Scene[];

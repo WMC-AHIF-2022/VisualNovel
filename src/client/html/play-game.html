@@ -1,42 +1,71 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Game you play</title>
-    <link rel="stylesheet" href="../styles.css" type="text/css">
+    <meta charset="UTF-8" />
+    <link href="./../styles.css"  rel="stylesheet" type="text/css" />
+    <title>Play Game</title>
+    <link rel="icon" href="../img/additional/logo.png" type="image/icon type"/>
+    <link rel="stylesheet" href="../playGame.css">
 </head>
 <body>
-<div id="game" class="container-md">
-    <h2 id="gendertext">Choose desired gender:</h2>
-    <button type="button" id="btnFemale" class="genderbtn">Female</button>
-    <button type="button" id="btnMale" class="genderbtn">Male</button>
-    <button type="button" id="btnDiv" class="genderbtn">Other</button>
-    <button type="button" id="btnOpt1" >Option1</button>
-    <button type="button" id="btnOpt2" >Option2</button>
+<div id="main-content">
+    <div class="centered-menu">
+        <ul class="navigationBar">
+            <li><a href="./index.html">Home</a></li>
+            <li><a href="./character-description.html">Characters</a></li>
+            <li><a href="./story-description.html">Story</a></li>
+            <li><a href="./VisualNovel-history.html">History</a></li>
+            <li><a href="./games.html">Games</a></li>
+            <li><a href="./aboutUs.html">About us</a></li>
+            <li><a href="./maker.html">Maker</a></li>
+        </ul>
+    </div>
+    <div class="gameContainer">
+        <div class="grid-item itemCharacterOnTheLeft">
+            <img id="imgLeftChar" alt="character on the left">
+        </div>
+        <div class="grid-item itemCharacterOnTheRight" >
+            <img  alt="character on the right" id="imgRightChar" >
+        </div>
+        <div class="grid-item item3">3
+        </div>
+        <div class="grid-item itemTalkingPerson">
+            <div id="divTalkingPerson" ><p id="pTalkingPerson">Name</p></div>
+        </div>
+        <div class="grid-item itemTextBox">
+            <div id="divText" ><p id="pText">Text</p></div>
+        </div>
+        <div class="grid-item item6">
+            <ul class="navigationBarGame">
+                <li><button>Overview</button></li>
+                <li><button>Previous</button></li>
+                <li><button>Next</button></li>
+                <li><button>Screen</button></li>
+            </ul>
+        </div>
+    </div>
+         <!-- gender buttons -->
+         <h2 id="gendertext">Choose desired gender:</h2>
+         <button type="button" id="btnFemale" class="genderbtn">Female</button>
+         <button type="button" id="btnMale" class="genderbtn">Male</button>
+         <button type="button" id="btnDiv" class="genderbtn">Other</button>
+         <button type="button" id="btnOpt1" >Option1</button>
+         <button type="button" id="btnOpt2" >Option2</button>
 
-    <h2 id="EnterText">Enter name of Choice:</h2>
-    <button type="button" id="btnContinue" class="btn btn-primary">
-        Continue
-    </button>
-    <img id="charLeft" class="clickable" alt="character on the left">
-    <img id="charRight" class="clickable" alt="character on the right">
+         <!--Name and enter button -->
+         <h2 id="EnterText">Enter name of Choice:</h2>
+         <button type="button" id="btnContinue" class="btn btn-primary">
+             Continue
+         </button>
 
-    <label for="MCsName"></label>
-    <input type="text" id="MCsName" />
+         <label for="MCsName"></label>
+         <input type="text" id="MCsName" />
 
-    <div id="divTalkingPerson" class="clickable"><p id="pTalkingPerson">Name</p></div>
-    <div id="divText" class="clickable"><p id="pText">Text</p></pid></div>
-
-    <button type="button" id="btnRestart" class="btn btn-primary">
-        Restart Game
-    </button>
-
-    <img
-        class="Start clickable"
-        id="background"
-        alt=""
-        src="../images/backgrounds/SpawnPoint.png"
-    />
+         <!-- restart -->
+         <button type="button" id="btnRestart" class="btn btn-primary">
+             Restart Game
+         </button>
+    </div>
 </div>
 <script type="module">
     import * as game from "../scripts/game";
