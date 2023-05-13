@@ -1,9 +1,10 @@
-.gameContainer{
-    gap: 3px;
+.grid-container {
     display: grid;
-    padding: 5px;
-    margin: 3em;
-    background-image: url("./img/backgrounds/baum.png");
+    gap: 3px;
+    background-color: #2196F3;
+    margin:5em;
+    grid-template-rows: 10em 5em 15em 3em;
+    grid-template-columns: auto;
 }
 
 .grid-item {
@@ -13,43 +14,60 @@
     font-size: 30px;
 }
 
-.itemCharacterOnTheLeft {
+.itemCharacterLeft {
     grid-column: 1;
-    grid-row: 1 / span 4;
+    grid-row: 1/span 4;
 }
 
-.itemCharacterOnTheRight {
+.itemCharacterRight {
     grid-column: 3;
     grid-row: 1 / span 4;
 }
 
-.itemTextBox {
+.itemText {
     grid-column: 1 / span 3;
     grid-row: 3;
 }
-.item6{
-    grid-column: 1 / span 3;
+.itemButtons{
     grid-row: 4;
+    grid-column: 1 / span 3;
+    background-color: rgb(96, 84, 94);
+    padding: 0;
+
+}
+.btn-group button {
+    font-size: 0.5em;
+    background-color: rgb(96, 84, 94);
+    color: rgb(204, 232, 225);
+    border: none;
+    cursor: pointer;
+    padding: 1em;
+    float: left;
 }
 
+.btn-group button:not(:last-child) {
+    border-right: none;
+}
+
+.btn-group:after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+.btn-group button:hover {
+    background-color: rgb(74, 15, 57);
+
+}
+.reset-style, .reset-style * {
+    all: revert;
+}
+/*
+    img styling for the characters
+ */
 #imgLeftChar{
     width: 12em;
-
 }
 #imgRightChar{
     width: 12em;
-}
-.navigationBarGame {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-    background-color: rgb(0, 97, 97);
-    font-size: 17px;
-}
-li button{
-    display: block;
-    color: rgb(204, 232, 225);
-    text-align: center;
-    padding: 25px;
 }

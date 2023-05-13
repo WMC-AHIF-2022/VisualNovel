@@ -2,10 +2,11 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8" />
-    <link href="./../styles.css"  rel="stylesheet" type="text/css" />
+
     <title>Play Game</title>
     <link rel="icon" href="../img/additional/logo.png" type="image/icon type"/>
     <link rel="stylesheet" href="../playGame.css">
+    <link rel="stylesheet" href="../styles.css">
 </head>
 <body>
 <div id="main-content">
@@ -20,52 +21,43 @@
             <li><a href="./maker.html">Maker</a></li>
         </ul>
     </div>
-    <div class="gameContainer">
-        <div class="grid-item itemCharacterOnTheLeft">
-            <img id="imgLeftChar" alt="character on the left">
-        </div>
-        <div class="grid-item itemCharacterOnTheRight" >
-            <img  alt="character on the right" id="imgRightChar" >
-        </div>
-        <div class="grid-item item3">3
-        </div>
-        <div class="grid-item itemTalkingPerson">
-            <div id="divTalkingPerson" ><p id="pTalkingPerson">Name</p></div>
-        </div>
-        <div class="grid-item itemTextBox">
-            <div id="divText" ><p id="pText">Text</p></div>
-        </div>
-        <div class="grid-item item6">
-            <ul class="navigationBarGame">
-                <li><button>Overview</button></li>
-                <li><button>Previous</button></li>
-                <li><button>Next</button></li>
-                <li><button>Screen</button></li>
-            </ul>
+
+    <div class="grid-container">
+        <div class="grid-item itemCharacterLeft"><img id="imgLeftChar" src="../img/Characters/Steak.png" alt="img left char"></div>
+        <div class="grid-item itemCharacterRight"><img id="imgRightChar" src="../img/Characters/vita.png" alt="img right char"></im></div>
+        <div class="grid-item item3">3</div>
+        <div class="grid-item item4">4</div>
+        <div class="grid-item itemText">5</div>
+        <div class="grid-item itemButtons">
+            <div class="btn-group reset-style"  style="width:100%">
+                <button id="btnOverview"   style="width:25%">Overview</button>
+                <button id="btnPrevious" style="width:25%">Previous</button>
+                <button id="btnNext" style="width:25%">Next</button>
+                <button id="btnFullScreen"  style="width:25%">Full Screen</button>
+            </div>
         </div>
     </div>
-         <!-- gender buttons -->
-         <h2 id="gendertext">Choose desired gender:</h2>
-         <button type="button" id="btnFemale" class="genderbtn">Female</button>
-         <button type="button" id="btnMale" class="genderbtn">Male</button>
-         <button type="button" id="btnDiv" class="genderbtn">Other</button>
-         <button type="button" id="btnOpt1" >Option1</button>
-         <button type="button" id="btnOpt2" >Option2</button>
+     <!-- gender buttons -->
+     <h2 id="gendertext">Choose desired gender:</h2>
+     <button type="button" id="btnFemale" class="genderbtn">Female</button>
+     <button type="button" id="btnMale" class="genderbtn">Male</button>
+     <button type="button" id="btnDiv" class="genderbtn">Other</button>
+     <button type="button" id="btnOpt1" >Option1</button>
+     <button type="button" id="btnOpt2" >Option2</button>
 
-         <!--Name and enter button -->
-         <h2 id="EnterText">Enter name of Choice:</h2>
-         <button type="button" id="btnContinue" class="btn btn-primary">
-             Continue
-         </button>
+     <!--Name and enter button -->
+     <h2 id="EnterText">Enter name of Choice:</h2>
+     <button type="button" id="btnContinue" class="btn btn-primary">
+         Continue
+     </button>
 
-         <label for="MCsName"></label>
-         <input type="text" id="MCsName" />
+     <label for="MCsName"></label>
+     <input type="text" id="MCsName" />
 
-         <!-- restart -->
-         <button type="button" id="btnRestart" class="btn btn-primary">
-             Restart Game
-         </button>
-    </div>
+     <!-- restart -->
+     <button type="button" id="btnRestart" class="btn btn-primary">
+         Restart Game
+     </button>
 </div>
 <script type="module">
     import * as game from "../scripts/game";
