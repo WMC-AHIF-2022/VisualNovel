@@ -28,7 +28,7 @@
 }
 
 .itemText {
-    visibility: hidden;
+    display: none;
     grid-column: 1 / span 3;
     grid-row: 3;
     background: rgba(0, 0, 0, 0.68);
@@ -50,7 +50,7 @@
     grid-column: 1/span 3;
 }
 .itemName{
-    visibility: hidden;
+    display: none;
     background: rgba(0, 0, 0, 0.68);
     color: rgb(210, 245, 237);
     font-size: 0.8em;
@@ -86,11 +86,11 @@
     img styling for the characters
  */
 #imgLeftChar{
-    visibility: hidden;
+    display: none;
     width: 12em;
 }
 #imgRightChar{
-    visibility: hidden;
+    display: none;
     width: 12em;
 }
 
@@ -113,7 +113,17 @@
 #lblName{
     font-size: 0.8em;
 }
-.txtEnterName{
+#txtEnterName{
     color: rgb(210, 245, 237);
     font-size: 0.8em;
+}
+#btnOpt1{
+    margin-right: 5em;
+    margin-left: 5em;
+    display: none;
+}
+#btnOpt2{
+    margin-right: 5em;
+    margin-left: 5em;
+    display: none;
 }

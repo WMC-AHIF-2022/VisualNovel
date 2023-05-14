@@ -14,7 +14,6 @@ export class Scene{
     private text: string;
     private pictures: ScenePictures;
 
-    constructor(id:number);
     constructor(id: number, isDecision? : boolean) {
         this.id = id;
         if(isDecision){
@@ -30,12 +29,25 @@ export class Scene{
             return this.handleDecision();
         }
         this.playNormalScene(pronouns,playerName);
-        return this.nextId;
+        return this.playPrevOrNextScene();
+
+    }
+
+    private playPrevOrNextScene():number {
+        let nextSceneId = -1;
+        document.getElementById('btnNext').addEventListener('click', ()=>{
+            alert('you clicked next');
+            nextSceneId = this.nextId;
+        });
+        document.getElementById('btnPrevious').addEventListener('click',()=>{
+            nextSceneId = this.prevId;
+        })
+        return nextSceneId;
     }
 
     private playNormalScene(pronouns: string[], playerName: string) {
-        let textField = document.getElementById("pText");
-        let talkingPerson = document.getElementById("pTalkingPerson");
+        let textField = document.getElementById("txtTextInTheBox");
+        let talkingPerson = document.getElementById("txtName");
 
         if(this.talkingCharacter === "::name"){
             this.talkingCharacter = playerName;
@@ -77,8 +89,8 @@ export class Scene{
         secondButton.innerText = this.buttonName2;
 
         //TODO!! check if button is visible
-        firstButton.style.display = "block";
-        secondButton.style.display = "block";
+        firstButton.style.display = "inline-block";
+        secondButton.style.display = "inline-block";
         console.log("set buttons onto visible");
 
         let nextSceneToBePlayed:number = -1; // in case something goes wrong, return -1
@@ -90,6 +102,8 @@ export class Scene{
             console.log(`clicked button: ${this.buttonName2} next scene is: ${this.nextId2}`);
             nextSceneToBePlayed =  this.nextId2;
         });
+        firstButton.style.display = 'none';
+        secondButton.style.display = 'none';
         return nextSceneToBePlayed;
     }
 
@@ -147,6 +161,12 @@ export class Scene{
     }
     public setNextId(value: number) {
         this.nextId = value;
+    }
+    public setButton1(value: string){
+        this.buttonName1 = value;
+    }
+    public setButton2(value: string){
+        this.buttonName2 = value;
     }
 }
 
