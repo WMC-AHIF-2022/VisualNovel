@@ -20,11 +20,38 @@ export class Game{
      *  return: false = if game not finished true = if game is finished
      */
     public playGame():boolean{
+        this.getNameAndPronouns();
         let nextID:number = 0;
         while (nextID != -1){ // TODO!! check if the last nextID is gonna be -1
             nextID = this.scenes[nextID].playScene(this.pronouns,this.playerName);
         }
         return true;
+    }
+    private getNameAndPronouns():void{
+
+        document.getElementById("btnFemale").addEventListener("click", () => {
+            this.pronouns = ['she','her','hers'];
+            this.hideGenderElements();
+        });
+        document.getElementById("btnMale").addEventListener("click", () => {
+            this.pronouns = ['he','him','his'];
+            this.hideGenderElements();
+        });
+        document.getElementById("btnDiv").addEventListener("click", () => {
+            this.pronouns = ['they','them','theirs'];
+            this.hideGenderElements();
+        });
+    }
+
+    private hideGenderElements():void {
+        //hide gender elements
+        document.getElementById("txtGender").style.display = "none";
+        document.getElementById("btnFemale").style.display = "none";
+        document.getElementById("btnMale").style.display = "none";
+        document.getElementById("btnMale").style.display = "none";
+        //show text box and talking person
+        document.getElementById("txtBox").style.display = "inline-block";
+        document.getElementById("txtName").style.display = "inline-block";
     }
 
     /**

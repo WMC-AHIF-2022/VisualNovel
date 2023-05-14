@@ -23,11 +23,31 @@
     </div>
 
     <div class="grid-container">
-        <div class="grid-item itemCharacterLeft"><img id="imgLeftChar" src="../img/Characters/Steak.png" alt="img left char"></div>
-        <div class="grid-item itemCharacterRight"><img id="imgRightChar" src="../img/Characters/vita.png" alt="img right char"></im></div>
-        <div class="grid-item item3">3</div>
-        <div class="grid-item item4">4</div>
-        <div class="grid-item itemText">5</div>
+        <div class="grid-item itemCharacterLeft">
+            <img id="imgLeftChar" src="../img/Characters/Steak.png" alt="img left char">
+        </div>
+        <div class="grid-item itemCharacterRight">
+            <img id="imgRightChar" src="../img/Characters/vita.png" alt="img right char">
+        </div>
+        <div class="grid-item item3">
+            <!--Name and enter button -->
+            <p class="txtEnterName">Enter name of Choice:</p>
+            <label for="lblName"></label>
+            <input type="text" id="lblName" />
+        </div>
+        <div class="grid-item itemName" id="txtName"><p>name</p></div>
+        <div class="grid-item itemText" id="txtBox">
+            <p >some text</p>
+            <button type="button" class="btnStyle" id="btnOpt1" >Option1</button>
+            <button type="button" class="btnStyle" id="btnOpt2" >Option2</button>
+        </div>
+        <div class="grid-item itemGenderButtons">
+            <!-- gender buttons -->
+            <p id="txtGender">Choose desired gender:</p>
+            <button type="button" id="btnFemale" class="btnStyle">Female</button>
+            <button type="button" id="btnMale" class="btnStyle">Male</button>
+            <button type="button" id="btnDiv" class="btnStyle">Other</button>
+        </div>
         <div class="grid-item itemButtons">
             <div class="btn-group reset-style"  style="width:100%">
                 <button id="btnOverview"   style="width:25%">Overview</button>
@@ -37,27 +57,11 @@
             </div>
         </div>
     </div>
-     <!-- gender buttons -->
-     <h2 id="gendertext">Choose desired gender:</h2>
-     <button type="button" id="btnFemale" class="genderbtn">Female</button>
-     <button type="button" id="btnMale" class="genderbtn">Male</button>
-     <button type="button" id="btnDiv" class="genderbtn">Other</button>
-     <button type="button" id="btnOpt1" >Option1</button>
-     <button type="button" id="btnOpt2" >Option2</button>
 
-     <!--Name and enter button -->
-     <h2 id="EnterText">Enter name of Choice:</h2>
-     <button type="button" id="btnContinue" class="btn btn-primary">
-         Continue
-     </button>
-
-     <label for="MCsName"></label>
-     <input type="text" id="MCsName" />
-
-     <!-- restart -->
+     <!-- restart
      <button type="button" id="btnRestart" class="btn btn-primary">
          Restart Game
-     </button>
+     </button>-->
 </div>
 <script type="module">
     import * as game from "../scripts/game";
