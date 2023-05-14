@@ -25,12 +25,23 @@ export class Scene{
     }
 
     public playScene(pronouns: string[], playerName:string): number{
+        this.displayCharactersAndBackground()
         if(this.isDecision){
             return this.handleDecision();
         }
         this.playNormalScene(pronouns,playerName);
         return this.playPrevOrNextScene();
 
+    }
+
+    private displayCharactersAndBackground() {
+        const charLeft = <HTMLImageElement>document.getElementById("imgLeftChar");
+        charLeft.src = this.pictures.getleftChar();
+        const charRight = <HTMLImageElement>document.getElementById('imgRightChar');
+        charRight.src = this.pictures.getRightChar();
+
+        const div = document.getElementById("imgBackground");
+        div.style.backgroundImage = `url('${this.pictures.getBackground()}')`;
     }
 
     private playPrevOrNextScene():number {
