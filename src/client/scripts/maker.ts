@@ -1,7 +1,6 @@
 import {Game} from "./game.js";
 import {Scene} from "./scene.js";
 import {ScenePictures} from "./scene-pics.js";
-import * as domain from "domain";
 
 export class Maker{
     private game: Game;
@@ -105,10 +104,15 @@ export class Maker{
     }
 
     saveSceneElements() {
-        console.log("saving before switch/create");
-        console.log("old Szene");
+        if(this.curScene.getDecision()){
+            let btnName = <HTMLInputElement>document.getElementById("btn1");
+            this.curScene.setButton1(btnName.value);
+            btnName = <HTMLInputElement>document.getElementById("btn2");
+            this.curScene.setButton2(btnName.value);
+            document.getElementById("btn1").style.display = "none";
+            document.getElementById("btn2").style.display = "none";
+        }
         console.log(this.curScene);
-        console.log()
         document.getElementById(`${this.curScene.getId()}`).style.color= "#CCE8E1";
         this.curScene.setTalkingCharacter((<HTMLInputElement>document.getElementById("povName")).value);
         this.curScene.setText((<HTMLInputElement>document.getElementById("playgroundTextbox")).value);
@@ -117,8 +121,6 @@ export class Maker{
         let background = <HTMLInputElement>document.getElementById("bgLabel");
         let leftUrl;
         let rightUrl;
-        console.log(leftChar.src)
-        console.log(rightChar.src)
         if(!leftChar.src.startsWith("data")){
              leftUrl = "";
         }
@@ -157,14 +159,22 @@ export class Maker{
     }
 
     createOptions() {
-        let html = '<button id="btn1">Option 1</button><button id="btn2 ">Option 2</button>'
-        let place = document.getElementById("btnsAndName");
-        //place.append(html);
+        document.getElementById("btn1").style.display = "block";
+        document.getElementById("btn2").style.display = "block";
     }
 
     private loadScene(scene: Scene) {
         console.log("Zu Ladende szene:");
         console.log(scene);
+        if(this.curScene.getDecision()){
+            let btn1 = <HTMLInputElement>document.getElementById("btn1");
+            btn1.style.display = "block";
+            btn1.value = this.curScene.getButton1();
+            let btn2 = <HTMLInputElement>document.getElementById("btn2");
+            btn2.style.display = "block";
+            btn2.value = this.curScene.getButton2();
+
+        }
         (<HTMLInputElement>document.getElementById("playgroundTextbox")).value = this.curScene.getText();
         (<HTMLInputElement>document.getElementById("povName")).value = this.curScene.getTalkingCharacter();
         document.getElementById("bgLabel").style.backgroundImage = this.curScene.getPictures().getBackground();
@@ -217,6 +227,10 @@ export class Maker{
     }
 
     async setPlaygroundBack() {
+        if(this.curScene.getDecision()){
+            document.getElementById("btn1").style.display = "none";
+            document.getElementById("btn2").style.display = "none";
+        }
         (<HTMLInputElement>document.getElementById("playgroundTextbox")).value = 'Enter text here';
         (<HTMLInputElement>document.getElementById("povName")).value = 'Name';
         document.getElementById("file-label2").style.backgroundColor = 'gainsboro';

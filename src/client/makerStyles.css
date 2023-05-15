@@ -168,6 +168,10 @@ input[type="file"] {
     margin-right: 2.5em;
 }
 
+.btnInputs{
+    display: none;
+}
+
 
 
 
