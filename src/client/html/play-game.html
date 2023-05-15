@@ -1,69 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-
-    <title>Play Game</title>
-    <link rel="icon" href="../img/additional/logo.png" type="image/icon type"/>
-    <link rel="stylesheet" href="../playGame.css">
-    <link rel="stylesheet" href="../styles.css">
-    <script src="../scripts/game.js" type="module"></script>
-    <script src="../scripts/scene.js" type="module"></script>
+    <meta charset="UTF-8">
+    <title>Game you play</title>
+    <link rel="stylesheet" href="../styles.css" type="text/css">
 </head>
 <body>
-<div id="main-content">
-    <div class="centered-menu">
-        <ul class="navigationBar">
-            <li><a href="./index.html">Home</a></li>
-            <li><a href="./character-description.html">Characters</a></li>
-            <li><a href="./story-description.html">Story</a></li>
-            <li><a href="./VisualNovel-history.html">History</a></li>
-            <li><a href="./games.html">Games</a></li>
-            <li><a href="./aboutUs.html">About us</a></li>
-            <li><a href="./maker.html">Maker</a></li>
-        </ul>
-    </div>
+<div id="game" class="container-md">
+    <h2 id="gendertext">Choose desired gender:</h2>
+    <button type="button" id="btnFemale" class="genderbtn">Female</button>
+    <button type="button" id="btnMale" class="genderbtn">Male</button>
+    <button type="button" id="btnDiv" class="genderbtn">Other</button>
+    <button type="button" id="btnOpt1" >Option1</button>
+    <button type="button" id="btnOpt2" >Option2</button>
 
-    <div class="grid-container" id="imgBackground">
-        <div class="grid-item itemCharacterLeft">
-            <img id="imgLeftChar" src="../img/Characters/Steak.png" alt="img left char">
-        </div>
-        <div class="grid-item itemCharacterRight">
-            <img id="imgRightChar" src="../img/Characters/vita.png" alt="img right char">
-        </div>
-        <div class="grid-item item3">
-            <!--Name and enter button -->
-            <p id="txtEnterName">Enter name of Choice:</p>
-            <label for="lblName"></label>
-            <input type="text" id="lblName" />
-        </div>
-        <div class="grid-item itemName" id="txtName"><p>name</p></div>
-        <div class="grid-item itemText" id="txtBox">
-            <p id="txtTextInTheBox">some text</p>
-            <button type="button" class="btnStyle" id="btnOpt1" >Option1</button>
-            <button type="button" class="btnStyle" id="btnOpt2" >Option2</button>
-        </div>
-        <div class="grid-item itemGenderButtons">
-            <!-- gender buttons -->
-            <p id="txtGender">Choose desired gender:</p>
-            <button type="button" id="btnFemale" class="btnStyle">Female</button>
-            <button type="button" id="btnMale" class="btnStyle">Male</button>
-            <button type="button" id="btnDiv" class="btnStyle">Other</button>
-        </div>
-        <div class="grid-item itemButtons">
-            <div class="btn-group reset-style"  style="width:100%">
-                <button id="btnOverview"   style="width:25%">Overview</button>
-                <button id="btnPrevious" style="width:25%">Previous</button>
-                <button id="btnNext" style="width:25%">Next</button>
-                <button id="btnFullScreen"  style="width:25%">Full Screen</button>
-            </div>
-        </div>
-    </div>
-
-     <!-- restart
-     <button type="button" id="btnRestart" class="btn btn-primary">
-         Restart Game
-     </button>-->
+    <h2 id="EnterText">Enter name of Choice:</h2>
+    <button type="button" id="btnContinue" class="btn btn-primary">
+        Continue
+    </button>
+    <img id="charLeft" class="clickable" alt="character on the left">
+    <img id="charRight" class="clickable" alt="character on the right">
+    <label for="MCsName"></label>
+    <input type="text" id="MCsName" />
+    <div id="SpeakingPerson" class="clickable">Name</div>
+    <div id="textbox" class="clickable">Textbox</div>
+    <button type="button" id="btnRestart" class="btn btn-primary">
+        Restart Game
+    </button>
+    <img
+        class="Start clickable"
+        id="background"
+        alt=""
+        src="../images/backgrounds/SpawnPoint.png"
+    />
 </div>
+<script type="module">
+    import * as game from "../scripts/game";
+    import * as game from "../scripts/scene";
+</script>
 </body>
 </html>

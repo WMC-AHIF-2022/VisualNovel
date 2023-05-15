@@ -7,6 +7,9 @@ export class ScenePictures{
         this.rightChar = rightChar;
         this.background = background;
     }
+    public formatPictures(){
+
+    }
 
     public getleftChar(): string {
         return this.leftChar;
