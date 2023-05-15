@@ -4,7 +4,7 @@
     "module": "es6",
     "strict": true, // Enable all strict type-checking options.
     "sourceMap": true, // Create source map files for emitted JavaScript files.
-    "strictNullChecks": false, // When type checking, dont't take into account null and undefined,
+    "strictNullChecks": false, // When type checking, don't take into account null and undefined,
     "skipDefaultLibCheck": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
