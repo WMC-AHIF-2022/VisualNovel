@@ -6,6 +6,7 @@ import * as domain from "domain";
 export class Maker{
     private game: Game;
     private curScene :Scene;
+    private idCounter: number = 0;
 
     constructor() {
         this.game = new Game();
@@ -16,7 +17,7 @@ export class Maker{
         console.log("Lege neue Szene an");
         //let listPart = document.getElementById(`li ${this.curScene.getId()}`);
         if(this.curScene === null || this.curScene.getId() === this.game.getScenes().length-1){
-            this.curScene = new Scene();
+            this.curScene = new Scene(this.idCounter++);
             let list = document.getElementById("sceneOverview");
             let html = '<li id="li ' + `${this.curScene.getId()}`+'"><p id="' + `${this.curScene.getId()}`+'" class="clickable">Scene ';
             this.game.addScene(this.curScene);
@@ -236,7 +237,7 @@ export class Maker{
     createDecisionScene(num : Number) {
         this.curScene.setDecison(true);
         console.log("Lege neue Decision Szene an");
-        let scene = new Scene();
+        let scene = new Scene(this.idCounter++);
         scene.setPrevId(this.curScene.getId());
         if(num == 1){
             this.curScene.setNextId(scene.getId());
