@@ -35,10 +35,11 @@
                 <button id="makeDecision" class="makerButton">make decision</button>
             </div>
         </div>
-        <div class="playground-con">
-            <div  class="playgroundItem1">
+        <label  id="bgLabel" for="background-upload" class="playground-con">
+            <div  id="pgItem1" class="playgroundItem1">
                 <label id="file-label" for="file-upload" class="custom-file-upload">
-                    <p class="plus">+</p>
+                    <img src=""class="img" id="leftChar" />
+                    <p id="leftPlus" class="plus">+</p>
                 </label>
                 <input id="file-upload" type="file"/>
             </div>
@@ -46,10 +47,10 @@
             <div id=btnsAndName" class="playgroundItem2">
                 <input id="povName" value="Name"/>
             </div>
-            <div class="playgroundItem3">
-                <label for="file-upload2" class="custom-file-upload">
-                    <img src=""class="img" id="char" />
-                    <p class="plus">+</p>
+            <div id="pgItem3" class="playgroundItem3">
+                <label id="file-label2" for="file-upload2" class="custom-file-upload">
+                    <img src=""class="img" id="rightChar" />
+                    <p id="rightPlus" class="plus">+</p>
                 </label>
                 <input id="file-upload2" type="file" accept="images/*"/>
             </div>
@@ -58,7 +59,8 @@
                 <textarea id="playgroundTextbox" >Enter text here</textarea>
             </div>
 
-        </div>
+        </label>
+        <input id="background-upload" type="file" accept="images/*"/>
     </div>
 
 </body>

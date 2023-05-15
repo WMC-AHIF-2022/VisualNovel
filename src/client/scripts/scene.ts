@@ -12,10 +12,11 @@ export class Scene{
     private talkingCharacter: string;
     private text: string;
     private pictures: ScenePictures;
+    private static idCount: number = 0;
 
-    constructor(id:number);
-    constructor(id: number, isDecision? : boolean) {
-        this.id = id;
+    constructor();
+    constructor(isDecision? : boolean) {
+        this.id = Scene.idCount++;
         if(isDecision){
             this.isDecision = isDecision;
         }
@@ -85,6 +86,10 @@ export class Scene{
     }
     public setNextId(value: number) {
         this.nextId = value;
+    }
+
+    public setDecison(value: boolean){
+        this.isDecision = value;
     }
 }
 

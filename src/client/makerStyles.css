@@ -26,6 +26,7 @@
     margin-right: 0;
     grid-template-rows: auto auto 10em;
     grid-template-columns: auto 10.7em;
+    position: relative;
 }
 
 .playgroundItem1{
@@ -148,7 +149,6 @@ input[type="file"] {
     width: 10em;
    background-color: gainsboro;
     text-align: center;
-    margin: 0 2.5em 0 2.5em;
     padding: 7em 0 7em 0;
     height: 7em;
 
@@ -158,6 +158,14 @@ input[type="file"] {
     width: 10em;
     height: 15em;
     display: none;
+}
+
+#file-label2{
+    margin-left: 2.5em;
+}
+
+#file-label{
+    margin-right: 2.5em;
 }
 
 

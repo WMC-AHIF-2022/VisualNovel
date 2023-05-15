@@ -61,4 +61,8 @@ export class Game{
     public getPronouns():string[]{
         return this.pronouns;
     }
+
+    public getScenes():Scene[]{
+        return this.scenes;
+    }
 }
