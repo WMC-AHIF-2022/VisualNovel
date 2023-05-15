@@ -1,7 +1,8 @@
 import {ScenePictures} from "./scene-pics";
 
 export class Scene{
-    private isDecision:boolean;
+    //TODO!! delete clickable and add prev and next buttons in html
+    private readonly isDecision:boolean;
     private buttonName1 : string; //button name for nextId
     private buttonName2:string; // button name for nextId2
 
@@ -14,7 +15,9 @@ export class Scene{
     private pictures: ScenePictures;
     private static idCount: number = 0;
 
-    constructor();
+    constructor(id: number, isDecision? : boolean) {
+        this.id = id;
+    }
     constructor(isDecision? : boolean) {
         this.id = Scene.idCount++;
         if(isDecision){
@@ -25,19 +28,106 @@ export class Scene{
         }
     }
 
-    public playScene(pronouns: string[]): number{
+    public playScene(pronouns: string[], playerName:string): number{
+        this.displayCharactersAndBackground()
         if(this.isDecision){
-            return this.showDecision();
+            return this.handleDecision();
         }
-        return;
+        this.playNormalScene(pronouns,playerName);
+        return this.playPrevOrNextScene();
+
+    }
+
+    private displayCharactersAndBackground() {
+        const charLeft = <HTMLImageElement>document.getElementById("imgLeftChar");
+        charLeft.src = this.pictures.getleftChar();
+        const charRight = <HTMLImageElement>document.getElementById('imgRightChar');
+        charRight.src = this.pictures.getRightChar();
+
+        const div = document.getElementById("imgBackground");
+        div.style.backgroundImage = `url('${this.pictures.getBackground()}')`;
+    }
+
+    private playPrevOrNextScene():number {
+        let nextSceneId = -1;
+        document.getElementById('btnNext').addEventListener('click', ()=>{
+            alert('you clicked next');
+            nextSceneId = this.nextId;
+        });
+        document.getElementById('btnPrevious').addEventListener('click',()=>{
+            nextSceneId = this.prevId;
+        })
+        return nextSceneId;
+    }
+
+    private playNormalScene(pronouns: string[], playerName: string) {
+        let textField = document.getElementById("txtTextInTheBox");
+        let talkingPerson = document.getElementById("txtName");
+
+        if(this.talkingCharacter === "::name"){
+            this.talkingCharacter = playerName;
+        }
+
+        talkingPerson.innerText = this.talkingCharacter;
+        textField.innerText = this.replacePronounsAndPlayerName(pronouns, playerName);
     }
 
     /**
-     * shows decision
-     * return: number for next scene nextId if button 1 was pressed nextId2 if button 2 was pressed
+     * helper function for replacing the player name and pronouns
+     * @param pronouns the pronouns which are going to be inserted
+     * @param playerName the player name which is going to be inserted
+     * @return the replaced string
+     * ::name -> player name
+     * ::they -> he, she, they
+     * ::them -> him, her, them
+     * ::theirs -> his, hers, theirs
      */
-    private showDecision() :number {
-        return 0;
+    private replacePronounsAndPlayerName(pronouns: string[], playerName: string):string {
+        this.text = this.text.replace("::name", playerName);
+        this.text = this.text.replace("::they",pronouns[1]);
+        this.text = this.text.replace("::them",pronouns[2]);
+        this.text = this.text.replace("::theirs",pronouns[3]);
+
+        return this.text;
+    }
+
+    /**
+     * handle decision
+     * @return: number for next scene nextId if button 1 was pressed nextId2 if button 2 was pressed
+     */
+    private handleDecision() :number {
+        this.resetTextFields();
+
+        let firstButton:HTMLElement = document.getElementById('btnOpt1');
+        let secondButton:HTMLElement = document.getElementById('btnOpt2');
+        firstButton.innerText = this.buttonName1;
+        secondButton.innerText = this.buttonName2;
+
+        //TODO!! check if button is visible
+        firstButton.style.display = "inline-block";
+        secondButton.style.display = "inline-block";
+        console.log("set buttons onto visible");
+
+        let nextSceneToBePlayed:number = -1; // in case something goes wrong, return -1
+        firstButton.addEventListener('click',()=>{
+            console.log(`clicked button: ${this.buttonName1} next scene is: ${this.nextId}`);
+            nextSceneToBePlayed = this.nextId;
+        });
+        secondButton.addEventListener('click',()=>{
+            console.log(`clicked button: ${this.buttonName2} next scene is: ${this.nextId2}`);
+            nextSceneToBePlayed =  this.nextId2;
+        });
+        firstButton.style.display = 'none';
+        secondButton.style.display = 'none';
+        return nextSceneToBePlayed;
+    }
+
+    /**
+     * small helper function for resetting the content in the text fields talking person and text
+     */
+    private resetTextFields() {
+        document.getElementById("pTalkingPerson").textContent = " ";
+        document.getElementById("pText").textContent = " ";
     }
 
     //Getters + Setters
@@ -86,6 +176,13 @@ export class Scene{
     }
     public setNextId(value: number) {
         this.nextId = value;
+    }
+
+    public setButton1(value: string){
+        this.buttonName1 = value;
+    }
+    public setButton2(value: string){
+        this.buttonName2 = value;
     }
 
     public setDecison(value: boolean){
