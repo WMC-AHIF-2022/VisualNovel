@@ -13,13 +13,9 @@ export class Scene{
     private talkingCharacter: string;
     private text: string;
     private pictures: ScenePictures;
-    private static idCount: number = 0;
 
-    /*constructor(id: number, isDecision? : boolean) {
+    constructor(id: number, isDecision? : boolean) {
         this.id = id;
-    }*/
-    constructor(isDecision? : boolean) {
-        this.id = Scene.idCount++;
         if(isDecision){
             this.isDecision = isDecision;
         }
