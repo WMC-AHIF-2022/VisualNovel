@@ -13,9 +13,13 @@ export class Scene{
     private talkingCharacter: string;
     private text: string;
     private pictures: ScenePictures;
+    private static idCount: number = 0;
 
     constructor(id: number, isDecision? : boolean) {
         this.id = id;
+    }
+    constructor(isDecision? : boolean) {
+        this.id = Scene.idCount++;
         if(isDecision){
             this.isDecision = isDecision;
         }
@@ -173,11 +177,16 @@ export class Scene{
     public setNextId(value: number) {
         this.nextId = value;
     }
+
     public setButton1(value: string){
         this.buttonName1 = value;
     }
     public setButton2(value: string){
         this.buttonName2 = value;
+    }
+
+    public setDecison(value: boolean){
+        this.isDecision = value;
     }
 }
 
