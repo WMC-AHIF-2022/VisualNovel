@@ -2,7 +2,7 @@ import {ScenePictures} from "./scene-pics";
 
 export class Scene{
     //TODO!! delete clickable and add prev and next buttons in html
-    private readonly isDecision:boolean;
+    private  isDecision:boolean;
     private buttonName1 : string; //button name for nextId
     private buttonName2:string; // button name for nextId2
 
@@ -15,9 +15,9 @@ export class Scene{
     private pictures: ScenePictures;
     private static idCount: number = 0;
 
-    constructor(id: number, isDecision? : boolean) {
+    /*constructor(id: number, isDecision? : boolean) {
         this.id = id;
-    }
+    }*/
     constructor(isDecision? : boolean) {
         this.id = Scene.idCount++;
         if(isDecision){

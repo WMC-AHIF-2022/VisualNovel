@@ -122,18 +122,18 @@ async function init() {
     const data = JSON.parse(`{"username": "${gameId}"}`);
     const game:Game = await fetchRestEndpoint('', 'GET',data);*/
     const game = new Game();
-    let scene:Scene = new Scene(0, false);
+    let scene:Scene = new Scene( false);
     scene.setText('text');
     scene.setTalkingCharacter('::name');
     scene.setNextId(1);
     game.addScene(scene);
-    let scene2: Scene = new Scene(1,true);
+    let scene2: Scene = new Scene(true);
     scene2.setButton1('mew');
     scene2.setButton2('wuff');
     scene2.setNextId(2);
     scene2.setNextId2(3);
     scene2.setPrevId(0);
-    let scene3:Scene = new Scene(2, false);
+    let scene3:Scene = new Scene( false);
     scene3.setText('yayy scene3 ::they');
     scene3.setTalkingCharacter('::name');
     scene3.setPrevId(1);
