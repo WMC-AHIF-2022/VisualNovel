@@ -23,18 +23,31 @@ export class Scene {
     }
   }
 
+  // TODO!! check why next scene doesn't get played and fix every bug that occurs after the first fix
   public async playScene(
     pronouns: string[],
     playerName: string
   ): Promise<number> {
     this.displayCharactersAndBackground();
+    console.log('finished displaying scene');
     if (this.isDecision) {
       return this.handleDecision();
     }
     this.playNormalScene(pronouns, playerName);
-    return await this.playPrevOrNextScene();
+    let nextIDnew:number =  await this.playPrevOrNextScene();
+    console.log(`next id: ${nextIDnew}`);
+    return nextIDnew;
   }
 
+  /**
+   * function for displaying characters and background as saved in the scene
+   * @private
+   */
+  //TODO!! add a clause where one character is not given and fill it in as empty
+  // be careful, this can be either the left or the right character, might even be the background
+  // in case of not being able to fetch it!!! So check both cases!!
+  // 1. not given
+  // 2. not able to fetch / broken picture or url
   private displayCharactersAndBackground() {
     const charLeft = <HTMLImageElement>document.getElementById("imgLeftChar");
     charLeft.src = this.pictures.getleftChar();
@@ -45,19 +58,44 @@ export class Scene {
     div.style.backgroundImage = `url('${this.pictures.getBackground()}')`;
   }
 
+  /**
+   * function for deciding to play the next or the previous scene (with the buttons on the bottom)
+   * @private
+   */
+  // do not delete the promise, it is needed to wait for the button click
   private playPrevOrNextScene(): Promise<number> {
-    return new Promise<number>((resolve) => {
-      document.getElementById("btnNext").addEventListener("click", () => {
+    let nextButton = document.getElementById('btnNext');
+    let prevButton = document.getElementById('btnPrevious');
+
+    const removeEventListeners = () => {
+      removeAllEventListeners(nextButton);
+      removeAllEventListeners(prevButton);
+    }
+    let id:Promise<number> =  new Promise<number>((resolve) => {
+      nextButton.addEventListener("click", () => {
         alert("you clicked next");
+        removeEventListeners();
         resolve(this.nextId);
       });
-      document.getElementById("btnPrevious").addEventListener("click", () => {
+      prevButton.addEventListener("click", () => {
+        alert("you clicked prev");
+        removeEventListeners();
         resolve(this.prevId);
       });
     });
+    console.log(`next id after resolving promise: ${id}`);
+    return id;
   }
 
+  /**
+   * helper function for playScene, when the scene is a normal non-decision scene, the text boxes need to get
+   * checked for replacement strings like ::name which doesn't need to be done with a decision
+   * @param pronouns
+   * @param playerName
+   * @private
+   */
   private playNormalScene(pronouns: string[], playerName: string) {
+    this.resetTextFields();
     let textField = document.getElementById("txtTextInTheBox");
     let talkingPerson = document.getElementById("txtName");
 
@@ -66,10 +104,7 @@ export class Scene {
     }
 
     talkingPerson.innerText = this.talkingCharacter;
-    textField.innerText = this.replacePronounsAndPlayerName(
-      pronouns,
-      playerName
-    );
+    textField.innerText = this.replacePronounsAndPlayerName(pronouns, playerName);
   }
 
   /**
@@ -86,6 +121,7 @@ export class Scene {
     pronouns: string[],
     playerName: string
   ): string {
+    console.log(`text: ${this.text}`);
     this.text = this.text
       .replace("::name", playerName)
       .replace("::they", pronouns[1])
@@ -98,6 +134,7 @@ export class Scene {
    * handle decision
    * @return: number for next scene nextId if button 1 was pressed nextId2 if button 2 was pressed
    */
+  // do not delete the promise, it is needed to wait for the button click
   private async handleDecision(): Promise<number> {
     this.resetTextFields();
 

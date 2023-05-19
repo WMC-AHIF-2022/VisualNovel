@@ -18,7 +18,6 @@ export class Game {
 
   /**
    *  playGame: function for starting the game
-   *  return: false = if game not finished true = if game is finished
    */
   async playGame() {
     console.log("length: " + this.scenes.length);
@@ -26,6 +25,11 @@ export class Game {
     await this.playScenes();
   }
 
+  /**
+   * function for waiting for the user to decide what gender they want to have
+   * @private
+   */
+  // do not delete the promise, it is needed to wait for the button click
   private async handlePronounsAndGenderInput(): Promise<void> {
     let name = <HTMLInputElement>document.getElementById("lblName");
     console.log(`name: ${name}`);
@@ -74,6 +78,11 @@ export class Game {
     console.log(`name: ${this.playerName} pronouns: ${this.pronouns[0]}`);
   }
 
+  /**
+   * function for waiting until text gets entered into the text field, before making buttons clickable
+   * @private
+   */
+  // do not delete the promise, it is needed to wait for the text input
   private async prepareForGame() {
     return await new Promise<void>((resolve) => {
       document.getElementById("lblName").addEventListener("input", async () => {
@@ -83,18 +92,26 @@ export class Game {
     });
   }
 
+  /**
+   * function for playing all the scenes in the scene []
+   * @private
+   */
+  //TODO!! check why next scene doesn't get played, might have something todo with the scene class or this one
   private async playScenes(): Promise<void> {
     console.log(`name: ${this.playerName} pronouns: ${this.pronouns[0]}`);
     let nextID: number = 0;
     while (nextID != -1) {
       // TODO!! check if the last nextID is gonna be -1
-      nextID = await this.scenes[nextID].playScene(
-        this.pronouns,
-        this.playerName
-      );
+      console.log(nextID);
+      console.log(`scene text: ${this.scenes[nextID].getText()}`);
+      nextID = await this.scenes[nextID].playScene(this.pronouns, this.playerName);
     }
   }
 
+  /**
+   * function to hide the gender elements after the gender gets chosen
+   * @private
+   */
   private hideGenderElements(): void {
     //hide gender elements
     document.getElementById("txtGender").style.display = "none";
@@ -154,14 +171,18 @@ export class Game {
     return this.scenes;
   }
 }
-
+// TODO!! once the server runs and we have some games in the db, fetch them from there with the
+//  id being stored in the session storage when a game gets clicked on the overview
 async function init() {
+  // first prototype for the fetching
   /*let gameId:string = sessionStorage.getItem('gameId');
     const data = JSON.parse(`{"username": "${gameId}"}`);
     const game:Game = await fetchRestEndpoint('', 'GET',data);*/
+
+  //test data
   const game = new Game();
   let scene: Scene = new Scene(0, false);
-  scene.setText("text");
+  scene.setText("::name said that ::they like cats");
   scene.setTalkingCharacter("::name");
   scene.setPictures(
     new ScenePictures(
