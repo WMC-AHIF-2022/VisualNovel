@@ -14,8 +14,7 @@ export class Maker{
 
     createScene() {
         console.log("Lege neue Szene an");
-        //let listPart = document.getElementById(`li ${this.curScene.getId()}`);
-        if(this.curScene === null || this.curScene.getId() === this.game.getScenes().length-1){
+        if(this.curScene === null){
             this.curScene = new Scene(this.idCounter++);
             let list = document.getElementById("sceneOverview");
             let html = '<li id="li ' + `${this.curScene.getId()}`+'"><p id="' + `${this.curScene.getId()}`+'" class="clickable">Scene ';
@@ -25,6 +24,28 @@ export class Maker{
             list.innerHTML += html;
         }
         else{
+            let list = document.getElementById(`li ${this.curScene.getId()}`).parentElement;
+            let newList = "";
+            let items = list.getElementsByTagName("li");
+            console.log(items[0]);
+            console.log(items);
+            console.log(items[0].nextElementSibling);
+            for(let i:Element = items[0]; i !== null; i = i.nextElementSibling){
+                console.log("sibling thingies:");
+                console.log(i);
+                newList += `<li id="${i.id}">`+i.innerHTML+"</li>";
+                if(i.id == `li ${this.curScene.getId()}`){
+                    this.curScene = new Scene(this.idCounter++);
+                    newList += '<li id="li ' + `${this.curScene.getId()}`+'"><p id="' + `${this.curScene.getId()}`+'" class="clickable">Scene ';
+                    newList += this.curScene.getId()+1;
+                    newList += '</p></li>';
+                    this.game.addScene(this.curScene);
+                }
+
+            }
+            console.log("no sibling??");
+            list.innerHTML = newList;
+
 
         }
 
@@ -147,12 +168,12 @@ export class Maker{
                 console.log("szene switched");
                 this.saveSceneElements();
                 console.log(`clicked id ${i}`);
-                this.curScene = this.game.getScenes()[i];
+                this.curScene = this.game.getScene(+scenes[i].id);
                 console.log("new scene");
                 console.log(this.curScene);
                 console.log(`clicked id ${i}`);
-                this.loadScene(this.game.getScenes()[i]);
-                document.getElementById(`${i}`).style.color = "pink";
+                this.loadScene(this.game.getScene(+scenes[i].id));
+                document.getElementById(`${scenes[i].id}`).style.color = "pink";
             })
         }
 
@@ -260,7 +281,7 @@ export class Maker{
             this.curScene.setNextId2(scene.getId());
         }
         let list = document.getElementById("sceneOverview");
-        let html = '<li> <ul id="listOf"><li>  <p id="' + `${scene.getId()}`+'" class="clickable">Scene ';
+        let html = '<li> <ul id="listOf"><li id="li ' + `${scene.getId()}`+'">  <p id="' + `${scene.getId()}`+'" class="clickable">Scene ';
         this.game.addScene(scene);
         html += scene.getId()+1;
         html += ` -option ${num}`
