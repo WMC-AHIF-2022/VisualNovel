@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<!--suppress XmlHighlighting, XmlHighlighting -->
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -24,6 +25,7 @@
         </div>
         <div class="grid-container">
             <div class="item1"><p>Visual Novel</p></div>
+            <div class="uploadItem"><button id="uploadButton">upload</button></div>
             <div class="item2"></div>
             <div class="item3">
                 <ul id="sceneOverview">
@@ -38,8 +40,8 @@
         <label  id="bgLabel" for="background-upload" class="playground-con">
             <div  id="pgItem1" class="playgroundItem1">
                 <label id="file-label" for="file-upload" class="custom-file-upload">
-                    <img src=""class="img" id="leftChar" />
-                    <p id="leftPlus" class="plus">+</p>
+                    <img src="" class="img" id="leftChar"  alt=""/>
+                    <p id="leftPlus" class="plus" >+</p>
                 </label>
                 <input id="file-upload" type="file"/>
             </div>
@@ -50,8 +52,8 @@
                 <input id="povName" value="Name"/>
             </div>
             <div id="pgItem3" class="playgroundItem3">
-                <label id="file-label2" for="file-upload2" class="custom-file-upload">
-                    <img src=""class="img" id="rightChar" />
+                <label id="file-label2" for="file-upload2" class="custom-file-upload" >
+                    <img alt="" src=""class="img" id="rightChar" />
                     <p id="rightPlus" class="plus">+</p>
                 </label>
                 <input id="file-upload2" type="file" accept="images/*"/>

@@ -5,7 +5,7 @@
     height: 34em;
     width: 20em;
     grid-template-areas:
-    'Name Name Name'
+    'Name Name Upload'
     'ScrollLine SceneList SceneList'
     'Buttons Buttons Buttons';
     color: #CCE8E1;
@@ -33,14 +33,6 @@
     grid-area: LeftCharacter;
     justify-self: right;
     align-self: center;
-}
-
-.characterSpaces{
-    width: 10em;
-    background-color: gainsboro;
-    text-align: center;
-    margin: 0 2.5em 0 2.5em;
-    padding: 7em 0 7em 0;
 }
 
 .playgroundItem2{
@@ -77,8 +69,24 @@ input{
 
 }
 
-.item1{
+#uploadButton{
+    margin: 0 0 0;
+    height: 3em;
+    width: 7em;
+    border-radius: 4em;
+    font-size: 17px;
+    border: 1px solid black;
+}
+
+.uploadItem{
+    grid-area: Upload;
+    justify-self: center;
     padding-top: 1em;
+    align-self: center;
+}
+
+.item1{
+    padding-top: 1.5em;
     padding-left: 3em;
     grid-area: Name;
 
@@ -87,7 +95,6 @@ input{
 .item2{
     grid-area: ScrollLine;
     background-color: black;
-    height: 20em;
     width: 0.3em;
     border: 0.3em solid black;
     border-radius: 2em;
@@ -103,6 +110,7 @@ input{
 
 .item4{
     grid-area: Buttons;
+    align-self: center;
 }
 
 ul{
@@ -121,7 +129,12 @@ p{
 }
 
 li{
-    padding-left: 0em;
+    padding-left: 0;
+}
+
+.childList{
+    padding: 0;
+    margin: 0;
 }
 
 .makerButton {
@@ -131,7 +144,7 @@ li{
     height: 3em;
     width: 10em;
     margin-left: 3em;
-    margin-bottom: 0.5em;
+    margin-bottom: 0.3em;
 }
 
 .plus{
@@ -154,12 +167,6 @@ input[type="file"] {
 
 }
 
-#char{
-    width: 10em;
-    height: 15em;
-    display: none;
-}
-
 #file-label2{
     margin-left: 2.5em;
 }
@@ -171,9 +178,3 @@ input[type="file"] {
 .btnInputs{
     display: none;
 }
-
-
-
-
-
-
