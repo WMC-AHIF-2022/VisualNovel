@@ -184,5 +184,16 @@ export class Scene{
     public setDecison(value: boolean){
         this.isDecision = value;
     }
+
+    public getDecision(){
+        return this.isDecision;
+    }
+    public getButton1(){
+        return this.buttonName1;
+    }
+
+    public getButton2(){
+        return this.buttonName2;
+    }
 }
 

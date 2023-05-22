@@ -115,6 +115,15 @@ export class Game{
     public getScenes():Scene[]{
         return this.scenes;
     }
+
+    public getScene(id:number):Scene{
+        for(let scene of this.scenes){
+            if(scene.getId()==id){
+                return scene;
+            }
+        }
+        return null;
+    }
 }
 
 async function init() {

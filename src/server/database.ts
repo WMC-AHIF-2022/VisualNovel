@@ -1,7 +1,5 @@
-import { Database as Driver } from "sqlite3";
-import { open, Database } from "sqlite";
-import * as sqlite3 from "sqlite3";
-
+import {open,Database} from "sqlite";
+import {Database as Driver} from "sqlite3";
 export const dbFileName = 'database.db';
 
 export class DB{
@@ -24,7 +22,8 @@ export class DB{
                 prevId INTEGER,
                 talkingChar Text NOT NULL,
                 text TEXT NOT NULL,
-                ScenePicsId Integer
+                ScenePicsId Integer,
+                gameId Integer Primary Key                        
             )strict;`
         );
         await connection.run(`
