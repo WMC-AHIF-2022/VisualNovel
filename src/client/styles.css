@@ -73,8 +73,7 @@ td {
 }
 
 li {
-  padding-left: 2em;
-  padding-right: 2em;
+  padding-left: 0;
   display: inline-block;
   text-align: left;
 }
@@ -176,7 +175,7 @@ button:hover {
   overflow: hidden;
   vertical-align: bottom;
   animation: dots steps(4, end) 2s infinite;
-  width: 0px;
+  width: 0;
 }
 
 @keyframes dots {

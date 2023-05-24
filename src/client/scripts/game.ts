@@ -167,6 +167,18 @@ export class Game {
     return this.pronouns;
   }
 
+
+    public getScene(id:number):Scene{
+        for(let scene of this.scenes){
+            if(scene.getId()==id){
+                return scene;
+            }
+        }
+        return null;
+    }
+}
+
+
   public getScenes(): Scene[] {
     return this.scenes;
   }

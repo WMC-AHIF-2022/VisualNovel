@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<!--suppress XmlHighlighting, XmlHighlighting -->
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -13,7 +14,7 @@
     <div id="main-content">
         <div class="centered-menu">
             <ul class="navigationBar">
-                <li><a href="./index.html">Home</a></li>
+                <li><a href="../index.html">Home</a></li>
                 <li><a href="./character-description.html">Characters</a></li>
                 <li><a href="./story-description.html">Story</a></li>
                 <li><a href="./VisualNovel-history.html">History</a></li>
@@ -24,6 +25,7 @@
         </div>
         <div class="grid-container">
             <div class="item1"><p>Visual Novel</p></div>
+            <div class="uploadItem"><button id="uploadButton">upload</button></div>
             <div class="item2"></div>
             <div class="item3">
                 <ul id="sceneOverview">
@@ -38,18 +40,20 @@
         <label  id="bgLabel" for="background-upload" class="playground-con">
             <div  id="pgItem1" class="playgroundItem1">
                 <label id="file-label" for="file-upload" class="custom-file-upload">
-                    <img src=""class="img" id="leftChar" />
-                    <p id="leftPlus" class="plus">+</p>
+                    <img src="" class="img" id="leftChar"  alt=""/>
+                    <p id="leftPlus" class="plus" >+</p>
                 </label>
                 <input id="file-upload" type="file"/>
             </div>
 
-            <div id=btnsAndName" class="playgroundItem2">
+            <div id="btnsAndName" class="playgroundItem2">
+                <input class="btnInputs" id="btn1" value="Option 1"/>
+                <input class="btnInputs" id="btn2" value="Option 2"/>
                 <input id="povName" value="Name"/>
             </div>
             <div id="pgItem3" class="playgroundItem3">
-                <label id="file-label2" for="file-upload2" class="custom-file-upload">
-                    <img src=""class="img" id="rightChar" />
+                <label id="file-label2" for="file-upload2" class="custom-file-upload" >
+                    <img alt="" src=""class="img" id="rightChar" />
                     <p id="rightPlus" class="plus">+</p>
                 </label>
                 <input id="file-upload2" type="file" accept="images/*"/>

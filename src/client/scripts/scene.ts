@@ -246,4 +246,3 @@ export class Scene {
   public setDecison(value: boolean) {
     this.isDecision = value;
   }
-}

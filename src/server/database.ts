@@ -1,7 +1,6 @@
-import { Database as Driver } from "sqlite3";
-import { open, Database } from "sqlite";
-
-export const dbFileName = "database.db";
+import {open,Database} from "sqlite";
+import {Database as Driver} from "sqlite3";
+export const dbFileName = 'database.db';
 
 export class DB {
   public static async createDBConnection(): Promise<Database> {
@@ -24,9 +23,12 @@ export class DB {
                 prevId INTEGER,
                 talkingChar Text NOT NULL,
                 text TEXT NOT NULL,
-                ScenePicsId Integer
-            )strict;`);
-    await connection.run(`
+
+                ScenePicsId Integer,
+                gameId Integer Primary Key                        
+            )strict;`
+        );
+        await connection.run(`
            create table if not exists Games (
                 gameId INTEGER NOT NULL PRIMARY KEY
            )strict;`);
@@ -35,9 +37,11 @@ export class DB {
                 gameInfoId INTEGER PRIMARY KEY,
                 gameId INTEGER not null,
                 gameName TEXT  DEFAULT "Visual Novel",
-                FOREIGN KEY(gameName) REFERENCES Game(gameId)
-            )strict;`);
-    await connection.run(`
+
+                FOREIGN KEY(gameId) REFERENCES Game(gameId)
+            )strict;`
+        );
+        await connection.run(`
             ALTER TABLE Games ADD COLUMN gameInfoId INTEGER REFERENCES GameInfos(gameInfoId);
         `);
   }
