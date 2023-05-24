@@ -176,9 +176,6 @@ export class Game {
         }
         return null;
     }
-}
-
-
   public getScenes(): Scene[] {
     return this.scenes;
   }

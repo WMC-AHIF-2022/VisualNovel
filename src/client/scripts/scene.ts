@@ -25,8 +25,8 @@ export class Scene {
 
   // TODO!! check why next scene doesn't get played and fix every bug that occurs after the first fix
   public async playScene(
-    pronouns: string[],
-    playerName: string
+      pronouns: string[],
+      playerName: string
   ): Promise<number> {
     this.displayCharactersAndBackground();
     console.log('finished displaying scene');
@@ -34,7 +34,7 @@ export class Scene {
       return this.handleDecision();
     }
     this.playNormalScene(pronouns, playerName);
-    let nextIDnew:number =  await this.playPrevOrNextScene();
+    let nextIDnew: number = await this.playPrevOrNextScene();
     console.log(`next id: ${nextIDnew}`);
     return nextIDnew;
   }
@@ -71,7 +71,7 @@ export class Scene {
       removeAllEventListeners(nextButton);
       removeAllEventListeners(prevButton);
     }
-    let id:Promise<number> =  new Promise<number>((resolve) => {
+    let id: Promise<number> = new Promise<number>((resolve) => {
       nextButton.addEventListener("click", () => {
         alert("you clicked next");
         removeEventListeners();
@@ -118,15 +118,15 @@ export class Scene {
    * ::theirs -> his, hers, theirs
    */
   private replacePronounsAndPlayerName(
-    pronouns: string[],
-    playerName: string
+      pronouns: string[],
+      playerName: string
   ): string {
     console.log(`text: ${this.text}`);
     this.text = this.text
-      .replace("::name", playerName)
-      .replace("::they", pronouns[1])
-      .replace("::them", pronouns[2])
-      .replace("::theirs", pronouns[3]);
+        .replace("::name", playerName)
+        .replace("::they", pronouns[1])
+        .replace("::them", pronouns[2])
+        .replace("::theirs", pronouns[3]);
     return this.text;
   }
 
@@ -158,7 +158,7 @@ export class Scene {
     nextSceneToBePlayed = await new Promise<number>((resolve) => {
       firstButton.addEventListener("click", () => {
         console.log(
-          `clicked button: ${this.buttonName1} next scene is: ${this.nextId}`
+            `clicked button: ${this.buttonName1} next scene is: ${this.nextId}`
         );
 
         // Resolve promise and remove the event listeners
@@ -167,7 +167,7 @@ export class Scene {
       });
       secondButton.addEventListener("click", () => {
         console.log(
-          `clicked button: ${this.buttonName2} next scene is: ${this.nextId2}`
+            `clicked button: ${this.buttonName2} next scene is: ${this.nextId2}`
         );
 
         // Resolve promise and remove the event listeners
@@ -220,18 +220,23 @@ export class Scene {
   public setPictures(value: ScenePictures) {
     this.pictures = value;
   }
+
   public setText(value: string) {
     this.text = value;
   }
+
   public setTalkingCharacter(value: string) {
     this.talkingCharacter = value;
   }
+
   public setPrevId(value: number) {
     this.prevId = value;
   }
+
   public setNextId2(value: number) {
     this.nextId2 = value;
   }
+
   public setNextId(value: number) {
     this.nextId = value;
   }
@@ -239,10 +244,23 @@ export class Scene {
   public setButton1(value: string) {
     this.buttonName1 = value;
   }
+
   public setButton2(value: string) {
     this.buttonName2 = value;
   }
 
-  public setDecison(value: boolean) {
+  public setDecision(value: boolean) {
     this.isDecision = value;
   }
+
+  public getDecision() {
+    return this.isDecision;
+  }
+  public getButton1() {
+    return this.buttonName1;
+  }
+
+  public getButton2() {
+    return this.buttonName2;
+  }
+}

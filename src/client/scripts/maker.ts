@@ -268,7 +268,7 @@ export class Maker{
 
     createDecisionScene(num : Number) {
         this.DisableButtons(true)
-        this.curScene.setDecison(true);
+        this.curScene.setDecision(true);
         console.log("Lege neue Decision Szene an");
         let scene = new Scene(this.idCounter++);
         scene.setPrevId(this.curScene.getId());
