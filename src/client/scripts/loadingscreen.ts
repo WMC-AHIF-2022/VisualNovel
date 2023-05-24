@@ -1,5 +1,5 @@
 async function wait(delay: number): Promise<void> {
-  return new Promise(resolve => setTimeout(resolve, delay));
+  return new Promise((resolve) => setTimeout(resolve, delay));
 }
 
 function setDisplay(element: HTMLElement, display: string): void {
