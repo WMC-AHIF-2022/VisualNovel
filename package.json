@@ -4,7 +4,7 @@
   "description": "This Website is all about Visual Novels.",
   "main": "index.js",
   "scripts": {
-    "preserver-dev": "tsc --project ./src/client/",
+    "preserver-dev": "tsc --watch --project ./src/client/",
     "server-dev": "npx nodemon src/server/app.ts",
     "start": "npx ts-node src/server/app.ts"
   },

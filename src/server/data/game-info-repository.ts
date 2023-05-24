@@ -1,6 +1,6 @@
 import {IGame, IGameinfo} from "./game-repository";
 import {DB} from "../database";
-import {GameInfo} from "../../client/scripts/game-info";
+
 
 let gameinfos: IGameinfo[] = [];
 

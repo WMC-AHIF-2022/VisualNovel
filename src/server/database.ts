@@ -36,7 +36,7 @@ export class DB{
                 gameInfoId INTEGER PRIMARY KEY,
                 gameId INTEGER not null,
                 gameName TEXT  DEFAULT "Visual Novel",
-                FOREIGN KEY(gameName) REFERENCES Game(gameId)
+                FOREIGN KEY(gameId) REFERENCES Game(gameId)
             )strict;`
         );
         await connection.run(`

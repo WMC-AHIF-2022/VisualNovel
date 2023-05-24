@@ -1,17 +1,10 @@
 {
   "compilerOptions": {
-    "target": "es6", // Set the JavaScript language version for emitted JavaScript and include compatible library declarations.
-    "module": "es6",
+    "target": "es2021", // Set the JavaScript language version for emitted JavaScript and include compatible library declarations.
+    "module": "esnext", // Specify what module code is generated.
+    "moduleResolution": "node",
     "strict": true, // Enable all strict type-checking options.
     "sourceMap": true, // Create source map files for emitted JavaScript files.
-    "strictNullChecks": false, // When type checking, dont't take into account null and undefined,
-    "skipDefaultLibCheck": true,
-    "esModuleInterop": true,
-    "skipLibCheck": true,
-    "lib": [
-      "DOM",
-      "ES6"
-    ]
-  },
-
+    "strictNullChecks": false // When type checking, dont't take into account null and undefined
+  }
 }

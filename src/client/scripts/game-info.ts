@@ -1,4 +1,4 @@
-import {Game} from "./game";
+
 
 export class GameInfo {
     private readonly creator: string; // creator doesn't change
