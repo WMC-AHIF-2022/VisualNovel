@@ -2,12 +2,12 @@ import { ScenePictures } from "./scene-pics.js";
 import {removeAllEventListeners} from "./extra/tools.js";
 
 export class Scene {
-  private isDecision: boolean;
-  private buttonName1: string; //button name for nextId
+  private isDecision: boolean; //TODO!! delete this and replace with an if (if button2 == empty)
+  private buttonName1: string; //button name for nextId1
   private buttonName2: string; // button name for nextId2
 
   private readonly id: number;
-  private nextId: number;
+  private nextId1: number;
   private nextId2: number;
   private prevId: number;
   private talkingCharacter: string;
@@ -50,7 +50,7 @@ export class Scene {
   // 2. not able to fetch / broken picture or url
   private displayCharactersAndBackground() {
     const charLeft = <HTMLImageElement>document.getElementById("imgLeftChar");
-    charLeft.src = this.pictures.getleftChar();
+    charLeft.src = this.pictures.getLeftChar();
     const charRight = <HTMLImageElement>document.getElementById("imgRightChar");
     charRight.src = this.pictures.getRightChar();
 
@@ -75,7 +75,7 @@ export class Scene {
       nextButton.addEventListener("click", () => {
         alert("you clicked next");
         removeEventListeners();
-        resolve(this.nextId);
+        resolve(this.nextId1);
       });
       prevButton.addEventListener("click", () => {
         alert("you clicked prev");
@@ -132,7 +132,7 @@ export class Scene {
 
   /**
    * handle decision
-   * @return: number for next scene nextId if button 1 was pressed nextId2 if button 2 was pressed
+   * @return: number for next scene nextId1 if button 1 was pressed nextId2 if button 2 was pressed
    */
   // do not delete the promise, it is needed to wait for the button click
   private async handleDecision(): Promise<number> {
@@ -158,12 +158,12 @@ export class Scene {
     nextSceneToBePlayed = await new Promise<number>((resolve) => {
       firstButton.addEventListener("click", () => {
         console.log(
-            `clicked button: ${this.buttonName1} next scene is: ${this.nextId}`
+            `clicked button: ${this.buttonName1} next scene is: ${this.nextId1}`
         );
 
         // Resolve promise and remove the event listeners
         removeEventListeners();
-        resolve(this.nextId);
+        resolve(this.nextId1);
       });
       secondButton.addEventListener("click", () => {
         console.log(
@@ -194,7 +194,7 @@ export class Scene {
   }
 
   public getNextId(): number {
-    return this.nextId;
+    return this.nextId1;
   }
 
   public getNextId2(): number {
@@ -238,7 +238,7 @@ export class Scene {
   }
 
   public setNextId(value: number) {
-    this.nextId = value;
+    this.nextId1 = value;
   }
 
   public setButton1(value: string) {

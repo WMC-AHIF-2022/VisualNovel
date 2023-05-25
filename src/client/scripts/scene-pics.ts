@@ -9,7 +9,7 @@ export class ScenePictures {
   }
   public formatPictures() {}
 
-  public getleftChar(): string {
+  public getLeftChar(): string {
     return this.leftChar;
   }
 

@@ -207,8 +207,8 @@ export class Maker{
         }
         let leftChar = <HTMLImageElement>document.getElementById("leftChar");
         // @ts-ignore
-        leftChar.src = this.curScene.getPictures().getleftChar();
-        if(this.curScene.getPictures().getleftChar() === ""){
+        leftChar.src = this.curScene.getPictures().getLeftChar();
+        if(this.curScene.getPictures().getLeftChar() === ""){
             console.log("Kein Linker");
             document.getElementById("leftChar").style.display = "none";
             document.getElementById("pgItem1").style.justifySelf = "right";
