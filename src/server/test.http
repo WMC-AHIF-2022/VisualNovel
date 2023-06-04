@@ -16,7 +16,7 @@ POST http://localhost:3000/api/games HTTP/1.1
 Content-Type: application/json
 
 {
-  "gameName": "VisualNovel",
-  "scenes": [],
-  "infoId": 2
+  "name": "VisualNovel",
+  "creator": "HttpCreator",
+  "description": "http description text"
 }

@@ -5,23 +5,27 @@ import { StatusCodes } from "http-status-codes";
 export const SceneRouter = express.Router();
 
 SceneRouter.post("/", async (request, response) => {
-  let nextId: number | undefined = request.body.nextId;
-  let choiceId: number | undefined = request.body.choiceId;
+  let nextId: number | undefined = request.body.nextId1;
+  let choiceId: number | undefined = request.body.nextId2;
   let prevId: number | undefined = request.body.prevId;
   let talkingChar: string | undefined = request.body.talkingChar;
   let text: string | undefined = request.body.text;
-  let scenePicsId: number | undefined = request.body.scenePicsId;
+  let button1: string | undefined = request.body.button1;
+  let button2: string | undefined = request.body.button2;
+  let picLeft: number | undefined = request.body.picLeft;
+  let picRight: number | undefined = request.body.picRight;
+  let picBackground: number | undefined = request.body.picBackground;
   let gameId: number | undefined = request.body.gameId;
 
+  if (typeof nextId !== "number") {
+    response.status(StatusCodes.BAD_REQUEST).send("action missing or not ok");
+    return;
+  }
   if (typeof choiceId !== "number") {
     response.status(StatusCodes.BAD_REQUEST).send("action missing or not ok");
     return;
   }
   if (typeof prevId !== "number") {
-    response.status(StatusCodes.BAD_REQUEST).send("action missing or not ok");
-    return;
-  }
-  if (typeof nextId !== "number") {
     response.status(StatusCodes.BAD_REQUEST).send("action missing or not ok");
     return;
   }
@@ -33,7 +37,23 @@ SceneRouter.post("/", async (request, response) => {
     response.status(StatusCodes.BAD_REQUEST).send("action missing or not ok");
     return;
   }
-  if (typeof scenePicsId !== "number") {
+  if (typeof button1 !== "string") {
+    response.status(StatusCodes.BAD_REQUEST).send("action missing or not ok");
+    return;
+  }
+  if (typeof button2 !== "string") {
+    response.status(StatusCodes.BAD_REQUEST).send("action missing or not ok");
+    return;
+  }
+  if (typeof picLeft !== "number") {
+    response.status(StatusCodes.BAD_REQUEST).send("action missing or not ok");
+    return;
+  }
+  if (typeof picRight !== "number") {
+    response.status(StatusCodes.BAD_REQUEST).send("action missing or not ok");
+    return;
+  }
+  if (typeof picBackground !== "number") {
     response.status(StatusCodes.BAD_REQUEST).send("action missing or not ok");
     return;
   }
@@ -43,13 +63,17 @@ SceneRouter.post("/", async (request, response) => {
   }
   const scene: IScene = {
     id: -1,
-    nextId: nextId,
-    choiceId: choiceId,
+    nextId1: nextId,
+    nextId2: choiceId,
     prevId: prevId,
     talkingChar: talkingChar,
     text: text,
-    scenePicsId: scenePicsId,
-    gameId: gameId,
+    button1: button1,
+    button2: button2,
+    picLeft: picLeft,
+    picRight: picRight,
+    picBackground: picBackground,
+    gameId: gameId
   };
 
   try {
