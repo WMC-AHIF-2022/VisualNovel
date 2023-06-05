@@ -2,12 +2,16 @@ POST http://localhost:3000/api/scenes HTTP/1.1
 Content-Type: application/json
 
 {
-  "nextId": 2,
-  "choiceId": 3,
+  "nextId1": 2,
+  "nextId2": 3,
   "prevId": 1,
   "talkingChar": "Vita",
   "text": "Test",
-  "scenePicsId": 3
+  "scenePicsId": 3,
+  "picLeft": 1,
+  "picRight": 2,
+  "picBackground": 3,
+  "gameId": 1
 }
 
 ###################

@@ -12,7 +12,7 @@ export async function getAllGameInfos() {
 }
 
 export async function addGameInfo(info:IGameinfo): Promise<void> {
-    const db = await DB.createDBConnection();
+    /*const db = await DB.createDBConnection();
     await db.get('PRAGMA foreign_keys = ON');
     const stmt = await db.prepare('insert into IGameinfo(infoId, creator, description, releaseDate, name)values(?1, ?2, ?3, ?4, ?5)');
     await stmt.bind({1:info.infoId, 2:info.creator, 3:info.description, 4:info.releaseDate, 5:info.name});
@@ -25,6 +25,6 @@ export async function addGameInfo(info:IGameinfo): Promise<void> {
     }
     else {
         info.infoId = operationResult.lastID!;
-    }
+    }*/
 
 }

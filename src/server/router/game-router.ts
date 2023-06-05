@@ -7,7 +7,7 @@ import {addGame, getAllGames, IGame} from "../data/game-repository";
 export const GameRouter = express.Router();
 
 GameRouter.get("/", async (request, response) => {
-  const games = getAllGames();
+  const games = await getAllGames();
   response.status(StatusCodes.OK).json(games);
 });
 
@@ -31,11 +31,10 @@ GameRouter.post("/",async (request, response)=>{
 
   const game : IGame ={
     id: -1,
-    scenes: [],
     creator: creator.toString(),
     description: desc.toString(),
-    creationDate: new Date(),
-    name:gameName.toString()
+    creationDate: new Date().getTime(),
+    gameName:gameName.toString()
   }
 
   try {
