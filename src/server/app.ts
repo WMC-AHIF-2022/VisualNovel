@@ -2,6 +2,7 @@ import express from "express";
 import { join } from "path";
 import { SceneRouter } from "./router/scene-router";
 import { GameRouter } from "./router/game-router";
+import {DB} from "./database";
 
 const app = express();
 
@@ -14,6 +15,8 @@ app.use("/api/games", GameRouter);
 
 const port = 3000;
 
-app.listen(port, () => {
+app.listen(port, async () => {
+  const db = await DB.createDBConnection();
+  await DB.ensureSampleDataInserted(db);
   console.log(`Server listening on port ${port}`);
 });

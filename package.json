@@ -4,10 +4,10 @@
   "description": "This Website is all about Visual Novels.",
   "main": "index.js",
   "scripts": {
-    "preserver-dev": "tsc --project ./src/client/",
-    "client-dev": "tsc --watch --project ./src/client",
-    "server-dev": "npx nodemon src/server/app.ts",
-    "start": "npx ts-node src/server/app.ts"
+    "server-dev": "npx nodemon ./src/server/app.ts",
+    "client-dev": "npx tsc --watch --project ./src/client",
+    "prestart": "npx tsc --project ./src/client",
+    "start": "npx ts-node ./src/server/app.ts"
   },
   "repository": {
     "type": "git",
@@ -20,19 +20,19 @@
   },
   "homepage": "https://github.com/WMC-AHIF-2022/VisualNovel#readme",
   "dependencies": {
-    "express": "^4.17.2",
-    "http-status-codes": "^2.2.0",
-    "sqlite": "^4.2.0",
-    "sqlite3": "^5.1.6"
+    "express": "4.17.2",
+    "http-status-codes": "2.2.0",
+    "sqlite": "4.2.0",
+    "sqlite3": "5.1.6"
   },
   "devDependencies": {
-    "@types/express": "^4.17.13",
-    "@types/jquery": "^3.5.16",
-    "@types/node": "^17.0.45",
-    "nodemon": "^2.0.15",
-    "prettier": "^2.8.8",
-    "ts-node": "^10.5.0",
-    "typescript": "^4.6.2"
+    "@types/express": "4.17.13",
+    "@types/jquery": "3.5.16",
+    "@types/node": "18.11.18",
+    "nodemon": "2.0.15",
+    "prettier": "2.8.8",
+    "ts-node": "10.5.0",
+    "typescript": "4.6.2"
   },
   "nodemonConfig": {
     "ignore": [

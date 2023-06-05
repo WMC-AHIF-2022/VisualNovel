@@ -1,28 +1,48 @@
 import express from "express";
-import { addScene, IScene } from "../data/scene-repository";
-import { StatusCodes } from "http-status-codes";
-import { addGame, IGame } from "../data/game-repository";
+import {addScene, IScene} from "../data/scene-repository";
+import {StatusCodes} from "http-status-codes";
+import {addGame, getAllGames, IGame} from "../data/game-repository";
+
 
 export const GameRouter = express.Router();
 
-GameRouter.post("/", async (request, response) => {
-  let infoId: number | undefined = request.body.infoId;
+GameRouter.get("/", async (request, response) => {
+  const games = await getAllGames();
+  response.status(StatusCodes.OK).json(games);
+});
 
-  if (typeof infoId !== "number") {
-    response.status(StatusCodes.BAD_REQUEST).send("action missing or not ok");
-    return;
+GameRouter.post("/",async (request, response)=>{
+  let creator: string | undefined = request.body.creator;
+  let desc: string | undefined = request.body.description;
+  let gameName: string | undefined = request.body.name;
+
+  if (typeof creator !== "string") {
+    response.status(StatusCodes.BAD_REQUEST).send("done missing or not ok");
+    return
+  }
+  if (typeof desc !== "string") {
+    response.status(StatusCodes.BAD_REQUEST).send("done missing or not ok");
+    return
+  }
+  if (typeof gameName !== "string") {
+    response.status(StatusCodes.BAD_REQUEST).send("done missing or not ok");
+    return
   }
 
-  const game: IGame = {
+  const game : IGame ={
     id: -1,
-    scenes: [],
-    infoId: infoId,
-  };
+    creator: creator.toString(),
+    description: desc.toString(),
+    creationDate: new Date().getTime(),
+    gameName:gameName.toString()
+  }
 
   try {
     await addGame(game);
     response.status(StatusCodes.CREATED).send(game);
-  } catch (e) {
+  }
+  catch (e) {
     response.sendStatus(StatusCodes.INTERNAL_SERVER_ERROR);
   }
-});
+
+})

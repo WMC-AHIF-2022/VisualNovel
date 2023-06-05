@@ -2,13 +2,17 @@ import { DB } from "../database";
 
 export interface IScene {
   id: number;
-  nextId: number;
-  choiceId: number;
+  nextId1: number;
+  nextId2: number;
   prevId: number;
   talkingChar: string;
   text: string;
-  scenePicsId: number;
-  gameId: number; //muss noch in der Datenbank verändert werden
+  button1: string;
+  button2: string;
+  picLeft: number;
+  picRight: number;
+  picBackground: number;
+  gameId: number;
 }
 
 let nextId = 0;
@@ -38,16 +42,20 @@ export function getSceneById(id: number): IScene | undefined {
 export async function addScene(scene: IScene): Promise<void> {
   const db = await DB.createDBConnection();
   const stmt = await db.prepare(
-    "insert into Scenes (nextId,choiceId,prevId,talkingChar,text,scenePicsId)values(?1,?2,?3,?4,?5,?6,?7)"
+    "insert into Scenes (nextId1,nextId2,prevId,talkingChar,text,button1,button2,picLeft,picRight,picBackground,gameId)values(?1,?2,?3,?4,?5,?6,?7,?8,?9,?10,?11)"
   );
   await stmt.bind({
-    1: scene.nextId,
-    2: scene.choiceId,
+    1: scene.nextId1,
+    2: scene.nextId2,
     3: scene.prevId,
     4: scene.talkingChar,
     5: scene.text,
-    6: scene.scenePicsId,
-    7: scene.gameId,
+    6: scene.button1,
+    7: scene.button2,
+    8: scene.picLeft,
+    9: scene.picRight,
+    10: scene.picBackground,
+    11: scene.gameId,
   });
   const operationResult = await stmt.run();
   await stmt.finalize();

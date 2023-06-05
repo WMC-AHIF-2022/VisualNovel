@@ -1,23 +1,20 @@
-import { DB } from "../database";
-import { IScene } from "./scene-repository";
+import {DB} from "../database";
+import {IScene} from "./scene-repository";
 
 export interface IGame {
-  id: number;
-  scenes: IScene[];
-  infoId: number;
+  id: number,
+  creator: string,
+  description: string,
+  creationDate: number,
+  gameName:string
 }
 
 export interface IGameinfo {
-  infoId: number;
-  creator: string;
-  description: string;
-  releaseDate: Date;
-  name: string;
 }
 
 let nextId = 0;
 
-let games: IGame[] = [];
+let games:IGame[] = [];
 
 function findGameIndex(id: number) {
   for (let i = 0; i < games.length; i++) {
@@ -28,35 +25,39 @@ function findGameIndex(id: number) {
   return -1;
 }
 
-export function getAllGames() {
+export async function getAllGames(): Promise<IGame[]> {
+  console.log("getAllGames");
+  const db = await DB.createDBConnection();
+  const games = await db.all<IGame[]>('select * from Games');
+  console.log(games);
+  await db.close();
   return games;
 }
 
-export function getGameById(id: number): IGame | undefined {
+export function getGameById(id: number): IGame|undefined {
   const index: number = findGameIndex(id);
   if (index < 0) {
     return undefined;
   }
   return games[index];
 }
-//TODO!! change things
-export async function addGame(game: IGame): Promise<void> {
+
+export async function addGame(game:IGame): Promise<void> {
   const db = await DB.createDBConnection();
-  await db.get("PRAGMA foreign_keys = ON");
-  const stmt = await db.prepare("insert into Games (infoId)values(?1)");
-  await stmt.bind({ 1: game.infoId });
-  const operationResult = await stmt.run();
+  await db.get('PRAGMA foreign_keys = ON');
+  const stmt = await db.prepare('insert into Games (creator,description, creationDate,gameName)values(?1,?2, ?3,?4)');
+  await stmt.bind({1:game.creator, 2:game.description, 3:game.creationDate, 4:game.gameName});
+  const operationResult =await stmt.run();
   await stmt.finalize();
   await db.close();
 
-  if (
-    typeof operationResult.changes !== "number" ||
-    operationResult.changes !== 1
-  ) {
+  if (typeof operationResult.changes !== "number" || operationResult.changes !== 1) {
     throw new Error("DB Error");
-  } else {
+  }
+  else {
     game.id = operationResult.lastID!;
   }
+
 }
 
 export function removeAllGames(): void {
