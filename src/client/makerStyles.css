@@ -130,6 +130,7 @@ p{
 
 li{
     padding-left: 0;
+    display: flex;
 }
 
 .childList{
@@ -177,4 +178,17 @@ input[type="file"] {
 
 .btnInputs{
     display: none;
+}
+
+.clickable{
+    float: left;
+}
+
+.listViewClickable{
+    align-self: flex-end;
+
+}
+
+.navbar{
+    display: inline-block;
 }
