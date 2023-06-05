@@ -4,10 +4,10 @@
   "description": "This Website is all about Visual Novels.",
   "main": "index.js",
   "scripts": {
-    "preserver-dev": "tsc --project ./src/client/",
-    "client-dev": "tsc --watch --project ./src/client",
-    "server-dev": "npx nodemon src/server/app.ts",
-    "start": "npx ts-node src/server/app.ts"
+    "server-dev": "npx nodemon ./src/server/app.ts",
+    "client-dev": "npx tsc --watch --project ./src/client",
+    "prestart": "npx tsc --project ./src/client",
+    "start": "npx ts-node ./src/server/app.ts"
   },
   "repository": {
     "type": "git",

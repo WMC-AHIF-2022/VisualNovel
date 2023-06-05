@@ -6,6 +6,8 @@ export class Maker{
     private game: Game;
     private curScene :Scene;
     private idCounter: number = 0;
+    private displayedSceneNum = 1;
+    private listDisplayIdCounter = 0;
 
     constructor() {
         this.game = new Game();
@@ -23,7 +25,7 @@ export class Maker{
             let list = document.getElementById("sceneOverview");
             let html = '<li id="li ' + `${this.curScene.getId()}`+'"><p id="' + `${this.curScene.getId()}`+'" class="clickable">Scene ';
             this.game.addScene(this.curScene);
-            html += this.curScene.getId()+1;
+            html += this.displayedSceneNum++;
             html += '</p></li>';
             list.innerHTML += html;
         }
@@ -32,7 +34,7 @@ export class Maker{
             this.curScene = new Scene(this.idCounter++);
             let SiblingItem = "";
             SiblingItem += '<li id="li ' + `${this.curScene.getId()}`+'"><p id="' + `${this.curScene.getId()}`+'" class="clickable">Scene ';
-            SiblingItem += this.curScene.getId()+1;
+            SiblingItem += this.displayedSceneNum++;
             SiblingItem += '</p></li>';
             this.game.addScene(this.curScene);
             item.insertAdjacentHTML("afterend",SiblingItem);
@@ -169,6 +171,10 @@ export class Maker{
     createOptions() {
         document.getElementById("btn1").style.display = "block";
         document.getElementById("btn2").style.display = "block";
+        this.DisableButtons(true)
+        this.curScene.setDecision(true);
+        this.displayedSceneNum++;
+        document.getElementById(`${this.curScene.getId()}`).innerText += " <"
     }
 
     private loadScene(scene: Scene) {
@@ -266,33 +272,32 @@ export class Maker{
         document.getElementById("bgLabel").style.backgroundColor = "white";
     }
 
-    createDecisionScene(num : Number) {
-        this.DisableButtons(true)
-        this.curScene.setDecision(true);
+    async createDecisionScene(num: Number) {
         console.log("Lege neue Decision Szene an");
         let scene = new Scene(this.idCounter++);
         scene.setPrevId(this.curScene.getId());
         let item = document.getElementById(`li ${this.curScene.getId()}`);
-        let html = '<li> <ul class="childList"><li id="li ' + `${scene.getId()}`+'">  <p id="' + `${scene.getId()}`+'" class="clickable">Scene ';
+        let html = '<li> <ul class="childList"><li id="li ' + `${scene.getId()}` + '">  <p id="' + `${scene.getId()}` + '" class="clickable">Scene ';
         this.game.addScene(scene);
-        html += scene.getId()+1;
-        html += ` -opt. ${num}`
-        html += '</p></li></ul></li>';
-        if(num == 1){
+        html += this.displayedSceneNum;
+        html += `.${num}`
+        html += '</p><p id="ld ' + `${this.listDisplayIdCounter}` + '" class="listViewClickable">[close]</p></li></ul></li>';
+        if (num == 1) {
             this.curScene.setNextId(scene.getId());
-            item.insertAdjacentHTML("afterend",html);
-        }
-        else{
+            item.insertAdjacentHTML("afterend", html);
+        } else {
             this.curScene.setNextId2(scene.getId());
             console.log(item.nextElementSibling);
-            item.nextElementSibling.insertAdjacentHTML("afterend",html);
+            item.nextElementSibling.insertAdjacentHTML("afterend", html);
         }
 
         scene.setText("Enter text here");
         scene.setTalkingCharacter("Name");
-        let pics = new ScenePictures("","","none");
+        let pics = new ScenePictures("", "", "none");
         scene.setPictures(pics);
-
+        console.log(this.listDisplayIdCounter);
+        console.log(document.getElementById(`ld ${this.listDisplayIdCounter}`));
+        this.changeListDisplay(document.getElementById(`ld ${this.listDisplayIdCounter++}`));
 
     }
 
@@ -301,6 +306,41 @@ export class Maker{
         btnDecision.disabled = disable;
         let btnScene = <HTMLButtonElement>document.getElementById("makeScene");
         btnScene.disabled = disable;
+    }
+
+    changeListDisplay(btn: HTMLElement) {
+            btn.addEventListener("click",()=> {
+                if (btn.innerText === "[close]") {
+                    closeListPart(btn);
+                } else {
+                    expandListPart(btn);
+                }
+            })
+
+
+
+        function closeListPart(btn: HTMLElement) {
+            btn.innerText = "[expand]"
+            console.log("should close and set expand");
+            btn = <HTMLElement>btn.parentElement.nextElementSibling;
+            while(btn !== null){
+                btn.style.display = "none";
+                btn = <HTMLElement>btn.nextElementSibling;
+            }
+        }
+
+        function expandListPart(btn: HTMLElement) {
+            btn.innerText = "[close]"
+            console.log("should expand and set close");
+            btn = <HTMLElement>btn.parentElement.nextElementSibling;
+            while(btn !== null){
+                btn.style.display = "flex";
+                btn = <HTMLElement>btn.nextElementSibling;
+            }
+
+        }
+
+
     }
 }
 
@@ -318,7 +358,6 @@ async function init() {
         await maker.createDecisionScene(2);
         await maker.createOptions();
         await maker.switchScene();
-
 
     });
     document.getElementById("uploadButton").addEventListener("click",()=>{
