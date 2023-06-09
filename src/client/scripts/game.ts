@@ -2,17 +2,18 @@ import { GameInfo } from "./game-info.js";
 import { Scene } from "./scene.js";
 import { removeAllEventListeners } from "./extra/tools.js";
 import { ScenePictures } from "./scene-pics.js";
+import {map} from "jquery";
 
 export class Game {
   //TODO!! get one scene or a limited scene array of xx scenes instead of all
   private readonly id: number; // must stay readonly, due to saving in database and identification
   private pronouns: string[] = []; // index 1 = they|he|she index 2 = Them|him|her index 3 = theirs|his|hers
-  private scenes: Scene[];
+  private scenes: Map<number, Scene>;
   private infos: GameInfo; // description might get changed
   //private loggedIn: boolean; TODO! check if needed when accounts exist
   private playerName: string;
   constructor() {
-    this.scenes = [];
+    this.scenes = new Map<number, Scene>();
     this.infos = new GameInfo();
   }
 
@@ -20,7 +21,7 @@ export class Game {
    *  playGame: function for starting the game
    */
   async playGame() {
-    console.log("length: " + this.scenes.length);
+    console.log("length: " + this.scenes.size);
     await this.prepareForGame();
     await this.playScenes();
   }
@@ -35,49 +36,55 @@ export class Game {
     console.log(`name: ${name}`);
 
     // Handle the selection of the gender and pronouns :D
-    this.playerName = name.value;
-    if (this.playerName != "") {
-      return await new Promise<void>((resolve) => {
-        const btnFemale = document.getElementById("btnFemale");
-        const btnMale = document.getElementById("btnMale");
-        const btnDiv = document.getElementById("btnDiv");
-
-        // Remove all even listeners once a single event listener was triggered
-        const removeAllListeners = () => {
-          removeAllEventListeners(btnFemale);
-          removeAllEventListeners(btnMale);
-          removeAllEventListeners(btnDiv);
-        };
-
-        btnFemale.addEventListener("click", async () => {
-          this.pronouns = ["she", "her", "hers"];
-          console.log("Chosen gender: female");
-          this.hideGenderElements();
-
-          removeAllListeners();
-          resolve();
-        });
-        btnMale.addEventListener("click", async () => {
-          this.pronouns = ["he", "him", "his"];
-          console.log("Chosen gender: male");
-          this.hideGenderElements();
-
-          removeAllListeners();
-          resolve();
-        });
-        btnDiv.addEventListener("click", async () => {
-          this.pronouns = ["they", "them", "theirs"];
-          console.log("Chosen gender: diverse");
-          this.hideGenderElements();
-
-          removeAllListeners();
-          resolve();
-        });
+    return await new Promise<void>( (resolve) => {
+      name.addEventListener('keyup',async ()=>{
+        await this.waitForUserToChoosePronouns();
+        this.playerName = name.value;
+        console.log(`name: ${this.playerName} pronouns: ${this.pronouns[0]}`);
+        resolve();
       });
-    }
-    console.log(`name: ${this.playerName} pronouns: ${this.pronouns[0]}`);
+    });
   }
 
+  private async waitForUserToChoosePronouns(){
+    return await new Promise<void>((resolve) => {
+      const btnFemale = document.getElementById("btnFemale");
+      const btnMale = document.getElementById("btnMale");
+      const btnDiv = document.getElementById("btnDiv");
+
+      // Remove all even listeners once a single event listener was triggered
+      const removeAllListeners = () => {
+        removeAllEventListeners(btnFemale);
+        removeAllEventListeners(btnMale);
+        removeAllEventListeners(btnDiv);
+      };
+
+      btnFemale.addEventListener("click", async () => {
+        this.pronouns = ["she", "her", "hers"];
+        console.log("Chosen gender: female");
+        this.hideGenderElements();
+
+        removeAllListeners();
+        resolve();
+      });
+      btnMale.addEventListener("click", async () => {
+        this.pronouns = ["he", "him", "his"];
+        console.log("Chosen gender: male");
+
+        this.hideGenderElements();
+        removeAllListeners();
+        resolve();
+      });
+      btnDiv.addEventListener("click", async () => {
+        this.pronouns = ["they", "them", "theirs"];
+        console.log("Chosen gender: diverse");
+        this.hideGenderElements();
+
+        removeAllListeners();
+        resolve();
+      });
+    });
+  }
   /**
    * function for waiting until text gets entered into the text field, before making buttons clickable
    * @private
@@ -98,13 +105,15 @@ export class Game {
    */
   //TODO!! check why next scene doesn't get played, might have something todo with the scene class or this one
   private async playScenes(): Promise<void> {
-    console.log(`name: ${this.playerName} pronouns: ${this.pronouns[0]}`);
+    //console.log(`name: ${this.playerName} pronouns: ${this.pronouns[0]}`);
     let nextID: number = 0;
+
     while (nextID != -1) {
       // TODO!! check if the last nextID is gonna be -1
+
       console.log(nextID);
-      console.log(`scene text: ${this.scenes[nextID].getText()}`);
-      nextID = await this.scenes[nextID].playScene(this.pronouns, this.playerName);
+      console.log(`scene text: ${this.scenes.get(nextID).getDecision()}`);
+      nextID = await this.scenes.get(nextID).playScene(this.pronouns, this.playerName);
     }
   }
 
@@ -141,7 +150,7 @@ export class Game {
    * @param newScene
    */
   public addScene(newScene: Scene) {
-    this.scenes.push(newScene);
+    this.scenes.set(newScene.getId(), newScene);
   }
   /**
    * changeDescription: function to change game description
@@ -169,15 +178,14 @@ export class Game {
 
 
     public getScene(id:number):Scene{
-        for(let scene of this.scenes){
-            if(scene.getId()==id){
-                return scene;
-            }
-        }
-        return null;
+        return this.scenes.get(id);
     }
   public getScenes(): Scene[] {
-    return this.scenes;
+    let arr:Scene[] = [];
+    for (const scene of this.scenes.values()) {
+      arr.push(scene);
+    }
+    return arr;
   }
 }
 // TODO!! once the server runs and we have some games in the db, fetch them from there with the
@@ -189,6 +197,7 @@ async function init() {
     const game:Game = await fetchRestEndpoint('', 'GET',data);*/
 
   //test data
+  //window location search
   const game = new Game();
   let scene: Scene = new Scene(0, false);
   scene.setText("::name said that ::they like cats");
@@ -206,7 +215,7 @@ async function init() {
   scene2.setButton1("mew");
   scene2.setButton2("wuff");
   scene2.setNextId(2);
-  scene2.setNextId2(3);
+  scene2.setNextId2(2);
   scene2.setPrevId(0);
   scene2.setPictures(
     new ScenePictures(

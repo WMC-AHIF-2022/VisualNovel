@@ -24,19 +24,18 @@ export class Scene {
   }
 
   // TODO!! check why next scene doesn't get played and fix every bug that occurs after the first fix
-  public async playScene(
-      pronouns: string[],
-      playerName: string
-  ): Promise<number> {
+  public async playScene(pronouns: string[], playerName: string): Promise<number> {
+    console.log('me in function: playScene');
+
     this.displayCharactersAndBackground();
     console.log('finished displaying scene');
     if (this.isDecision) {
-      return this.handleDecision();
+      return await this.handleDecision();
     }
     this.playNormalScene(pronouns, playerName);
-    let nextIDnew: number = await this.playPrevOrNextScene();
-    console.log(`next id: ${nextIDnew}`);
-    return nextIDnew;
+    let nextIDNew: number = await this.playPrevOrNextScene();
+    console.log(`next id: ${nextIDNew}`);
+    return nextIDNew;
   }
 
   /**
@@ -49,6 +48,8 @@ export class Scene {
   // 1. not given
   // 2. not able to fetch / broken picture or url
   private displayCharactersAndBackground() {
+    console.log('me in function: displayCharactersAndBackground');
+
     const charLeft = <HTMLImageElement>document.getElementById("imgLeftChar");
     charLeft.src = this.pictures.getLeftChar();
     const charRight = <HTMLImageElement>document.getElementById("imgRightChar");
@@ -64,6 +65,8 @@ export class Scene {
    */
   // do not delete the promise, it is needed to wait for the button click
   private playPrevOrNextScene(): Promise<number> {
+    console.log('me in function: playPrevOrNextScene');
+
     let nextButton = document.getElementById('btnNext');
     let prevButton = document.getElementById('btnPrevious');
 
@@ -71,20 +74,20 @@ export class Scene {
       removeAllEventListeners(nextButton);
       removeAllEventListeners(prevButton);
     }
-    let id: Promise<number> = new Promise<number>((resolve) => {
+    return  new Promise<number>((resolve) => {
       nextButton.addEventListener("click", () => {
         alert("you clicked next");
         removeEventListeners();
+        console.log(`next scene will be ${this.nextId1}`);
         resolve(this.nextId1);
       });
       prevButton.addEventListener("click", () => {
         alert("you clicked prev");
         removeEventListeners();
+        console.log(`next scene will be ${this.prevId}`);
         resolve(this.prevId);
       });
     });
-    console.log(`next id after resolving promise: ${id}`);
-    return id;
   }
 
   /**
@@ -96,6 +99,8 @@ export class Scene {
    */
   private playNormalScene(pronouns: string[], playerName: string) {
     this.resetTextFields();
+    console.log('me in function: playNormalScene');
+
     let textField = document.getElementById("txtTextInTheBox");
     let talkingPerson = document.getElementById("txtName");
 
@@ -103,8 +108,8 @@ export class Scene {
       this.talkingCharacter = playerName;
     }
 
-    talkingPerson.innerText = this.talkingCharacter;
-    textField.innerText = this.replacePronounsAndPlayerName(pronouns, playerName);
+    talkingPerson.innerHTML = this.talkingCharacter;
+    textField.innerHTML = this.replacePronounsAndPlayerName(pronouns, playerName);
   }
 
   /**
@@ -124,9 +129,9 @@ export class Scene {
     console.log(`text: ${this.text}`);
     this.text = this.text
         .replace("::name", playerName)
-        .replace("::they", pronouns[1])
-        .replace("::them", pronouns[2])
-        .replace("::theirs", pronouns[3]);
+        .replace("::they", pronouns[0])
+        .replace("::them", pronouns[1])
+        .replace("::theirs", pronouns[2]);
     return this.text;
   }
 
@@ -137,26 +142,30 @@ export class Scene {
   // do not delete the promise, it is needed to wait for the button click
   private async handleDecision(): Promise<number> {
     this.resetTextFields();
-
+    console.log('me in function: handleDecision');
     let firstButton: HTMLElement = document.getElementById("btnOpt1");
     let secondButton: HTMLElement = document.getElementById("btnOpt2");
     firstButton.innerText = this.buttonName1;
     secondButton.innerText = this.buttonName2;
 
-    //TODO!! check if button is visible
     firstButton.style.display = "inline-block";
     secondButton.style.display = "inline-block";
     console.log("set buttons onto visible");
 
     // Remove the event listeners created by this function -> will be removed once the promise is resolved
     const removeEventListeners = () => {
+      console.log('removing events');
       removeAllEventListeners(firstButton);
       removeAllEventListeners(secondButton);
+      document.getElementById('btnOpt2').style.display = 'none';
+      document.getElementById('btnOpt1').style.display = 'none';
+
     }
 
-    let nextSceneToBePlayed: number = -1; // in case something goes wrong, return -1
-    nextSceneToBePlayed = await new Promise<number>((resolve) => {
-      firstButton.addEventListener("click", () => {
+    return  await new Promise<number>((resolve) => {
+      console.log('waiting for button click');
+      firstButton.addEventListener('click',  () => {
+        console.log('added event listener to button 1')
         console.log(
             `clicked button: ${this.buttonName1} next scene is: ${this.nextId1}`
         );
@@ -165,27 +174,24 @@ export class Scene {
         removeEventListeners();
         resolve(this.nextId1);
       });
-      secondButton.addEventListener("click", () => {
+      console.log('tessssst');
+      secondButton.addEventListener("click",  () => {
         console.log(
             `clicked button: ${this.buttonName2} next scene is: ${this.nextId2}`
         );
-
         // Resolve promise and remove the event listeners
         removeEventListeners();
         resolve(this.nextId2);
       });
     });
-    firstButton.style.display = "none";
-    secondButton.style.display = "none";
-    return nextSceneToBePlayed;
   }
 
   /**
    * small helper function for resetting the content in the text fields talking person and text
    */
   private resetTextFields() {
-    document.getElementById("pTalkingPerson").textContent = " ";
-    document.getElementById("pText").textContent = " ";
+     document.getElementById("txtTextInTheBox").innerHTML = " ";
+     document.getElementById("txtName").innerHTML = " ";
   }
 
   //Getters + Setters
