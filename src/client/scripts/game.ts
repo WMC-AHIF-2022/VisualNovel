@@ -103,18 +103,21 @@ export class Game {
    * function for playing all the scenes in the scene []
    * @private
    */
-  //TODO!! check why next scene doesn't get played, might have something todo with the scene class or this one
   private async playScenes(): Promise<void> {
     //console.log(`name: ${this.playerName} pronouns: ${this.pronouns[0]}`);
     let nextID: number = 0;
 
     while (nextID != -1) {
-      // TODO!! check if the last nextID is gonna be -1
 
       console.log(nextID);
       console.log(`scene text: ${this.scenes.get(nextID).getDecision()}`);
       nextID = await this.scenes.get(nextID).playScene(this.pronouns, this.playerName);
     }
+    document.getElementById("imgLeftChar").style.display = 'none';
+    document.getElementById("imgRightChar").style.display = 'none';
+    document.getElementById("txtTextInTheBox").style.display = 'none';
+    document.getElementById("txtName").style.display = 'none';
+    //document.getElementById("imgBackground").style.backgroundColor = 'rgb(0, 0, 0)';
   }
 
   /**
@@ -146,7 +149,7 @@ export class Game {
   }
 
   /**
-   * function to add a scene to the scene[] liss just deleted it bad liss
+   * function to add a scene to the scene[]
    * @param newScene
    */
   public addScene(newScene: Scene) {
@@ -192,7 +195,7 @@ export class Game {
 //  id being stored in the session storage when a game gets clicked on the overview
 async function init() {
   // first prototype for the fetching
-  /*let gameId:string = sessionStorage.getItem('gameId');
+  /*let gameId:string = sessionStorage.getItem('gameID');
     const data = JSON.parse(`{"username": "${gameId}"}`);
     const game:Game = await fetchRestEndpoint('', 'GET',data);*/
 
@@ -243,6 +246,11 @@ async function init() {
   game.addScene(scene3);
 
   await game.playGame();
+  document.getElementById('btnBackToGamesPage').style.display = 'inline-block';
+  document.getElementById('btnBackToGamesPage').addEventListener('click', ()=>{
+    //sessionStorage.removeItem('gameID');
+    window.location.href = '../html/games.html';
+  })
 }
 
 window.addEventListener("load", init);

@@ -23,7 +23,6 @@ export class Scene {
     }
   }
 
-  // TODO!! check why next scene doesn't get played and fix every bug that occurs after the first fix
   public async playScene(pronouns: string[], playerName: string): Promise<number> {
     console.log('me in function: playScene');
 
@@ -76,13 +75,13 @@ export class Scene {
     }
     return  new Promise<number>((resolve) => {
       nextButton.addEventListener("click", () => {
-        alert("you clicked next");
+        //alert("you clicked next");
         removeEventListeners();
         console.log(`next scene will be ${this.nextId1}`);
         resolve(this.nextId1);
       });
       prevButton.addEventListener("click", () => {
-        alert("you clicked prev");
+        //alert("you clicked prev");
         removeEventListeners();
         console.log(`next scene will be ${this.prevId}`);
         resolve(this.prevId);
@@ -174,7 +173,7 @@ export class Scene {
         removeEventListeners();
         resolve(this.nextId1);
       });
-      console.log('tessssst');
+
       secondButton.addEventListener("click",  () => {
         console.log(
             `clicked button: ${this.buttonName2} next scene is: ${this.nextId2}`
