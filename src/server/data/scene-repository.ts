@@ -39,6 +39,7 @@ export function getSceneById(id: number): IScene | undefined {
   return scenes[index];
 }
 
+//TODO!! check if game and pics exist
 export async function addScene(scene: IScene): Promise<void> {
   const db = await DB.createDBConnection();
   const stmt = await db.prepare(

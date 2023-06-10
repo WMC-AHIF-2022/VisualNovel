@@ -4,7 +4,10 @@ import { StatusCodes } from "http-status-codes";
 
 export const SceneRouter = express.Router();
 
+// in case scene is not a decision nextID2 = -1 every text field is '' in case no text was entered and the
+// picture ids are -1 in case none were entered
 SceneRouter.post("/", async (request, response) => {
+  let sceneID : number|undefined = request.body.id;
   let nextId: number | undefined = request.body.nextId1;
   let choiceId: number | undefined = request.body.nextId2;
   let prevId: number | undefined = request.body.prevId;
@@ -17,69 +20,41 @@ SceneRouter.post("/", async (request, response) => {
   let picBackground: number | undefined = request.body.picBackground;
   let gameId: number | undefined = request.body.gameId;
 
-  if (typeof nextId !== "number") {
+  if (typeof nextId !== "number" || typeof prevId !== "number" || typeof gameId !== "number" || typeof sceneID !== "number" || typeof  picBackground !== "number") {
     response.status(StatusCodes.BAD_REQUEST).send("action missing or not ok");
     return;
   }
-  if (typeof choiceId !== "number") {
-    response.status(StatusCodes.BAD_REQUEST).send("action missing or not ok");
-    return;
-  }
-  if (typeof prevId !== "number") {
-    response.status(StatusCodes.BAD_REQUEST).send("action missing or not ok");
-    return;
-  }
-  if (typeof text !== "string" || text.trim().length === 0) {
-    response.status(StatusCodes.BAD_REQUEST).send("action missing or not ok");
-    return;
-  }
-  if (typeof talkingChar !== "string" || talkingChar.trim().length === 0) {
-    response.status(StatusCodes.BAD_REQUEST).send("action missing or not ok");
-    return;
-  }
-  if (typeof button1 !== "string") {
-    response.status(StatusCodes.BAD_REQUEST).send("action missing or not ok");
-    return;
-  }
-  if (typeof button2 !== "string") {
-    response.status(StatusCodes.BAD_REQUEST).send("action missing or not ok");
-    return;
-  }
-  if (typeof picLeft !== "number") {
-    response.status(StatusCodes.BAD_REQUEST).send("action missing or not ok");
-    return;
-  }
-  if (typeof picRight !== "number") {
-    response.status(StatusCodes.BAD_REQUEST).send("action missing or not ok");
-    return;
-  }
-  if (typeof picBackground !== "number") {
-    response.status(StatusCodes.BAD_REQUEST).send("action missing or not ok");
-    return;
-  }
-  if (typeof gameId !== "number") {
-    response.status(StatusCodes.BAD_REQUEST).send("action missing or not ok");
-    return;
-  }
-  const scene: IScene = {
-    id: -1,
-    nextId1: nextId,
-    nextId2: choiceId,
-    prevId: prevId,
-    talkingChar: talkingChar,
-    text: text,
-    button1: button1,
-    button2: button2,
-    picLeft: picLeft,
-    picRight: picRight,
-    picBackground: picBackground,
-    gameId: gameId
-  };
 
-  try {
+  let scene: IScene = {id: sceneID, prevId: prevId, gameId:gameId, nextId1 :nextId, talkingChar: '', text: '', button1: '', button2:'', picBackground:picBackground, nextId2:-1, picLeft: -1, picRight: -1}
+
+  if(typeof choiceId === "number"){
+    scene.nextId2 = choiceId;
+    if(typeof button1 !== "string" || typeof button2 !== "string"){
+      response.status(StatusCodes.BAD_REQUEST).send("If scene is a decision, it needs button names!");
+      return;
+    }
+    scene.button1 = button1;
+    scene.button2 = button2;
+  }
+  else{
+    if(typeof  talkingChar === "string"){
+      scene.talkingChar = talkingChar;
+    }
+    if(typeof text === "string"){
+      scene.text = text;
+    }
+  }
+  if(typeof  picLeft === "number"){
+    scene.picLeft = picLeft;
+  }
+  if(typeof  picRight === "number"){
+    scene.picRight = picRight;
+  }
+  try{
     await addScene(scene);
-    response.status(StatusCodes.CREATED).send(scene);
-  } catch (e) {
+    response.sendStatus(StatusCodes.OK);
+  }
+  catch (ex){
     response.sendStatus(StatusCodes.INTERNAL_SERVER_ERROR);
   }
 });
