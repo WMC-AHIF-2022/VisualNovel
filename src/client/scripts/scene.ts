@@ -101,7 +101,7 @@ export class Scene {
     console.log('me in function: playNormalScene');
 
     let textField = document.getElementById("txtTextInTheBox");
-    let talkingPerson = document.getElementById("txtName");
+    let talkingPerson = document.getElementById("txtTalkingPerson");
 
     if (this.talkingCharacter === "::name") {
       this.talkingCharacter = playerName;
@@ -190,7 +190,7 @@ export class Scene {
    */
   private resetTextFields() {
      document.getElementById("txtTextInTheBox").innerHTML = " ";
-     document.getElementById("txtName").innerHTML = " ";
+     document.getElementById("txtTalkingPerson").innerHTML = " ";
   }
 
   //Getters + Setters

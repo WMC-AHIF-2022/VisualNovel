@@ -1,0 +1,24 @@
+POST http://localhost:3000/api/scenes HTTP/1.1
+Content-Type: application/json
+
+{
+  "nextId1": 1,
+  "prevId": -1,
+  "talkingChar": "Narrator",
+  "text": "You slowly awake from your sleep, still feeling a little bit tired.<br>Something feels off...<br>Your gut feeling doesn't trick you, as, when you open your eyes, you realize that you aren't in your bedroom. The room you are currently in seems odd to you. Apart from the bed you woke up in and a shelve next to the window, the only things filling the room are spiderwebs and dust.<br>For a second, you feel like you’re only imagining things, maybe you’re still dreaming… You wait for a short moment, but the scenery around you doesn’t change.<br>A loud BANG!<br>From outside the room makes you jolt up. You quickly push down the fear that starts to build inside you and decide, to search for the noise’s origin.",
+  "picLeft": -1,
+  "picRight": -1,
+  "picBackground": 1,
+  "gameId": 6
+}
+
+###################
+
+POST http://localhost:3000/api/games HTTP/1.1
+Content-Type: application/json
+
+{
+  "name": "Our Visual Novel",
+  "creator": "Visual Novel Team",
+  "description": "You wake up in an unknown world full of monsters and dangers you have never faced before. You know have to find a way back to your old home"
+}

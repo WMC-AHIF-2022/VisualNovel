@@ -203,7 +203,13 @@ async function init() {
   //window location search
   const game = new Game();
   let scene: Scene = new Scene(0, false);
-  scene.setText("::name said that ::they like cats");
+  scene.setText("You slowly awake from your sleep, still feeling a little bit tired. <br> Something feels off...<br> " +
+      "Your gut feeling doesn't trick you, as, when you open your eyes, you realize that you aren't in your bedroom. " +
+      "The room you are currently in seems odd to you. Apart from the bed you woke up in and a shelf next to the window, " +
+      "the only things filling the room are spiderwebs and dust. <br> For a second, you feel like you’re only imagining things, " +
+      "maybe you’re still dreaming… You wait for a short moment, but the scenery around you doesn’t change. <br> A loud BANG! <br> " +
+      "From outside the room makes you jolt up. You quickly push down the fear that starts to build inside you and decide, " +
+      "to search for the noise’s origin.");
   scene.setTalkingCharacter("::name");
   scene.setPictures(
     new ScenePictures(
