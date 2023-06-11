@@ -36,10 +36,12 @@ export class DB {
       );
       await connection.run(`
           create table if not exists Picture (
-             picId INTEGER NOT NULL PRIMARY KEY,
+             picId INTEGER NOT NULL ,
              url TEXT NOT NULL,
              gameId INTEGER NOT NULL,
-             FOREIGN KEY (gameId) REFERENCES Games(gameId)
+             FOREIGN KEY (gameId) REFERENCES Games(gameId),
+             PRIMARY KEY (picId,gameId)
+
           )strict;`
       );
     await connection.run(`
@@ -60,7 +62,7 @@ export class DB {
           FOREIGN KEY (picLeft) REFERENCES Picture(picId),
           FOREIGN KEY (picRight) REFERENCES Picture(picId),
           FOREIGN KEY (picBackground) REFERENCES Picture(picId),
-          PRIMARY KEY (id,gameId)                    
+          PRIMARY KEY (id,gameId)                
       )strict;`
     );
   }

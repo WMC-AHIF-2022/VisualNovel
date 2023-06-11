@@ -1,4 +1,6 @@
 import { DB } from "../database";
+import {IGame} from "./game-repository";
+import {getPictureById} from "./pictures-repository";
 
 export interface IScene {
   id: number;
@@ -39,37 +41,61 @@ export function getSceneById(id: number): IScene | undefined {
   return scenes[index];
 }
 
+async function checkIfPicsExist(picBackground: number, picLeft: number, picRight: number, gameID : number) {
+  if(picBackground !== -1){
+    if(await getPictureById(picBackground, gameID)=== undefined){
+      return false;
+    }
+  }
+  if(picLeft !== -1){
+    if(await getPictureById(picLeft,gameID)=== undefined){
+      return false;
+    }
+  }
+  if(picRight !== -1){
+    if(await getPictureById(picRight,gameID)=== undefined){
+      return false;
+    }
+  }
+  return true;
+}
+
 //TODO!! check if game and pics exist
 export async function addScene(scene: IScene): Promise<void> {
+  // check if game and pics exist
   const db = await DB.createDBConnection();
-  const stmt = await db.prepare(
-    "insert into Scenes (nextId1,nextId2,prevId,talkingChar,text,button1,button2,picLeft,picRight,picBackground,gameId)values(?1,?2,?3,?4,?5,?6,?7,?8,?9,?10,?11)"
-  );
-  await stmt.bind({
-    1: scene.nextId1,
-    2: scene.nextId2,
-    3: scene.prevId,
-    4: scene.talkingChar,
-    5: scene.text,
-    6: scene.button1,
-    7: scene.button2,
-    8: scene.picLeft,
-    9: scene.picRight,
-    10: scene.picBackground,
-    11: scene.gameId,
-  });
-  const operationResult = await stmt.run();
-  await stmt.finalize();
-  await db.close();
-
-  if (
-    typeof operationResult.changes !== "number" ||
-    operationResult.changes !== 1
-  ) {
-    throw new Error("DB Error");
-  } else {
-    scene.id = operationResult.lastID!;
+  let stmtCheckGame = await db.prepare('select * from Games where gameId = ?1');
+  await stmtCheckGame.bind({1: scene.gameId});
+  let game =  await stmtCheckGame.get<IGame>();
+  await stmtCheckGame.finalize();
+  if(game === undefined){
+    throw new Error('There is no game with given ID, could not add scene!');
   }
+  let picsExist = await checkIfPicsExist(scene.picBackground,scene.picLeft,scene.picRight,scene.gameId);
+  if(!picsExist){
+    throw new Error('This scenes pictures are not defined!');
+  }
+  // insert scene into database
+  const stmtInsert = await db.prepare(
+    "insert into Scenes (id, nextId1, nextId2, prevId, talkingChar, text, button1, button2, picLeft, picRight, picBackground, gameId) values(?1,?2,?3,?4,?5,?6,?7,?8,?9,?10,?11,?12)"
+  );
+  await stmtInsert.bind({
+    1: scene.id,
+    2: scene.nextId1,
+    3: scene.nextId2,
+    4: scene.prevId,
+    5: scene.talkingChar,
+    6: scene.text,
+    7: scene.button1,
+    8: scene.button2,
+    9: scene.picLeft,
+    10: scene.picRight,
+    11: scene.picBackground,
+    12: scene.gameId,
+  });
+  await stmtInsert.run();
+  await stmtInsert.finalize();
+  await db.close();
 }
 
 export function removeAllScenes(): void {

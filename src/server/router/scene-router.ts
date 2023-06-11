@@ -55,6 +55,10 @@ SceneRouter.post("/", async (request, response) => {
     response.sendStatus(StatusCodes.OK);
   }
   catch (ex){
+    if (ex instanceof Error) {
+      response.status(StatusCodes.BAD_REQUEST).send(ex.message);
+      return;
+    }
     response.sendStatus(StatusCodes.INTERNAL_SERVER_ERROR);
   }
 });
