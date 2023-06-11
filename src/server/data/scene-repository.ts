@@ -41,6 +41,13 @@ export function getSceneById(id: number): IScene | undefined {
   return scenes[index];
 }
 
+/**
+ * this function checks if the pictures in a scene exist
+ * @param picBackground bg id
+ * @param picLeft picLeft id
+ * @param picRight picRight id
+ * @param gameID game id
+ */
 async function checkIfPicsExist(picBackground: number, picLeft: number, picRight: number, gameID : number) {
   if(picBackground !== -1){
     if(await getPictureById(picBackground, gameID)=== undefined){
@@ -60,7 +67,7 @@ async function checkIfPicsExist(picBackground: number, picLeft: number, picRight
   return true;
 }
 
-//TODO!! check if game and pics exist
+
 export async function addScene(scene: IScene): Promise<void> {
   // check if game and pics exist
   const db = await DB.createDBConnection();

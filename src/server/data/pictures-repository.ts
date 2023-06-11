@@ -6,6 +6,11 @@ export interface IPicture {
   gameId: number;
 }
 
+/**
+ * this function gets a picture by the game and pic id
+ * @param picId
+ * @param gameID
+ */
 export async function getPictureById(picId: number, gameID :number):Promise<IPicture | undefined> {
   const db = await DB.createDBConnection();
   let picture;

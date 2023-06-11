@@ -20,14 +20,19 @@ SceneRouter.post("/", async (request, response) => {
   let picBackground: number | undefined = request.body.picBackground;
   let gameId: number | undefined = request.body.gameId;
 
+  //in case nextId/prevId/gameId/sceneId/backgroundId are not numbers thw scene won't be added
+  //a scene without a background would look strange that's why there needs to be a bg
   if (typeof nextId !== "number" || typeof prevId !== "number" || typeof gameId !== "number" || typeof sceneID !== "number" || typeof  picBackground !== "number") {
     response.status(StatusCodes.BAD_REQUEST).send("action missing or not ok");
     return;
   }
 
+  //the scene gets set with default values except for the values that have been checked before
   let scene: IScene = {id: sceneID, prevId: prevId, gameId:gameId, nextId1 :nextId, talkingChar: '', text: '', button1: '', button2:'', picBackground:picBackground, nextId2:-1, picLeft: -1, picRight: -1}
 
+  //checking if current scene is a decision scene
   if(typeof choiceId === "number"){
+    //adding and checking values needed to a decision
     scene.nextId2 = choiceId;
     if(typeof button1 !== "string" || typeof button2 !== "string"){
       response.status(StatusCodes.BAD_REQUEST).send("If scene is a decision, it needs button names!");
@@ -37,6 +42,7 @@ SceneRouter.post("/", async (request, response) => {
     scene.button2 = button2;
   }
   else{
+    //adding a normal scene
     if(typeof  talkingChar === "string"){
       scene.talkingChar = talkingChar;
     }
@@ -44,6 +50,7 @@ SceneRouter.post("/", async (request, response) => {
       scene.text = text;
     }
   }
+  //setting picId's in case of no id being set, id stays -1 to let everyone know, that there is no pic set
   if(typeof  picLeft === "number"){
     scene.picLeft = picLeft;
   }
@@ -51,10 +58,12 @@ SceneRouter.post("/", async (request, response) => {
     scene.picRight = picRight;
   }
   try{
+    //adding scene
     await addScene(scene);
     response.sendStatus(StatusCodes.OK);
   }
   catch (ex){
+    //returning the exact error message to know what happened
     if (ex instanceof Error) {
       response.status(StatusCodes.BAD_REQUEST).send(ex.message);
       return;
