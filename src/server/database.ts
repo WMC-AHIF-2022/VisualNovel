@@ -25,9 +25,28 @@ export class DB {
           password TEXT NOT NULL
           )strict;`
     );
+      await connection.run(`
+          create table if not exists Games (
+           gameId INTEGER NOT NULL PRIMARY KEY,
+           creationDate INTEGER,
+           creator TEXT DEFAULT 'Guest',
+           gameName TEXT DEFAULT 'Visual Novel',
+           description TEXT DEFAULT 'This game has no description yet!'
+          )strict;`
+      );
+      await connection.run(`
+          create table if not exists Picture (
+             picId INTEGER NOT NULL ,
+             url TEXT NOT NULL,
+             gameId INTEGER NOT NULL,
+             FOREIGN KEY (gameId) REFERENCES Games(gameId),
+             PRIMARY KEY (picId,gameId)
+
+          )strict;`
+      );
     await connection.run(`
       create table if not exists Scenes (
-          id INTEGER NOT NULL PRIMARY KEY,
+          id INTEGER NOT NULL,
           nextId1 INTEGER,
           nextId2 INTEGER,
           prevId INTEGER,
@@ -42,24 +61,8 @@ export class DB {
           FOREIGN KEY (gameId) REFERENCES Games(gameId),
           FOREIGN KEY (picLeft) REFERENCES Picture(picId),
           FOREIGN KEY (picRight) REFERENCES Picture(picId),
-          FOREIGN KEY (picBackground) REFERENCES Picture(picId)
-      )strict;`
-    );
-    await connection.run(`
-      create table if not exists Games (
-         gameId INTEGER NOT NULL PRIMARY KEY,
-         creationDate INTEGER,
-         creator TEXT DEFAULT "Guest",
-         gameName TEXT DEFAULT "Visual Novel",
-         description TEXT DEFAULT "This game has no description yet!"
-      )strict;`
-    );
-    await connection.run(`
-      create table if not exists Picture (
-         picId INTEGER NOT NULL PRIMARY KEY,
-         url TEXT NOT NULL,
-         gameId INTEGER NOT NULL,
-         FOREIGN KEY (gameId) REFERENCES Games(gameId)
+          FOREIGN KEY (picBackground) REFERENCES Picture(picId),
+          PRIMARY KEY (id,gameId)                
       )strict;`
     );
   }

@@ -2,17 +2,20 @@ import { GameInfo } from "./game-info.js";
 import { Scene } from "./scene.js";
 import { removeAllEventListeners } from "./extra/tools.js";
 import { ScenePictures } from "./scene-pics.js";
+import {map} from "jquery";
+import {fetchRestEndpoint} from "../utils/client-server.js";
+import {IScene} from "../../server/data/scene-repository.js";
 
 export class Game {
   //TODO!! get one scene or a limited scene array of xx scenes instead of all
   private readonly id: number; // must stay readonly, due to saving in database and identification
   private pronouns: string[] = []; // index 1 = they|he|she index 2 = Them|him|her index 3 = theirs|his|hers
-  private scenes: Scene[];
+  private scenes: Map<number, Scene>;
   private infos: GameInfo; // description might get changed
   //private loggedIn: boolean; TODO! check if needed when accounts exist
   private playerName: string;
   constructor() {
-    this.scenes = [];
+    this.scenes = new Map<number, Scene>();
     this.infos = new GameInfo();
   }
 
@@ -20,7 +23,7 @@ export class Game {
    *  playGame: function for starting the game
    */
   async playGame() {
-    console.log("length: " + this.scenes.length);
+    console.log("length: " + this.scenes.size);
     await this.prepareForGame();
     await this.playScenes();
   }
@@ -35,49 +38,55 @@ export class Game {
     console.log(`name: ${name}`);
 
     // Handle the selection of the gender and pronouns :D
-    this.playerName = name.value;
-    if (this.playerName != "") {
-      return await new Promise<void>((resolve) => {
-        const btnFemale = document.getElementById("btnFemale");
-        const btnMale = document.getElementById("btnMale");
-        const btnDiv = document.getElementById("btnDiv");
-
-        // Remove all even listeners once a single event listener was triggered
-        const removeAllListeners = () => {
-          removeAllEventListeners(btnFemale);
-          removeAllEventListeners(btnMale);
-          removeAllEventListeners(btnDiv);
-        };
-
-        btnFemale.addEventListener("click", async () => {
-          this.pronouns = ["she", "her", "hers"];
-          console.log("Chosen gender: female");
-          this.hideGenderElements();
-
-          removeAllListeners();
-          resolve();
-        });
-        btnMale.addEventListener("click", async () => {
-          this.pronouns = ["he", "him", "his"];
-          console.log("Chosen gender: male");
-          this.hideGenderElements();
-
-          removeAllListeners();
-          resolve();
-        });
-        btnDiv.addEventListener("click", async () => {
-          this.pronouns = ["they", "them", "theirs"];
-          console.log("Chosen gender: diverse");
-          this.hideGenderElements();
-
-          removeAllListeners();
-          resolve();
-        });
+    return await new Promise<void>( (resolve) => {
+      name.addEventListener('keyup',async ()=>{
+        await this.waitForUserToChoosePronouns();
+        this.playerName = name.value;
+        console.log(`name: ${this.playerName} pronouns: ${this.pronouns[0]}`);
+        resolve();
       });
-    }
-    console.log(`name: ${this.playerName} pronouns: ${this.pronouns[0]}`);
+    });
   }
 
+  private async waitForUserToChoosePronouns(){
+    return await new Promise<void>((resolve) => {
+      const btnFemale = document.getElementById("btnFemale");
+      const btnMale = document.getElementById("btnMale");
+      const btnDiv = document.getElementById("btnDiv");
+
+      // Remove all even listeners once a single event listener was triggered
+      const removeAllListeners = () => {
+        removeAllEventListeners(btnFemale);
+        removeAllEventListeners(btnMale);
+        removeAllEventListeners(btnDiv);
+      };
+
+      btnFemale.addEventListener("click", async () => {
+        this.pronouns = ["she", "her", "hers"];
+        console.log("Chosen gender: female");
+        this.hideGenderElements();
+
+        removeAllListeners();
+        resolve();
+      });
+      btnMale.addEventListener("click", async () => {
+        this.pronouns = ["he", "him", "his"];
+        console.log("Chosen gender: male");
+
+        this.hideGenderElements();
+        removeAllListeners();
+        resolve();
+      });
+      btnDiv.addEventListener("click", async () => {
+        this.pronouns = ["they", "them", "theirs"];
+        console.log("Chosen gender: diverse");
+        this.hideGenderElements();
+
+        removeAllListeners();
+        resolve();
+      });
+    });
+  }
   /**
    * function for waiting until text gets entered into the text field, before making buttons clickable
    * @private
@@ -96,16 +105,21 @@ export class Game {
    * function for playing all the scenes in the scene []
    * @private
    */
-  //TODO!! check why next scene doesn't get played, might have something todo with the scene class or this one
   private async playScenes(): Promise<void> {
-    console.log(`name: ${this.playerName} pronouns: ${this.pronouns[0]}`);
+    //console.log(`name: ${this.playerName} pronouns: ${this.pronouns[0]}`);
     let nextID: number = 0;
+
     while (nextID != -1) {
-      // TODO!! check if the last nextID is gonna be -1
+
       console.log(nextID);
-      console.log(`scene text: ${this.scenes[nextID].getText()}`);
-      nextID = await this.scenes[nextID].playScene(this.pronouns, this.playerName);
+      console.log(`scene text: ${this.scenes.get(nextID).getDecision()}`);
+      nextID = await this.scenes.get(nextID).playScene(this.pronouns, this.playerName);
     }
+    document.getElementById("imgLeftChar").style.display = 'none';
+    document.getElementById("imgRightChar").style.display = 'none';
+    document.getElementById("txtTextInTheBox").style.display = 'none';
+    document.getElementById("txtName").style.display = 'none';
+    //document.getElementById("imgBackground").style.backgroundColor = 'rgb(0, 0, 0)';
   }
 
   /**
@@ -137,11 +151,11 @@ export class Game {
   }
 
   /**
-   * function to add a scene to the scene[] liss just deleted it bad liss
+   * function to add a scene to the scene[]
    * @param newScene
    */
   public addScene(newScene: Scene) {
-    this.scenes.push(newScene);
+    this.scenes.set(newScene.getId(), newScene);
   }
   /**
    * changeDescription: function to change game description
@@ -166,74 +180,48 @@ export class Game {
   public getPronouns(): string[] {
     return this.pronouns;
   }
-
-
-    public getScene(id:number):Scene{
-        for(let scene of this.scenes){
-            if(scene.getId()==id){
-                return scene;
-            }
-        }
-        return null;
-    }
+  public getScene(id:number):Scene{
+      return this.scenes.get(id);
+  }
   public getScenes(): Scene[] {
-    return this.scenes;
+    let arr:Scene[] = [];
+    for (const scene of this.scenes.values()) {
+      arr.push(scene);
+    }
+    return arr;
+  }
+
+  public async createSceneMap(scenes: any) {
+    let sceneArr: IScene[] = await scenes.json();
+    for (const scene of sceneArr) {
+      let newScene = new Scene(scene.id);
+
+    }
+    console.log(sceneArr);
   }
 }
 // TODO!! once the server runs and we have some games in the db, fetch them from there with the
 //  id being stored in the session storage when a game gets clicked on the overview
 async function init() {
   // first prototype for the fetching
-  /*let gameId:string = sessionStorage.getItem('gameId');
+  /*let gameId:string = sessionStorage.getItem('gameID');
     const data = JSON.parse(`{"username": "${gameId}"}`);
     const game:Game = await fetchRestEndpoint('', 'GET',data);*/
-
   //test data
+  //window location search
+  console.log('loaded page');
   const game = new Game();
-  let scene: Scene = new Scene(0, false);
-  scene.setText("::name said that ::they like cats");
-  scene.setTalkingCharacter("::name");
-  scene.setPictures(
-    new ScenePictures(
-      "../img/Characters/vita.png",
-      "../img/Characters/vita.png",
-      "../img/backgrounds/baum.png"
-    )
-  );
-  scene.setNextId(1);
-  game.addScene(scene);
-  let scene2: Scene = new Scene(1, true);
-  scene2.setButton1("mew");
-  scene2.setButton2("wuff");
-  scene2.setNextId(2);
-  scene2.setNextId2(3);
-  scene2.setPrevId(0);
-  scene2.setPictures(
-    new ScenePictures(
-      "../img/Characters/Steak.png",
-      "../img/Characters/Steak.png",
-      "../img/backgrounds/baum.png"
-    )
-  );
+  let gameID = 6;
+  let scene = await fetchRestEndpoint(`http://localhost:3000/api/scenes/byGameID/${gameID}`, "GET");
+  await game.createSceneMap(scene);
 
-  let scene3: Scene = new Scene(2, false);
-  scene3.setText("yayy scene3 ::they");
-  scene3.setTalkingCharacter("::name");
-  scene3.setPrevId(1);
-  scene3.setNextId(-1);
-  scene3.setPictures(
-    new ScenePictures(
-      "../img/Characters/vita.png",
-      "../img/Characters/vita.png",
-      "../img/backgrounds/baum.png"
-    )
-  );
 
-  game.addScene(scene);
-  game.addScene(scene2);
-  game.addScene(scene3);
-
-  await game.playGame();
+  /*await game.playGame();
+  document.getElementById('btnBackToGamesPage').style.display = 'inline-block';
+  document.getElementById('btnBackToGamesPage').addEventListener('click', ()=>{
+    //sessionStorage.removeItem('gameID');
+    window.location.href = '../html/games.html';
+  })*/
 }
 
 window.addEventListener("load", init);
