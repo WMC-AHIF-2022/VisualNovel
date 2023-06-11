@@ -3,6 +3,8 @@ import { Scene } from "./scene.js";
 import { removeAllEventListeners } from "./extra/tools.js";
 import { ScenePictures } from "./scene-pics.js";
 import {map} from "jquery";
+import {fetchRestEndpoint} from "../utils/client-server.js";
+import {IScene} from "../../server/data/scene-repository.js";
 
 export class Game {
   //TODO!! get one scene or a limited scene array of xx scenes instead of all
@@ -178,17 +180,24 @@ export class Game {
   public getPronouns(): string[] {
     return this.pronouns;
   }
-
-
-    public getScene(id:number):Scene{
-        return this.scenes.get(id);
-    }
+  public getScene(id:number):Scene{
+      return this.scenes.get(id);
+  }
   public getScenes(): Scene[] {
     let arr:Scene[] = [];
     for (const scene of this.scenes.values()) {
       arr.push(scene);
     }
     return arr;
+  }
+
+  public async createSceneMap(scenes: any) {
+    let sceneArr: IScene[] = await scenes.json();
+    for (const scene of sceneArr) {
+      let newScene = new Scene(scene.id);
+
+    }
+    console.log(sceneArr);
   }
 }
 // TODO!! once the server runs and we have some games in the db, fetch them from there with the
@@ -198,65 +207,21 @@ async function init() {
   /*let gameId:string = sessionStorage.getItem('gameID');
     const data = JSON.parse(`{"username": "${gameId}"}`);
     const game:Game = await fetchRestEndpoint('', 'GET',data);*/
-
   //test data
   //window location search
+  console.log('loaded page');
   const game = new Game();
-  let scene: Scene = new Scene(0, false);
-  scene.setText("You slowly awake from your sleep, still feeling a little bit tired. <br> Something feels off...<br> " +
-      "Your gut feeling doesn't trick you, as, when you open your eyes, you realize that you aren't in your bedroom. " +
-      "The room you are currently in seems odd to you. Apart from the bed you woke up in and a shelf next to the window, " +
-      "the only things filling the room are spiderwebs and dust. <br> For a second, you feel like you’re only imagining things, " +
-      "maybe you’re still dreaming… You wait for a short moment, but the scenery around you doesn’t change. <br> A loud BANG! <br> " +
-      "From outside the room makes you jolt up. You quickly push down the fear that starts to build inside you and decide, " +
-      "to search for the noise’s origin.");
-  scene.setTalkingCharacter("::name");
-  scene.setPictures(
-    new ScenePictures(
-      "../img/Characters/vita.png",
-      "../img/Characters/vita.png",
-      "../img/backgrounds/baum.png"
-    )
-  );
-  scene.setNextId(1);
-  game.addScene(scene);
-  let scene2: Scene = new Scene(1, true);
-  scene2.setButton1("mew");
-  scene2.setButton2("wuff");
-  scene2.setNextId(2);
-  scene2.setNextId2(2);
-  scene2.setPrevId(0);
-  scene2.setPictures(
-    new ScenePictures(
-      "../img/Characters/Steak.png",
-      "../img/Characters/Steak.png",
-      "../img/backgrounds/baum.png"
-    )
-  );
+  let gameID = 6;
+  let scene = await fetchRestEndpoint(`http://localhost:3000/api/scenes/byGameID/${gameID}`, "GET");
+  await game.createSceneMap(scene);
 
-  let scene3: Scene = new Scene(2, false);
-  scene3.setText("yayy scene3 ::they");
-  scene3.setTalkingCharacter("::name");
-  scene3.setPrevId(1);
-  scene3.setNextId(-1);
-  scene3.setPictures(
-    new ScenePictures(
-      "../img/Characters/vita.png",
-      "../img/Characters/vita.png",
-      "../img/backgrounds/baum.png"
-    )
-  );
 
-  game.addScene(scene);
-  game.addScene(scene2);
-  game.addScene(scene3);
-
-  await game.playGame();
+  /*await game.playGame();
   document.getElementById('btnBackToGamesPage').style.display = 'inline-block';
   document.getElementById('btnBackToGamesPage').addEventListener('click', ()=>{
     //sessionStorage.removeItem('gameID');
     window.location.href = '../html/games.html';
-  })
+  })*/
 }
 
 window.addEventListener("load", init);

@@ -48,7 +48,7 @@ export function getSceneById(id: number): IScene | undefined {
  * @param picRight picRight id
  * @param gameID game id
  */
-async function checkIfPicsExist(picBackground: number, picLeft: number, picRight: number, gameID : number) {
+async function checkIfPicsExist(picBackground: number, picLeft: number, picRight: number, gameID : number):Promise<boolean> {
   if(picBackground !== -1){
     if(await getPictureById(picBackground, gameID)=== undefined){
       return false;
@@ -115,4 +115,18 @@ export function removeScene(scene: IScene): void {
     return;
   }
   scenes.splice(index, 1);
+}
+
+export async function getAllScenesFromGame(gameID:number):Promise<IScene[]>{
+  let scenes:IScene[]=[];
+  const db = await DB.createDBConnection();
+  try{
+    let stmtGetAllScenes = await db.prepare('Select * from Scenes where gameId = ?1');
+    await stmtGetAllScenes.bind({1: gameID});
+    scenes = await stmtGetAllScenes.all<IScene[]>();
+    await stmtGetAllScenes.finalize();
+  }finally {
+    await db.close();
+  }
+  return scenes;
 }

@@ -24,4 +24,6 @@ Content-Type: application/json
   "description": "You wake up in an unknown world full of monsters and dangers you have never faced before. You know have to find a way back to your old home"
 }
 #########
-GET http://localhost:3000/api/games 
+GET http://localhost:3000/api/games
+####
+GET http://localhost:3000/api/scenes/byGameID/6

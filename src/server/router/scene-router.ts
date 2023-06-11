@@ -1,5 +1,5 @@
 import express, { response } from "express";
-import { addScene, IScene } from "../data/scene-repository";
+import {addScene, getAllScenesFromGame, IScene} from "../data/scene-repository";
 import { StatusCodes } from "http-status-codes";
 
 export const SceneRouter = express.Router();
@@ -74,4 +74,14 @@ SceneRouter.post("/", async (request, response) => {
 
 SceneRouter.get("/", async (request, response) => {
   console.log();
+});
+
+SceneRouter.get("/byGameID/:gameID", async (request, response) => {
+  let gameID = request.params.gameID;
+  if(!isNaN(Number(gameID))){
+    let scenes = await getAllScenesFromGame(Number(gameID));
+    response.status(StatusCodes.OK).json(scenes);
+    return;
+  }
+  response.sendStatus(StatusCodes.BAD_REQUEST);
 });
