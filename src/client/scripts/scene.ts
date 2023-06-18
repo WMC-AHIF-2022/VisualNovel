@@ -26,7 +26,11 @@ export class Scene {
   }
 
   public static async convertISceneToScene(scene : IScene):Promise<Scene>{
-    let newScene = new Scene(scene.id);
+    let decision = false;
+    if(scene.button1 !== ''){
+      decision = true;
+    }
+    let newScene = new Scene(scene.id,decision);
     newScene.setText(scene.text);
     newScene.setPrevId(scene.prevId);
     newScene.setNextId(scene.nextId1);

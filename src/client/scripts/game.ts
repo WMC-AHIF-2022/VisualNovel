@@ -202,6 +202,20 @@ export class Game {
     console.log(sceneArr);
   }
 }
+let isInFullScreen:boolean= false;
+let elem = document.documentElement;
+document.getElementById('btnFullScreen').addEventListener('click',async ()=>{
+  if(!isInFullScreen){
+    await elem.requestFullscreen();
+    isInFullScreen = true;
+    document.getElementById('btnFullScreen').textContent = 'exit Fullscreen';
+  }
+  else{
+    isInFullScreen =false;
+    await document.exitFullscreen();
+    document.getElementById('btnFullScreen').textContent = 'Fullscreen';
+  }
+})
 // TODO!! once the server runs and we have some games in the db, fetch them from there with the
 //  id being stored in the session storage when a game gets clicked on the overview
 async function init() {
