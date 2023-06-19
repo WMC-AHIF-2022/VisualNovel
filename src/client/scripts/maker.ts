@@ -31,7 +31,7 @@ export class Maker{
     createScene() {
         console.log("Lege neue Szene an");
         if(this.curScene === null){
-            this.curScene = {id:this.idCounter++, nextId1: null,nextId2:null,button1:null,button2:null,prevId:null,text: "Enter text here",talkingChar:"Name",picLeft:null,picRight:null,picBackground:null,gameId:1}
+            this.curScene = {id:this.idCounter++, nextId1: -1,nextId2:-1,button1:"",button2:"",prevId:-1,text: "Enter text here",talkingChar:"Name",picLeft:-1,picRight:-1,picBackground:-1,gameId:2}
             let list = document.getElementById("sceneOverview");
             let html = '<li id="li ' + `${this.curScene.id}`+'"><p id="' + `${this.curScene.id}`+'" class="clickable">Scene ';
             this.scenes.push(this.curScene);
@@ -41,7 +41,7 @@ export class Maker{
         }
         else{
             let item = document.getElementById(`li ${this.curScene.id}`);
-            this.curScene = {id:this.idCounter++, nextId1: null,nextId2:null,button1:null,button2:null,prevId:null,text: "Enter text here",talkingChar:"Name",picLeft:null,picRight:null,picBackground:null,gameId:1}
+            this.curScene = {id:this.idCounter++, nextId1: -1,nextId2:-1,button1:"",button2:"",prevId:-1,text: "Enter text here",talkingChar:"Name",picLeft:-1,picRight:-1,picBackground:-1,gameId:2}
             let SiblingItem = "";
             SiblingItem += '<li id="li ' + `${this.curScene.id}`+'"><p id="' + `${this.curScene.id}`+'" class="clickable">Scene ';
             SiblingItem += this.displayedSceneNum++;
@@ -152,13 +152,15 @@ export class Maker{
 
     saveSceneElements() {
         document.getElementById("picNameInp").style.display = "none"
-        if(this.curScene.nextId2 !== null){
+        if(this.curScene.nextId2 !== -1){
+            console.log("btns should dissapear");
             let btnName = <HTMLInputElement>document.getElementById("btn1");
             this.curScene.button1 = btnName.value;
             btnName = <HTMLInputElement>document.getElementById("btn2");
             this.curScene.button2 = btnName.value;
-            document.getElementById("btn1").style.display = "none";
+            document.getElementById("btn1").style.display ="none" ;
             document.getElementById("btn2").style.display = "none";
+            console.log(btnName.style.display);
             this.DisableButtons(false);
         }
         console.log(this.curScene);
@@ -198,7 +200,7 @@ export class Maker{
     private async loadScene() {
         console.log("Zu Ladende szene:");
         console.log(this.curScene);
-        if (this.curScene.nextId2 !== null) {
+        if (this.curScene.nextId2 !== -1) {
             let btn1 = <HTMLInputElement>document.getElementById("btn1");
             btn1.style.display = "block";
             btn1.value = this.curScene.button1;
@@ -219,7 +221,7 @@ export class Maker{
         }
         (<HTMLInputElement>document.getElementById("playgroundTextbox")).value = this.curScene.text;
         (<HTMLInputElement>document.getElementById("povName")).value = this.curScene.talkingChar;
-        if (this.curScene.picBackground === null) {
+        if (this.curScene.picBackground === -1) {
             console.log("Kein Hintergrund");
             document.getElementById("background-upload").style.backgroundImage = "none";
             document.getElementById("background-upload").style.backgroundColor = "white";
@@ -234,7 +236,7 @@ export class Maker{
             console.log(`Hi bg: `+ bgpic.url);
         }
         let leftChar = <HTMLImageElement>document.getElementById("leftChar");
-        if (this.curScene.picLeft === null) {
+        if (this.curScene.picLeft === -1) {
             console.log("Kein Linker");
             document.getElementById("leftChar").style.display = "none";
             document.getElementById("pgItem1").style.justifySelf = "right";
@@ -254,7 +256,7 @@ export class Maker{
             document.getElementById("pgItem1").style.justifySelf = 'center';
         }
         let rightChar = <HTMLImageElement>document.getElementById("rightChar");
-        if (this.curScene.picRight === null) {
+        if (this.curScene.picRight === -1) {
             console.log("Kein Rechter");
             document.getElementById("rightChar").style.display = "none";
             document.getElementById("rightPlus").style.display = "block";
@@ -275,7 +277,9 @@ export class Maker{
     }
 
     async setPlaygroundBack() {
-        if(this.curScene.nextId2 !== null){
+        console.log(`Scene nextId2 = ${this.curScene.nextId2}`);
+        if(this.curScene.nextId2 !== -1){
+            console.log("btn names should dissapear");
             document.getElementById("btn1").style.display = "none";
             document.getElementById("btn2").style.display = "none";
         }
@@ -297,8 +301,9 @@ export class Maker{
     }
 
     async createDecisionScene(num: Number) {
-        console.log("Lege neue Decision Szene an");                                                                                                                                //Todo: from itemStorage
-        let scene :IScene = {id:this.idCounter++, nextId1: null,nextId2:null,button1:null,button2:null,prevId:null,text: "Enter text here",talkingChar:"Name",picLeft:null,picRight:null,picBackground:null,gameId:1}
+        console.log("Lege neue Decision Szene an");//Todo: from itemStorage
+        console.log(`Id Counter = ${this.idCounter}`);
+        let scene :IScene = {id:this.idCounter++, nextId1: -1,nextId2:-1,button1:"",button2:"",prevId:-1,text: "Enter text here",talkingChar:"Name",picLeft:-1,picRight:-1,picBackground:-1,gameId:2}
         scene.prevId = this.curScene.id;
         let item = document.getElementById(`li ${this.curScene.id}`);
         let html = '<li> <ul class="childList"><li id="li ' + `${scene.id}` + '">  <p id="' + `${scene.id}` + '" class="clickable">Scene ';
@@ -307,9 +312,11 @@ export class Maker{
         html += `.${num}`
         html += '</p><p id="ld ' + `${this.listDisplayIdCounter}` + '" class="listViewClickable">v</p></li></ul></li>';
         if (num == 1) {
+            console.log(`nextId1 = ${scene.id}`);
             this.curScene.nextId1 = scene.id;
             item.insertAdjacentHTML("afterend", html);
         } else {
+            console.log(`nextId2 = ${scene.id}`);
             this.curScene.nextId2 = scene.id;
             console.log(item.nextElementSibling);
             item.nextElementSibling.insertAdjacentHTML("afterend", html);
@@ -379,18 +386,31 @@ async function init() {
 
     });
     document.getElementById("uploadButton").addEventListener("click",async () => {
-        maker.saveSceneElements();
+        console.log("Speichern der letzten Szenenelemente")
+        await maker.saveSceneElements();
+        console.log("bereit zum speicher");
         let scenes = maker.getScenes();
+        console.log(scenes.length);
+        console.log("saving scenes now");
+
         for (let scene of scenes) { //connecting scenes, by giving them their nextId's and prevId's through the HTML List
             let sceneElement = document.getElementById(`li ${scene.id}`);
-            if (sceneElement.nextElementSibling !== null) {
-                scene.nextId1 = +sceneElement.nextElementSibling.id.substring(3);
-            }
-            if (sceneElement.previousElementSibling !== null) {
-                scene.prevId = +sceneElement.previousElementSibling.id.substring(3);
+            console.log("Szene:");
+            console.log(scene);
+            if(scene.nextId2 === -1){
+                if (sceneElement.nextElementSibling !== null) {
+                    scene.nextId1 = +sceneElement.nextElementSibling.id.substring(3);
+                }
+                if (sceneElement.previousElementSibling !== null) {
+                    scene.prevId = +sceneElement.previousElementSibling.id.substring(3);
+                }
             }
 
+
+            await fetchRestEndpoint("http://localhost:3000/api/scenes","POST",scene);
+            console.log(scene);
         }
+
     })
 
 }

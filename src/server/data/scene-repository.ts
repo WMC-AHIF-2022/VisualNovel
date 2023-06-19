@@ -49,6 +49,7 @@ export function getSceneById(id: number): IScene | undefined {
  * @param gameID game id
  */
 async function checkIfPicsExist(picBackground: number, picLeft: number, picRight: number, gameID : number):Promise<boolean> {
+  console.log('bg: '+ picBackground+'pl: '+picLeft+'pr: '+picRight);
   if(picBackground !== -1){
     if(await getPictureById(picBackground, gameID)=== undefined){
       return false;
@@ -69,6 +70,7 @@ async function checkIfPicsExist(picBackground: number, picLeft: number, picRight
 
 
 export async function addScene(scene: IScene): Promise<void> {
+  console.log("trying to add scene");
   // check if game and pics exist
   const db = await DB.createDBConnection();
   let stmtCheckGame = await db.prepare('select * from Games where gameId = ?1');
@@ -82,6 +84,7 @@ export async function addScene(scene: IScene): Promise<void> {
   if(!picsExist){
     throw new Error('This scenes pictures are not defined!');
   }
+  console.log('text: '+scene.text);
   // insert scene into database
   const stmtInsert = await db.prepare(
     "insert into Scenes (id, nextId1, nextId2, prevId, talkingChar, text, button1, button2, picLeft, picRight, picBackground, gameId) values(?1,?2,?3,?4,?5,?6,?7,?8,?9,?10,?11,?12)"
