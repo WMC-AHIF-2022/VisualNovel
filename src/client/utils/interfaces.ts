@@ -1,10 +1,3 @@
-export interface IGame {
-    id: number,
-    creator: string,
-    description: string,
-    creationDate: number,
-    gameName:string
-}
 
 export interface IPicture {
     picId: number;
