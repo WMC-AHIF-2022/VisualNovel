@@ -5,7 +5,6 @@ import {fetchRestEndpoint} from "../utils/client-server.js";
 import {IScene} from "../utils/interfaces.js";
 
 export class Game {
-  //TODO!! get one scene or a limited scene array of xx scenes instead of all
   private readonly id: number; // must stay readonly, due to saving in database and identification
   private pronouns: string[] = []; // index 1 = they|he|she index 2 = Them|him|her index 3 = theirs|his|hers
   private scenes: Map<number, Scene>;
@@ -216,19 +215,20 @@ document.getElementById('btnFullScreen').addEventListener('click',async ()=>{
     document.getElementById('btnFullScreen').textContent = 'Fullscreen';
   }
 })
-// TODO!! once the server runs and we have some games in the db, fetch them from there with the
-//  id being stored in the session storage when a game gets clicked on the overview
 async function init() {
   // first prototype for the fetching
-  /*let gameId:string = sessionStorage.getItem('gameID');
-    const data = JSON.parse(`{"username": "${gameId}"}`);
-    const game:Game = await fetchRestEndpoint('', 'GET',data);*/
+  let gameId:string = sessionStorage.getItem('gameID');
+  if(isNaN(Number(gameId))){
+    window.location.href = '../html/games.html';
+  }
+  /*const data = JSON.parse(`{"username": "${gameId}"}`);
+  const game:Game = await fetchRestEndpoint('', 'GET',data);*/
   //test data
   //window location search
   console.log('loaded page');
-  let gameID = 6;
-  const game = new Game(gameID);
-  let scene = await fetchRestEndpoint(`http://localhost:3000/api/scenes/byGameID/${gameID}`, "GET");
+  //let gameID = 6;
+  const game = new Game(Number(gameId));
+  let scene = await fetchRestEndpoint(`http://localhost:3000/api/scenes/byGameID/${gameId}`, "GET");
   await game.createSceneMap(scene);
 
   console.log('ready to play game');
@@ -241,50 +241,3 @@ async function init() {
 }
 
 window.addEventListener("load", init);
-
-/*
-  let scene: Scene = new Scene(0, false);
-  scene.setText("You slowly awake from your sleep, still feeling a little bit tired. <br> Something feels off...<br> " +
-      "Your gut feeling doesn't trick you, as, when you open your eyes, you realize that you aren't in your bedroom. " +
-      "The room you are currently in seems odd to you. Apart from the bed you woke up in and a shelf next to the window, " +
-      "the only things filling the room are spiderwebs and dust. <br> For a second, you feel like you’re only imagining things, " +
-      "maybe you’re still dreaming… You wait for a short moment, but the scenery around you doesn’t change. <br> A loud BANG! <br> " +
-      "From outside the room makes you jolt up. You quickly push down the fear that starts to build inside you and decide, " +
-      "to search for the noise’s origin.");
-  scene.setTalkingCharacter("::name");
-  scene.setPictures(
-    new ScenePictures(
-      "../img/Characters/vita.png",
-      "../img/Characters/vita.png",
-      "../img/backgrounds/baum.png"
-    )
-  );
-  scene.setNextId(1);
-  game.addScene(scene);
-  let scene2: Scene = new Scene(1, true);
-  scene2.setButton1("mew");
-  scene2.setButton2("wuff");
-  scene2.setNextId(2);
-  scene2.setNextId2(2);
-  scene2.setPrevId(0);
-  scene2.setPictures(
-    new ScenePictures(
-      "../img/Characters/Steak.png",
-      "../img/Characters/Steak.png",
-      "../img/backgrounds/baum.png"
-    )
-  );
-
-  let scene3: Scene = new Scene(2, false);
-  scene3.setText("yayy scene3 ::they");
-  scene3.setTalkingCharacter("::name");
-  scene3.setPrevId(1);
-  scene3.setNextId(-1);
-  scene3.setPictures(
-    new ScenePictures(
-      "../img/Characters/vita.png",
-      "../img/Characters/vita.png",
-      "../img/backgrounds/baum.png"
-    )
-  );
- */
