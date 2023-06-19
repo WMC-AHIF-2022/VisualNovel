@@ -1,0 +1,80 @@
+.thumbnailField {
+    display: inline-block;
+    cursor: pointer;
+    width: 20em;
+    background-color: grey;
+    text-align: center;
+    padding: 0 6em 6em 0;
+    height: 10em;
+    grid-area: Name;
+}
+
+input[type="file"] {
+    display: none;
+}
+
+.plus{
+    font-size: 5em;
+    margin-left: 1em;
+}
+
+.playgroundItem1{
+    justify-self: center;
+    align-self: center;
+}
+
+.titleField {
+    width: 300%;
+    box-sizing: border-box;
+    background: #000;
+    color: #fff;
+    opacity: 70%;
+    font-size: 19px;
+    resize: none;
+    margin-bottom: 1em;
+}
+
+.descField {
+    width: 300%;
+    box-sizing: border-box;
+    background: #000;
+    color: #fff;
+    opacity: 70%;
+    font-size: 16px;
+    resize: none;
+    padding-bottom: 10.9em;
+    margin-bottom: 1.5em;
+}
+
+.grid-container{
+    display: grid;
+    width: 27em;
+    height: 15em;
+    grid-template-areas:
+    'Name';
+    color: black;
+    grid-template-rows: 14.2em 10em;
+    grid-template-columns: 25em;
+    float: inside;
+}
+.uploadItem{
+    justify-self: center;
+    padding-top: 1em;
+}
+
+#uploadButton{
+    margin: 0 0 2em;
+    height: 3em;
+    width: 8em;
+    border-radius: 0.2em;
+    font-size: 17px;
+    border: 1px solid black;
+}
+#editButton{
+    margin: 0 26em 2em;
+    height: 3em;
+    width: 8em;
+    border-radius: 0.2em;
+    font-size: 17px;
+    border: 1px solid black;
+}
