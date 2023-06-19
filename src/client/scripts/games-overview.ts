@@ -34,7 +34,8 @@ async function init() {
   console.log(gamelinks);
   for(let i = 0;i < gamelinks.length;i++){
     gamelinks[i].addEventListener("click",()=>{
-      window.location.href = `localhost:3000/html/play-game.html`;
+      sessionStorage.setItem('gameID',`${games[i].id}`);
+      window.location.href = `../html/play-game.html`;
     })
   }
 }

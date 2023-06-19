@@ -409,6 +409,7 @@ async function init() {
 
             await fetchRestEndpoint("http://localhost:3000/api/scenes","POST",scene);
             console.log(scene);
+            window.location.href="../html/upload.html"
         }
 
     })
