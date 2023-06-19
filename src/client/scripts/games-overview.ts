@@ -34,7 +34,9 @@ async function init() {
   console.log(gamelinks);
   for(let i = 0;i < gamelinks.length;i++){
     gamelinks[i].addEventListener("click",()=>{
-      sessionStorage.setItem('gameID',`${games[i].id}`);
+      let id = `${games[i].id}`
+      sessionStorage.setItem('gameID',id);
+      console.log(games[i].id);
       window.location.href = `../html/play-game.html`;
     })
   }

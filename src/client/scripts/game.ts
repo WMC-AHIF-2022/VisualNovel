@@ -218,15 +218,17 @@ document.getElementById('btnFullScreen').addEventListener('click',async ()=>{
 async function init() {
   // first prototype for the fetching
   /*let gameId:string = sessionStorage.getItem('gameID');
+  console.log('gameID'+gameId);
   if(isNaN(Number(gameId))){
-    window.location.href = '../html/games.html';
-  }
-  const data = JSON.parse(`{"username": "${gameId}"}`);
-  const game:Game = await fetchRestEndpoint('', 'GET',data);*/
+    console.log(gameId);
+    //window.location.href = '../html/games.html';
+  }*/
+  //const data = JSON.parse(`{"username": "${gameId}"}`);
+  //const game:Game = await fetchRestEndpoint('', 'GET',data);
   //test data
   //window location search
   console.log('loaded page');
-  let gameId = 2;
+  let gameId = 6;
   const game = new Game(Number(gameId));
   let scene = await fetchRestEndpoint(`http://localhost:3000/api/scenes/byGameID/${gameId}`, "GET");
   await game.createSceneMap(scene);
