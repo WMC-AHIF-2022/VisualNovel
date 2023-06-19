@@ -1,22 +1,22 @@
 import { GameInfo } from "./game-info.js";
 import { Scene } from "./scene.js";
 import { removeAllEventListeners } from "./extra/tools.js";
-import { ScenePictures } from "./scene-pics.js";
-import {map} from "jquery";
 import {fetchRestEndpoint} from "../utils/client-server.js";
-import {IScene} from "../../server/data/scene-repository.js";
+import {IScene} from "../utils/interfaces.js";
 
 export class Game {
-  //TODO!! get one scene or a limited scene array of xx scenes instead of all
   private readonly id: number; // must stay readonly, due to saving in database and identification
   private pronouns: string[] = []; // index 1 = they|he|she index 2 = Them|him|her index 3 = theirs|his|hers
   private scenes: Map<number, Scene>;
   private infos: GameInfo; // description might get changed
   //private loggedIn: boolean; TODO! check if needed when accounts exist
   private playerName: string;
-  constructor() {
+  constructor(gameID?:number) {
     this.scenes = new Map<number, Scene>();
     this.infos = new GameInfo();
+    if(gameID){
+      this.id = gameID;
+    }
   }
 
   /**
@@ -193,35 +193,51 @@ export class Game {
 
   public async createSceneMap(scenes: any) {
     let sceneArr: IScene[] = await scenes.json();
-    for (const scene of sceneArr) {
-      let newScene = new Scene(scene.id);
 
+    for (const scene of sceneArr) {
+      let newScene =await Scene.convertISceneToScene(scene);
+      this.scenes.set(newScene.getId(),newScene);
     }
     console.log(sceneArr);
   }
 }
-// TODO!! once the server runs and we have some games in the db, fetch them from there with the
-//  id being stored in the session storage when a game gets clicked on the overview
+let isInFullScreen:boolean= false;
+let elem = document.documentElement;
+document.getElementById('btnFullScreen').addEventListener('click',async ()=>{
+  if(!isInFullScreen){
+    await elem.requestFullscreen();
+    isInFullScreen = true;
+    document.getElementById('btnFullScreen').textContent = 'exit Fullscreen';
+  }
+  else{
+    isInFullScreen =false;
+    await document.exitFullscreen();
+    document.getElementById('btnFullScreen').textContent = 'Fullscreen';
+  }
+})
 async function init() {
   // first prototype for the fetching
-  /*let gameId:string = sessionStorage.getItem('gameID');
-    const data = JSON.parse(`{"username": "${gameId}"}`);
-    const game:Game = await fetchRestEndpoint('', 'GET',data);*/
+  let gameId:string = sessionStorage.getItem('gameID');
+  if(isNaN(Number(gameId))){
+    window.location.href = '../html/games.html';
+  }
+  /*const data = JSON.parse(`{"username": "${gameId}"}`);
+  const game:Game = await fetchRestEndpoint('', 'GET',data);*/
   //test data
   //window location search
   console.log('loaded page');
-  const game = new Game();
-  let gameID = 6;
-  let scene = await fetchRestEndpoint(`http://localhost:3000/api/scenes/byGameID/${gameID}`, "GET");
+  //let gameID = 6;
+  const game = new Game(Number(gameId));
+  let scene = await fetchRestEndpoint(`http://localhost:3000/api/scenes/byGameID/${gameId}`, "GET");
   await game.createSceneMap(scene);
 
-
-  /*await game.playGame();
+  console.log('ready to play game');
+  await game.playGame();
   document.getElementById('btnBackToGamesPage').style.display = 'inline-block';
   document.getElementById('btnBackToGamesPage').addEventListener('click', ()=>{
     //sessionStorage.removeItem('gameID');
     window.location.href = '../html/games.html';
-  })*/
+  });
 }
 
 window.addEventListener("load", init);
