@@ -24,3 +24,29 @@ Content-Type: application/json
   "creator": "HttpCreator",
   "description": "http description text"
 }
+
+########################
+
+POST http://localhost:3000/api/games HTTP/1.1
+Content-Type: application/json
+
+{
+  "name": "VisualNovel",
+  "description": "http description text"
+}
+
+#########################
+
+POST http://localhost:3000/api/pics HTTP/1.1
+Content-Type: application/json
+
+{
+  "picId" : 2,
+  "url": "../img/Characters/monster.png",
+  "picName": "monster",
+  "gameId": 2
+}
+
+#############
+
+GET http://localhost:3000/api/pics/vita HTTP/1.1

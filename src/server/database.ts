@@ -38,6 +38,7 @@ export class DB {
           create table if not exists Picture (
              picId INTEGER NOT NULL ,
              url TEXT NOT NULL,
+             picName Text NOT NULL Unique,
              gameId INTEGER NOT NULL,
              FOREIGN KEY (gameId) REFERENCES Games(gameId),
              PRIMARY KEY (picId,gameId)

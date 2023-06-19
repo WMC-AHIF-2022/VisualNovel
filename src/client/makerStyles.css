@@ -192,3 +192,33 @@ input[type="file"] {
 .navbar{
     display: inline-block;
 }
+
+ul.childList > li {
+    margin-left: 1em;
+}
+
+#picNameInp{
+    background-color: #006161;
+    position: absolute;
+    align-self: center;
+    justify-self: center;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    padding: 2em;
+    border-radius: 1em;
+    border: 0.2em solid black;
+}
+
+#addBtn{
+    margin-top: 0.5em;
+    margin-bottom: 0;
+    border-radius: 2em;
+    font-size: 2em;
+    height: 1.5em;
+    border: 1px solid black;
+    width: 7em;
+}
+
+
+
