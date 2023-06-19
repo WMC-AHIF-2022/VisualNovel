@@ -3,6 +3,7 @@ import { join } from "path";
 import { SceneRouter } from "./router/scene-router";
 import { GameRouter } from "./router/game-router";
 import {DB} from "./database";
+import {pictureRouter} from "./router/picture-router";
 
 const app = express();
 
@@ -12,6 +13,7 @@ app.use(express.json());
 app.use(express.static(path, options));
 app.use("/api/scenes", SceneRouter);
 app.use("/api/games", GameRouter);
+app.use("/api/pics", pictureRouter);
 
 const port = 3000;
 

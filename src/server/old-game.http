@@ -6,10 +6,89 @@ Content-Type: application/json
   "nextId1": 1,
   "prevId": -1,
   "talkingChar": "Narrator",
-  "text": "You slowly awake from your sleep, still feeling a little bit tired.<br>Something feels off...<br>Your gut feeling doesn't trick you, as, when you open your eyes, you realize that you aren't in your bedroom. The room you are currently in seems odd to you. Apart from the bed you woke up in and a shelve next to the window, the only things filling the room are spiderwebs and dust.<br>For a second, you feel like you’re only imagining things, maybe you’re still dreaming… You wait for a short moment, but the scenery around you doesn’t change.<br>A loud BANG!<br>From outside the room makes you jolt up. You quickly push down the fear that starts to build inside you and decide, to search for the noise’s origin.",
+  "text": "You slowly awake from your sleep, still feeling a little bit tired.<br>'Something feels off...'<br>Your gut feeling doesn't trick you, as, when you open your eyes, you realize that you aren't in your bedroom. The room you are currently in seems odd to you. Apart from the bed you woke up in and a shelve next to the window, the only things filling the room are spiderwebs and dust.<br>For a second, you feel like you’re only imagining things, maybe you’re still dreaming… You wait for a short moment, but the scenery around you doesn’t change.<br>A loud BANG!<br>From outside the room makes you jolt up. You quickly push down the fear that starts to build inside you and decide, to search for the noise’s origin.",
   "picLeft": -1,
   "picRight": -1,
   "picBackground": 1,
+  "gameId": 6
+}
+########
+POST http://localhost:3000/api/scenes HTTP/1.1
+Content-Type: application/json
+
+{
+  "id": 1,
+  "nextId1": 2,
+  "prevId": 0,
+  "talkingChar": "Narrator",
+  "text": "You rush down the stairs to find yourself in a kitchen-like area. <br>‘How did I get here…?’<br> Klinck! <br> You look up to see something crawling on top of the counter. The round creature with wings and large teeth seems to stare at you. To your left you see an old frying pan, you could pick it up, it would be close enough to you, on the other hand... it might be able to talk...",
+  "picLeft": -1,
+  "picRight": 5,
+  "picBackground": 4,
+  "gameId": 6
+}
+
+########
+POST http://localhost:3000/api/scenes HTTP/1.1
+Content-Type: application/json
+
+{
+  "id": 2,
+  "nextId1": 3,
+  "nextId2": 4,
+  "prevId": 1,
+  "talkingChar": "",
+  "text": "",
+  "picLeft": 5,
+  "picRight": -1,
+  "button1": "Attack",
+  "button2": "Communicate",
+  "picBackground": 4,
+  "gameId": 6
+}
+###################
+POST http://localhost:3000/api/scenes HTTP/1.1
+Content-Type: application/json
+
+{
+  "id": 3,
+  "nextId1": 5,
+  "prevId": 2,
+  "talkingChar": "Narrator",
+  "text": "You immediately grab the frying pan and sneak up to it, taking only slow, small, steps…Once you felt like you were close enough you hit it on the head!!",
+  "picLeft": 5,
+  "picRight": -1,
+  "picBackground": 4,
+  "gameId": 6
+}
+###################
+POST http://localhost:3000/api/scenes HTTP/1.1
+Content-Type: application/json
+
+{
+  "id": 5,
+  "nextId1": -1,
+  "prevId": 3,
+  "talkingChar": "Narrator",
+  "text": " Your hit sent it off flaying across the room!<br>’What happened here!’",
+  "picLeft": -1,
+  "picRight": -1,
+  "picBackground": 4,
+  "gameId": 6
+}
+###################
+POST http://localhost:3000/api/scenes HTTP/1.1
+Content-Type: application/json
+
+{
+  "id": 4,
+  "nextId1": -1,
+  "prevId": 2,
+  "talkingChar": "Narrator",
+  "text": "You try to get closer to it, when it suddenly jumps at you! <br>‘Ahhhhhh!’<br> You scream and hold your arm as you start to panic! <br> Why was this happening to you?! You take an anxious step back as you hear someone or something coming closer….",
+  "picLeft": 5,
+  "picRight": -1,
+  "picBackground": 4,
   "gameId": 6
 }
 
