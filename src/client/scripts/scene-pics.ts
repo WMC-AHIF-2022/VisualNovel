@@ -20,16 +20,4 @@ export class ScenePictures {
   public getBackground(): string {
     return this.background;
   }
-
-  private setLeftChar(value: string) {
-    this.leftChar = value;
-  }
-
-  private setRightChar(value: string) {
-    this.rightChar = value;
-  }
-
-  private setBackground(value: string) {
-    this.background = value;
-  }
 }

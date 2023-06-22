@@ -1,13 +1,11 @@
-import {Game} from "./game.js";
-import {Scene} from "./scene.js";
-import {ScenePictures} from "./scene-pics.js";
 import {fetchRestEndpoint} from "../utils/client-server.js";
 import {IPicture, IScene} from "../utils/datamodels.js";
 
-/*Todo:  6. make the game editable
-        //: after talking with the others
-        7. see if showing base64 pic works, if not,then make it work --normal pics work :)
-        4. make the pop up look fancy (picture Name in line with checking if exists)
+/*Todo:  1. make the game editable
+         2. make the pop up look fancy (picture Name in line with checking if exists)
+         3. make the whole maker fit the window
+         4. improve sceneOverview
+
  */
 
 
@@ -56,22 +54,6 @@ export class Maker{
         const rightChar = document.getElementById("file-upload2");
         const background = document.getElementById("background-upload");
 
-        const convertBase64 =(file: File)=>{
-            return new Promise((resolve, reject) => {
-                const fileReader = new FileReader();
-                fileReader.readAsDataURL(file);
-
-                fileReader.onload = () => {
-                    resolve(fileReader.result);
-                };
-
-                fileReader.onerror = (error) => {
-                    reject(error);
-                };
-            });
-
-        }
-
         leftChar.addEventListener("click", async() => {
             this.selectingChar = true;
             console.log("clicked leftChar");
@@ -87,7 +69,6 @@ export class Maker{
             document.getElementById("file-upload").style.backgroundColor = 'transparent';
             document.getElementById("pgItem1").style.justifySelf = 'center';
 
-            //"url(\"../img/backgrounds/wald2_5.png\")"
             console.log("should have changed");
             this.selectingChar = false;
             this.curScene.picLeft = pic.picId;
@@ -279,7 +260,7 @@ export class Maker{
     async setPlaygroundBack() {
         console.log(`Scene nextId2 = ${this.curScene.nextId2}`);
         if(this.curScene.nextId2 !== -1){
-            console.log("btn names should dissapear");
+            console.log("btn names should disappear");
             document.getElementById("btn1").style.display = "none";
             document.getElementById("btn2").style.display = "none";
         }
@@ -367,6 +348,8 @@ export class Maker{
 
 
     }
+
+
 }
 
 async function init() {
@@ -386,31 +369,25 @@ async function init() {
 
     });
     document.getElementById("uploadButton").addEventListener("click",async () => {
-        console.log("Speichern der letzten Szenenelemente")
+        console.log("Speichern der letzten Szenen Elemente");
         await maker.saveSceneElements();
-        console.log("bereit zum speicher");
         let scenes = maker.getScenes();
-        console.log(scenes.length);
-        console.log("saving scenes now");
 
         for (let scene of scenes) { //connecting scenes, by giving them their nextId's and prevId's through the HTML List
             let sceneElement = document.getElementById(`li ${scene.id}`);
             console.log("Szene:");
             console.log(scene);
-            if(scene.nextId2 === -1){
-                if (sceneElement.nextElementSibling !== null) {
+            if(scene.nextId2 === -1 && sceneElement.nextElementSibling !== null){
                     scene.nextId1 = +sceneElement.nextElementSibling.id.substring(3);
-                }
-                if (sceneElement.previousElementSibling !== null) {
-                    scene.prevId = +sceneElement.previousElementSibling.id.substring(3);
-                }
             }
-
+            if (sceneElement.previousElementSibling !== null) {
+                scene.prevId = +sceneElement.previousElementSibling.id.substring(3);
+            }
 
             await fetchRestEndpoint("http://localhost:3000/api/scenes","POST",scene);
             console.log(scene);
-            window.location.href="../html/upload.html";
         }
+        window.location.href="../html/upload.html";
 
     })
 

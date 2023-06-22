@@ -17,30 +17,6 @@ export interface IScene {
   gameId: number;
 }
 
-let nextId = 0;
-let scenes: IScene[] = [];
-
-function findSceneIndex(id: number) {
-  for (let i = 0; i < scenes.length; i++) {
-    if (scenes[i].id === id) {
-      return i;
-    }
-  }
-  return -1;
-}
-
-export function getAllScenes() {
-  return scenes;
-}
-
-export function getSceneById(id: number): IScene | undefined {
-  const index: number = findSceneIndex(id);
-  if (index < 0) {
-    return undefined;
-  }
-  return scenes[index];
-}
-
 /**
  * this function checks if the pictures in a scene exist
  * @param picBackground bg id
@@ -106,18 +82,6 @@ export async function addScene(scene: IScene): Promise<void> {
   await stmtInsert.run();
   await stmtInsert.finalize();
   await db.close();
-}
-
-export function removeAllScenes(): void {
-  scenes.splice(0);
-}
-
-export function removeScene(scene: IScene): void {
-  const index: number = findSceneIndex(scene.id);
-  if (index < 0) {
-    return;
-  }
-  scenes.splice(index, 1);
 }
 
 export async function getAllScenesFromGame(gameID:number):Promise<IScene[]>{

@@ -1,5 +1,4 @@
 import {DB} from "../database";
-import {IScene} from "./scene-repository";
 
 export interface IGame {
   id: number,
@@ -12,19 +11,6 @@ export interface IGame {
 export interface IGameinfo {
 }
 
-let nextId = 0;
-
-let games:IGame[] = [];
-
-function findGameIndex(id: number) {
-  for (let i = 0; i < games.length; i++) {
-    if (games[i].id === id) {
-      return i;
-    }
-  }
-  return -1;
-}
-
 export async function getAllGames(): Promise<IGame[]> {
   console.log("getAllGames");
   const db = await DB.createDBConnection();
@@ -32,14 +18,6 @@ export async function getAllGames(): Promise<IGame[]> {
   console.log(games);
   await db.close();
   return games;
-}
-
-export function getGameById(id: number): IGame|undefined {
-  const index: number = findGameIndex(id);
-  if (index < 0) {
-    return undefined;
-  }
-  return games[index];
 }
 
 export async function addGame(game:IGame): Promise<void> {
@@ -60,14 +38,4 @@ export async function addGame(game:IGame): Promise<void> {
 
 }
 
-export function removeAllGames(): void {
-  games.splice(0);
-}
 
-export function removeGame(game: IGame): void {
-  const index: number = findGameIndex(game.id);
-  if (index < 0) {
-    return;
-  }
-  games.splice(index, 1);
-}
