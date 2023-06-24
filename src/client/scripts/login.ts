@@ -1,4 +1,4 @@
-import {fetchRestEndpoint} from "../utils/client-server";
+import {fetchRestEndpoint} from "../utils/client-server.js";
 
 const btnLogin = document.getElementById("btnLogin");
 const btnRegister = document.getElementById("btnRegister");
@@ -16,7 +16,7 @@ async function login() {
         const password = inputPassword.value;
 
         const data = JSON.parse(`{"username": "${username}", "password": "${password}"}`);
-        await fetchRestEndpoint("/api/user/login", "POST", data);
+        await fetchRestEndpoint("http://localhost:3000/api/user/login", "POST", data);
         sessionStorage.setItem("username", username);
         window.location.href = "../html/games.html"; //TODO!! here is the href
     } catch (e) {
@@ -33,7 +33,7 @@ async function register() {
         const password = elementPassword.value;
 
         const data = JSON.parse(`{"username": "${username}", "password": "${password}"}`);
-        await fetchRestEndpoint("/api/user/register", "POST", data);
+        await fetchRestEndpoint("http://localhost:3000/api/register", "POST", data);
         //loginStatus.innerHTML = "Signup successful, please login to continue";
         sessionStorage.setItem("username", username);
         window.location.href = "../html/games.html"; //TODO!! here is the href
