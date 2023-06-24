@@ -18,7 +18,7 @@ async function login() {
         const data = JSON.parse(`{"username": "${username}", "password": "${password}"}`);
         await fetchRestEndpoint("/api/user/login", "POST", data);
         sessionStorage.setItem("username", username);
-        window.location.href = "../html/games.html";
+        window.location.href = "../html/games.html"; //TODO!! here is the href
     } catch (e) {
         alert(`couldn't login! cause: ${e}`);
     }
@@ -36,7 +36,7 @@ async function register() {
         await fetchRestEndpoint("/api/user/register", "POST", data);
         //loginStatus.innerHTML = "Signup successful, please login to continue";
         sessionStorage.setItem("username", username);
-        window.location.href = "../html/games.html";
+        window.location.href = "../html/games.html"; //TODO!! here is the href
     } catch (e) {
         alert(`Signup failed: ${e}`);
         //loginError.innerHTML = `Signup failed: ${e}`;
