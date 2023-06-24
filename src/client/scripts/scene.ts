@@ -84,10 +84,21 @@ export class Scene {
     console.log('me in function: displayCharactersAndBackground');
 
     const charLeft = <HTMLImageElement>document.getElementById("imgLeftChar");
-    charLeft.src = this.pictures.getLeftChar();
+    if(this.pictures.getLeftChar() ===""){
+      charLeft.style.visibility = "hidden";
+    }
+    else {
+      charLeft.style.visibility = "visible";
+      charLeft.src = this.pictures.getLeftChar();
+    }
     const charRight = <HTMLImageElement>document.getElementById("imgRightChar");
-    charRight.src = this.pictures.getRightChar();
-
+    if(this.pictures.getRightChar() ===""){
+      charRight.style.visibility = "hidden";
+    }
+    else {
+      charRight.style.visibility = "visible";
+      charRight.src = this.pictures.getRightChar();
+    }
     const div = document.getElementById("imgBackground");
     div.style.backgroundImage = `url('${this.pictures.getBackground()}')`;
   }
