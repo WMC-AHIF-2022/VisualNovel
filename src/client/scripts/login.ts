@@ -6,19 +6,27 @@ const btnRegister = document.getElementById("btnRegister");
 btnRegister.addEventListener("click", async () => await register());
 btnLogin.addEventListener("click", async () => await login());
 
-//TODO!!-1  if wanted, change href to account.html (needs to be created!) check if login + register is wanted like this
-//TODO!!-5 add an account or login button to navbar!! (depends on what is needed after finishing TODO!!-1)
+window.onload = async ()=>{
+    console.log("loggin");
+    if(sessionStorage.getItem('username') !== null){
+        console.log("there is a username");
+        window.location.href = "../html/loggedIn.html";
+    }
+
+}
 async function login() {
     try {
-        const inputUsername = <HTMLInputElement>document.getElementById("username");
+        const inputUsername = <HTMLInputElement>document.getElementById("inputUsername");
         const username = inputUsername.value;
-        const inputPassword = <HTMLInputElement>document.getElementById("password");
+        const inputPassword = <HTMLInputElement>document.getElementById("inputPassword");
         const password = inputPassword.value;
 
         const data = JSON.parse(`{"username": "${username}", "password": "${password}"}`);
         await fetchRestEndpoint("http://localhost:3000/api/user/login", "POST", data);
         sessionStorage.setItem("username", username);
-        window.location.href = "../html/games.html"; //TODO!! here is the href
+        document.getElementById("loginBox").style.display = "none";
+        alert("logged in successfully");
+        window.location.href = "../html/loggedIn.html";
     } catch (e) {
         alert(`couldn't login! cause: ${e}`);
     }
@@ -26,19 +34,16 @@ async function login() {
 
 async function register() {
     try {
-        //loginError.innerHTML = "";
-        const elementUsername = <HTMLInputElement>document.getElementById("username");
+        const elementUsername = <HTMLInputElement>document.getElementById("inputUsername");
         const username = elementUsername.value;
-        const elementPassword = <HTMLInputElement>document.getElementById("password");
+        const elementPassword = <HTMLInputElement>document.getElementById("inputPassword");
         const password = elementPassword.value;
 
         const data = JSON.parse(`{"username": "${username}", "password": "${password}"}`);
-        await fetchRestEndpoint("http://localhost:3000/api/register", "POST", data);
-        //loginStatus.innerHTML = "Signup successful, please login to continue";
+        await fetchRestEndpoint("http://localhost:3000/api/user/register", "POST", data);
         sessionStorage.setItem("username", username);
-        window.location.href = "../html/games.html"; //TODO!! here is the href
+        window.location.href = "../html/loggedIn.html.html";
     } catch (e) {
         alert(`Signup failed: ${e}`);
-        //loginError.innerHTML = `Signup failed: ${e}`;
     }
 }

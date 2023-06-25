@@ -1,7 +1,7 @@
 .reset-style, .reset-style * {
     all: revert;
 }
-#h1LoginRegister{
+#h1LoginRegister, #loggedInMessage{
     color: #068c8c;
     text-align: center;
     padding-top: 2vw;
