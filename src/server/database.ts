@@ -1,6 +1,5 @@
 import {open,Database} from "sqlite";
 import {Database as Driver, verbose} from "sqlite3";
-import {StatusCodes} from "http-status-codes";
 import {IGame} from "./data/game-repository";
 export const dbFileName = 'database.db';
 
@@ -21,7 +20,7 @@ export class DB {
     await connection.run(`
       create table if not exists Account (
           accountId INTEGER NOT NULL PRIMARY KEY,
-          name TEXT NOT NULL,
+          name TEXT UNIQUE NOT NULL,
           password TEXT NOT NULL
           )strict;`
     );
