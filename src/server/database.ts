@@ -1,6 +1,5 @@
 import {open,Database} from "sqlite";
 import {Database as Driver, verbose} from "sqlite3";
-import {StatusCodes} from "http-status-codes";
 import {IGame} from "./data/game-repository";
 export const dbFileName = 'database.db';
 
