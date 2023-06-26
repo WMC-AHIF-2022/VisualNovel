@@ -32,7 +32,8 @@ Content-Type: application/json
 
 {
   "name": "VisualNovel",
-  "description": "http description text"
+  "description": "http description text",
+  "thumbnailURL": "../img/backgrounds/kitchen.png"
 }
 
 #########################
@@ -42,7 +43,7 @@ Content-Type: application/json
 
 {
   "picId" : 2,
-  "url": "../img/Characters/monster.png",
+  "url": "../client/img/Characters/monster.png",
   "picName": "monster",
   "gameId": 2
 }

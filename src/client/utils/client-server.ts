@@ -1,6 +1,6 @@
 export async function fetchRestEndpoint(
   route: string,
-  httpMethod: "GET" | "POST" | "DELETE",
+  httpMethod: "GET" | "POST" | "DELETE" | "PUT",
   data?: object
 ): Promise<any> {
   console.log("reached fetchRestEndpoint")

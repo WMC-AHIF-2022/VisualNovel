@@ -9,14 +9,15 @@ export interface IPicture {
 
 export async function addPicture(pic : IPicture){
   const db = await DB.createDBConnection();
+  let picId = await db.get<any>('SELECT MAX(picId) FROM Picture');
+  pic.picId = picId["MAX(picId)"] + 1 || 0;
+
   let stmt = await db.prepare('insert into Picture values (?1,?2,?3,?4)');
   await stmt.bind({1:pic.picId,2:pic.url,3:pic.picName,4:pic.gameId});
   await stmt.run();
   await stmt.finalize();
   await db.close();
 }
-
-
 
 export async function getPicByName(picName: string):Promise<IPicture|undefined>{
   const db = await DB.createDBConnection();

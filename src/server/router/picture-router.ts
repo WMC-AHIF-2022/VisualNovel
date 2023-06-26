@@ -23,7 +23,8 @@ PictureRouter.post("/",async (request,response)=>{
     }
 
     if(typeof gameId !== "number"){
-        response.status(StatusCodes.BAD_REQUEST).send("GameId is invalid");
+        //response.status(StatusCodes.BAD_REQUEST).send("GameId is invalid");
+        gameId = 0;
     }
 
     let pic : IPicture = {
@@ -32,6 +33,7 @@ PictureRouter.post("/",async (request,response)=>{
         url: url,
         gameId: gameId
     }
+    console.log(pic);
 
     try{
         await addPicture(pic);
