@@ -99,7 +99,7 @@ async function init(){
         console.log(game);
 
         let createGame = await fetchRestEndpoint(
-            `http://localhost:3000/api/games/`,"PUT", game
+            `http://localhost:3000/api/games/`,"POST", game
         );
         console.log(createGame);
         const gameId = await createGame.json();

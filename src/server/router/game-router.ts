@@ -91,7 +91,7 @@ GameRouter.put("/",async (request, response)=> {
     try {
       const db = await DB.createDBConnection();
       await db.get('PRAGMA foreign_keys = ON');
-      const getStmt = await db.get('SELECT * FROM Games where id = ?1');
+      const getStmt = await db.get('SELECT * FROM Games where gameId = ?1');
       let alreadyExists = await getStmt.bind({1:game.id});
       await getStmt.finalize();
       await db.close();
