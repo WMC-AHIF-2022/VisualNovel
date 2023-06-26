@@ -1,4 +1,4 @@
-.thumbnailField {
+.picField {
     display: inline-block;
     cursor: pointer;
     width: 20em;
@@ -34,18 +34,6 @@ input[type="file"] {
     margin-bottom: 1em;
 }
 
-.descField {
-    width: 300%;
-    box-sizing: border-box;
-    background: #000;
-    color: #fff;
-    opacity: 70%;
-    font-size: 16px;
-    resize: none;
-    padding-bottom: 10.9em;
-    margin-bottom: 1.5em;
-}
-
 .grid-container{
     display: grid;
     width: 27em;
@@ -63,23 +51,7 @@ input[type="file"] {
 }
 
 #uploadButton{
-    height: 3em;
-    width: 8em;
-    border-radius: 0.2em;
-    font-size: 17px;
-    border: 1px solid black;
-}
-#editButton{
-    margin: 0 3em 2em 28em;
-    height: 3em;
-    width: 8em;
-    border-radius: 0.2em;
-    font-size: 17px;
-    border: 1px solid black;
-}
-
-#picsButton{
-    margin: 0 3em 2em;
+    margin: 10em 20em 2em 2em;
     height: 3em;
     width: 8em;
     border-radius: 0.2em;

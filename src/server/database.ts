@@ -30,7 +30,8 @@ export class DB {
            creationDate INTEGER,
            creator TEXT DEFAULT 'Guest',
            gameName TEXT DEFAULT 'Visual Novel',
-           description TEXT DEFAULT 'This game has no description yet!'
+           description TEXT DEFAULT 'This game has no description yet!',
+           thumbnailURL TEXT DEFAULT '../img/backgrounds/blackScreen.png'
           )strict;`
       );
       await connection.run(`
@@ -69,8 +70,8 @@ export class DB {
     public static async ensureSampleDataInserted(connection: Database): Promise<void> {
 
         const games = [
-            [2, 1685910718329, 'DatabaseCreator', 'DBname', 'DBdesc'],
-            [3, 1685910718349, 'DatabaseCreator2', 'DBname2', 'DBdesc2'],
+            [2, 1685910718329, 'DatabaseCreator', 'DBname', 'DBdesc', '../img/backgrounds/kingdom.png'],
+            [3, 1685910718349, 'DatabaseCreator2', 'DBname2', 'DBdesc2', '../img/backgrounds/endScreen.png'],
             [5, 1685910738349, '','DBname3', 'A longer description to see what will happen and to see how the formatting will look like, abc abc abc abc abc abc abc abc abc abc abc abc abc abc abc']
         ];
 
@@ -91,8 +92,8 @@ export class DB {
                     await stmt.reset();
                 }
                 else {
-                    const stmt = await connection.prepare('insert into Games(gameId,creationDate,creator,gameName,description)values(?1,?2, ?3,?4,?5)');
-                    await stmt.bind({1: games[i][0], 2: games[i][1], 3: games[i][2], 4: games[i][3], 5: games[i][4]});
+                    const stmt = await connection.prepare('insert into Games(gameId,creationDate,creator,gameName,description, thumbnailURL)values(?1,?2,?3,?4,?5,?6)');
+                    await stmt.bind({1: games[i][0], 2: games[i][1], 3: games[i][2], 4: games[i][3], 5: games[i][4], 6: games[i][5]});
                     await stmt.run();
                     await stmt.finalize();
                     await stmt.reset();

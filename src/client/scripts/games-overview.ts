@@ -17,11 +17,10 @@ async function init() {
 
   for(let game of games){
     console.log(game.gameName);
-    let thumbnail = sessionStorage.getItem('game-thumbnail');
     let html =
         `<li id="game${game.id}" class="clickable"><table><tr><td>
                   <div>
-                    <img src="${thumbnail}" onerror="this.onerror=null;this.src='../img/backgrounds/blackScreen.png'" height="150em" width="215em">
+                    <img src="${game.thumbnailURL}" onerror="this.onerror=null;this.src='../img/backgrounds/blackScreen.png'" height="150em" width="215em">
                   </div>
                 </td>
         <td>

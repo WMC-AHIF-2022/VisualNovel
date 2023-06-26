@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8" />
     <link href="./../styles.css"  rel="stylesheet" type="text/css" />
-    <link href="./../uploadStyles.css" rel="stylesheet" type="text/css"/>
+    <link href="./../pic-uploadStyles.css" rel="stylesheet" type="text/css"/>
     <title>Upload</title>
     <link
             rel="icon"
             href="../img/additional/logo.png"
             type="image/icon type"
     />
-    <script src="../scripts/upload.js" type="module"></script>
+    <script src="../scripts/pics-upload.js" type="module"></script>
 </head>
 <body>
 <div id="main-content">
@@ -23,7 +23,6 @@
             <li><a href="./games.html">Games</a></li>
             <li><a href="./aboutUs.html">About us</a></li>
             <li><a href="./maker.html">Maker</a></li>
-            <li class="navbar"><a href="./login.html">Account</a></li>
         </ul>
     </div>
     <div class="whiteBox">
@@ -38,9 +37,9 @@
                             <td>
                                 <div class="grid-container">
                                     <div  id="pgItem1" class="playgroundItem1">
-                                        <label id="file-label" for="file-upload" class="thumbnailField">
+                                        <label id="file-label" for="file-upload" class="picField">
                                             <p id="plus" class="plus" >+</p>
-                                            <img src="" class="img" id="thumbnail"  alt=""/></img>
+                                            <img src="" class="img" id="pic"  alt=""/></img>
                                         </label>
                                         <input id="file-upload" type="file"/>
                                     </div>
@@ -48,28 +47,19 @@
                             </td>
                             <td>
                                 <div>
-                                    <label for="titleInput"></label>
-                                    <input type="text" placeholder="Game Title" class="titleField" id="titleInput"/>
+                                    <label for="nameInput"></label>
+                                    <input type="text" placeholder="Name Title" class="titleField" id="nameInput"/>
                                 </div>
-                                <div>
-                                    <label for="descInput"></label>
-                                    <input type="text" placeholder="a description for your game..." class="descField" id="descInput"/>
-                                </div>
+                            </td>
+                            <td>
+                                <div class="uploadItem"><button id="uploadButton">Publish Image</button></div>
                             </td>
                         </tr>
                     </table>
                 </li>
                 <table>
                     <tr>
-                        <td>
-                            <div class="uploadItem"><button id="editButton">Edit Game</button></div>
-                        </td>
-                        <td>
-                            <div class="uploadItem"><button id="uploadButton">Publish Game</button></div>
-                        </td>
-                        <td>
-                            <div class="uploadItem"><button id="picsButton">Add Pictures</button></div>
-                        </td>
+
                     </tr>
                 </table>
             </ol>
