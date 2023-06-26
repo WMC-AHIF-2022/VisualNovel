@@ -36,6 +36,7 @@ export class UploadGame{
         this.title = title.value;
         this.thumbnailURL = url.src;
         this.id = this.id++;
+        this.creator = sessionStorage.getItem('username');
         sessionStorage.setItem('game-id', this.id.toString());
 
         let game: IGame ={

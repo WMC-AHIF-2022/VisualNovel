@@ -42,7 +42,7 @@ async function register() {
         const data = JSON.parse(`{"username": "${username}", "password": "${password}"}`);
         await fetchRestEndpoint("http://localhost:3000/api/user/register", "POST", data);
         sessionStorage.setItem("username", username);
-        window.location.href = "../html/loggedIn.html.html";
+        window.location.href = "../html/loggedIn.html";
     } catch (e) {
         alert(`Signup failed: ${e}`);
     }
