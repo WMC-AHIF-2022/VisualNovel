@@ -9,11 +9,12 @@ const app = express();
 
 const path = join(__dirname, "../client");
 const options = { extensions: ["html"] };
-app.use(express.json());
+app.use(express.json({ limit: "200mb" }));
+app.use(express.urlencoded({ extended: true, limit: "200mb" }))
 app.use(express.static(path, options));
 app.use("/api/scenes", SceneRouter);
 app.use("/api/games", GameRouter);
-app.use("/api/pics",PictureRouter);
+app.use("/api/pics", PictureRouter);
 
 const port = 3000;
 
