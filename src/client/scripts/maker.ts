@@ -29,7 +29,7 @@ export class Maker{
 
     createScene() {
         if(this.curScene === null){
-            this.curScene = {id:this.idCounter++, nextId1: -1,nextId2:-1,button1:"",button2:"",prevId:-1,text: "Enter text here",talkingChar:"Name",picLeft:-1,picRight:-1,picBackground:-1,gameId:6}
+            this.curScene = {id:this.idCounter++, nextId1: -1,nextId2:-1,button1:"",button2:"",prevId:-1,text: "Enter text here",talkingChar:"Name",picLeft:-1,picRight:-1,picBackground:-1,gameId:+sessionStorage.getItem('game-id')}
             let list = document.getElementById("sceneOverview");
             let html = '<li id="li ' + `${this.curScene.id}`+'"><p id="' + `${this.curScene.id}`+'" class="clickable">Scene ';
             this.scenes.push(this.curScene);
@@ -39,7 +39,7 @@ export class Maker{
         }
         else{
             let item = document.getElementById(`li ${this.curScene.id}`);
-            this.curScene = {id:this.idCounter++, nextId1: -1,nextId2:-1,button1:"",button2:"",prevId:-1,text: "Enter text here",talkingChar:"Name",picLeft:-1,picRight:-1,picBackground:-1,gameId:6}
+            this.curScene = {id:this.idCounter++, nextId1: -1,nextId2:-1,button1:"",button2:"",prevId:-1,text: "Enter text here",talkingChar:"Name",picLeft:-1,picRight:-1,picBackground:-1,gameId:+sessionStorage.getItem('game-id')}
             let SiblingItem = "";
             SiblingItem += '<li id="li ' + `${this.curScene.id}`+'"><p id="' + `${this.curScene.id}`+'" class="clickable">Scene ';
             SiblingItem += this.displayedSceneNum++;
@@ -266,7 +266,7 @@ export class Maker{
     async createDecisionScene(num: Number) {
         console.log("Lege neue Decision Szene an");//Todo: from itemStorage
         console.log(`Id Counter = ${this.idCounter}`);
-        let scene :IScene = {id:this.idCounter++, nextId1: -1,nextId2:-1,button1:"",button2:"",prevId:-1,text: "Enter text here",talkingChar:"Name",picLeft:-1,picRight:-1,picBackground:-1,gameId:6}
+        let scene :IScene = {id:this.idCounter++, nextId1: -1,nextId2:-1,button1:"",button2:"",prevId:-1,text: "Enter text here",talkingChar:"Name",picLeft:-1,picRight:-1,picBackground:-1,gameId:+sessionStorage.getItem('game-id')}
         scene.prevId = this.curScene.id;
         let item = document.getElementById(`li ${this.curScene.id}`);
         let html = '<li> <ul class="childList"><li id="li ' + `${scene.id}` + '">  <p id="' + `${scene.id}` + '" class="clickable">Scene ';
@@ -413,12 +413,12 @@ export class Maker{
 
 async function init() {
     let maker:Maker = new Maker();
-    sessionStorage.clear();
-    if(sessionStorage.getItem("gameId") !== null){
+    //sessionStorage.clear();
+   /* if(sessionStorage.getItem("gameId") !== null){
         let gameId = +sessionStorage.getItem("gameId");
         let scenesResponse = await fetchRestEndpoint(`http://localhost:3000/api/scenes/ByGameId/${gameId}`,"GET");
         let scenes : IScene[] = await scenesResponse.json();
-        if(scenes.length !== 0){
+        if(scenes.length === 0){
             await maker.loadSceneOverview(scenes);
         }else{
             await maker.createScene();
@@ -426,7 +426,8 @@ async function init() {
 
     }else{
         await maker.createScene();
-    }
+    }*/
+    await maker.createScene();
     document.getElementById("makeScene").addEventListener("click",async()=>{
         await maker.saveSceneElements();
         await maker.setPlaygroundBack();
@@ -453,7 +454,13 @@ async function init() {
                 scene.prevId = +sceneElement.previousElementSibling.id.substring(3);
             }
 
-            await fetchRestEndpoint("http://localhost:3000/api/scenes","POST",scene);
+            try{
+                await fetchRestEndpoint("http://localhost:3000/api/scenes","POST",scene);
+            }
+            catch(ex){
+
+            }
+
         }
         window.location.href="../html/upload.html";
 

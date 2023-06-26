@@ -89,8 +89,9 @@ async function init(){
         const picId = await createPic.json();
         sessionStorage.setItem("pic-id", picId.id);
         console.log(sessionStorage.getItem("pic-id"));
-        sessionStorage.setItem("uploaded-pic", picId);
-        window.location.href = "http://localhost:3000/html/games.html";
+        sessionStorage.setItem("uploaded-pic", picId.toString());
+        console.log(sessionStorage.getItem("uploaded-pic"));
+        window.location.href = "../html/upload.html";
     });
 }
 

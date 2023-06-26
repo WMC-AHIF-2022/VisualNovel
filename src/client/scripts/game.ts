@@ -240,6 +240,12 @@ async function init() {
     //sessionStorage.removeItem('gameID');
     window.location.href = '../html/games.html';
   });
+
+  /*let btnOverview = document.getElementById("btnOverview");
+
+  btnOverview.addEventListener('click', async ()=>{
+    window.location.href = "../html/games.html";
+  });*/
 }
 
 window.addEventListener("load", init);
