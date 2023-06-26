@@ -2,7 +2,7 @@
     gap: 0.5em;
     background-color: rgb(0, 0, 0);
     margin:5em;
-    grid-template-rows: 10em 5em 15em 3em;
+    grid-template-rows: 10vw 5vw 15vw 3vw;
     grid-template-columns: auto;
     background-size: cover;
     /*width: 100vw;
@@ -14,8 +14,8 @@
 .grid-item {
     /*background-color: rgba(255, 255, 255, 0.8);*/
     text-align: center;
-    padding: 20px;
-    font-size: 30px;
+    padding: 1vw;
+    font-size: 1vw;
 }
 .itemGenderButtons{
     grid-column: 1 / span 3;
@@ -38,9 +38,9 @@
     background: rgba(0, 0, 0, 0.68);
     color: #fff;
     text-align: left;
-    font-size: 0.8em;
-    margin-left: 0.5em;
-    margin-right: 0.5em;
+    font-size: 0.8vw;
+    margin-left: 0.5vw;
+    margin-right: 0.5vw;
 }
 .itemButtons{
     grid-row: 4;
@@ -57,10 +57,10 @@
     display: none;
     background: rgba(0, 0, 0, 0.68);
     color: rgb(210, 245, 237);
-    font-size: 0.8em;
+    font-size: 1vw;
 }
 .btn-group button {
-    font-size: 0.5em;
+    font-size: 1vw;
     background-color: rgb(96, 84, 94);
     color: rgb(204, 232, 225);
     border: none;
@@ -76,7 +76,7 @@
 .btn-group:after {
     content: "";
     clear: both;
-    display: table;
+    display: table-row;
 }
 
 .btn-group button:hover {
@@ -91,44 +91,52 @@
  */
 #imgLeftChar{
     display: none;
-    width: 12em;
+    width: 22vw;
+    height: 33vw;
+    text-align: center;
 }
 #imgRightChar{
     display: none;
-    width: 12em;
+    width: 22vw;
+    height: 33vw;
 }
 
 .btnStyle{
+    /*
+    max-width: 100%;
+    max-height: 100%;
+    word-wrap: break-word;
+     */
     text-align: center;
     display: inline-block;
     background-color: rgb(96, 84, 94);
     font-family: Candara, fantasy;
     color: rgb(210, 245, 237);
-    width: 9em;
-    height: 3.5em;
-    font-size: 33px;
+    width: 15vw;
+    height: 5vw;
+    font-size: 2vw;
     /*margin-left: 2em;*/
-    border-radius: 6px;
+    border-radius: 0.7vw;
 }
 #txtGender{
     color: rgb(210, 245, 237);
-    font-size: 0.8em;
+    font-size: 2vw;
 }
 #lblName{
-    font-size: 0.8em;
+    font-size: 2vw;
 }
 #txtEnterName{
     color: rgb(210, 245, 237);
-    font-size: 0.8em;
+    font-size: 2vw;
 }
 #btnOpt1{
-    margin-right: 5em;
-    margin-left: 5em;
+    margin-right: 5vw;
+    margin-left: 5vw;
     display: none;
 }
 #btnOpt2{
-    margin-right: 5em;
-    margin-left: 5em;
+    margin-right: 5vw;
+    margin-left: 5vw;
     display: none;
 }
 #btnBackToGamesPage{

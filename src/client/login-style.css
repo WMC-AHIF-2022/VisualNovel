@@ -1,0 +1,73 @@
+.reset-style, .reset-style * {
+    all: revert;
+}
+#h1LoginRegister, #loggedInMessage{
+    color: #068c8c;
+    text-align: center;
+    padding-top: 2vw;
+    font-weight: bold;
+    margin-bottom: 3vw;
+    font-size: 2vw;
+}
+#inputPassword{
+    color: #055050;
+    margin-left: 8vw;
+}
+#inputUsername{
+    color: #055050;
+    margin-left: 8vw;
+    margin-bottom: 2vw;
+}
+#lblPassword{
+    color: #055050;
+    font-size: 1.6vw;
+    padding-left: 15vw;
+    font-family: papyrus, fantasy;
+}
+#lblUsername{
+    color: #055050;
+    font-size: 1.6vw;
+    padding-left: 15vw;
+    font-family: papyrus, fantasy;
+}
+.whiteBoxInput{
+    margin-top: 5vw;
+    background-color: rgba(245, 245, 245, 0.664);
+    padding-bottom: 2vw;
+    margin-left: 25vw;
+    margin-right: 25vw;
+}
+
+#divButtons{
+    margin-top: 4vw;
+    text-align: center;
+}
+#btnLogin{
+    margin-right: 20vw;
+    color: white;
+    background-color: #068c8c;
+}
+#btnLogin:hover{
+    background-color: #045b5b;
+    color: #afafaf;
+}
+
+#btnRegister{
+    color: #363636;
+    background-color: #8a8a8a;
+}
+
+#btnRegister:hover{
+    background-color: #464646;
+    color: #1a1a1a;
+}
+
+.btnStyle{
+    text-align: center;
+    display: inline-block;
+    font-family: Candara, fantasy;
+    width: 10vw;
+    height: 3vw;
+    font-size: 1.5vw;
+    border-radius: 3vw;
+}
